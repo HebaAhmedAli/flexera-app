@@ -1,5 +1,7 @@
 {
   "name": "TDS",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
