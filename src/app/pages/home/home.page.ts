@@ -7,9 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  public categories: any = [];
-  public featuredProducts: any = [];
-  public bestSellProducts: any = [];
 
   constructor(
   ) { }
