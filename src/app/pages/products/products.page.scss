@@ -1,0 +1,33 @@
+.add-fab {
+  zoom: 0.7;
+}
+
+ion-fab-button {
+  --background: black;
+}
+
+ion-col {
+  display: flex;
+}
+
+
+img {
+  height: 120px;
+  width: 100%;
+}
+
+ion-card {
+  width: 100%;
+
+}
+
+
+ion-card-header {
+  height: 100px;
+}
+
+ion-card-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

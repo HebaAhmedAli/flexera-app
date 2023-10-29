@@ -1,0 +1,53 @@
+<app-header></app-header>
+
+<ion-content>
+  <ion-title>Hyper Light</ion-title>
+    <div class="category-slider ion-padding-start">
+      <div class="swiper-container" >
+        <div class="swiper-wrapper">
+
+          <div class="swiper-slide">
+            <img src="assets/products/hyper-light.jpeg">
+          </div>
+          <div class="swiper-slide">
+            <video *ngIf="swiper.activeIndex === 1" width="100%" height="auto" controls autoplay>
+              <source src="assets/products/test.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <video *ngIf="swiper.activeIndex !== 1" width="100%" height="auto" controls>
+              <source src="assets/products/test.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="swiper-slide">
+            <img src="assets/products/hyper-light.jpeg">
+          </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+
+      </div>
+    </div>
+    <ion-grid>
+      <ion-row>
+        <div class="button-container price">
+        1000 EGP
+        </div>
+      </ion-row>
+      <ion-row>
+        <div class="button-container description">
+          The long description of the Hyper Light Device.
+        </div>
+      </ion-row>
+      <ion-row class="ion-text-center buttons-bottom " style="justify-content: center;">
+        <div class="button-container">
+        <ion-button expand="block" class="main-button" (click)="cartService.increaseCartCounter()">Add to cart</ion-button>
+        <ion-button expand="block" class="main-button">View Installment Plan</ion-button>
+        </div>
+      </ion-row>
+
+    </ion-grid>
+
+
+
+ </ion-content>

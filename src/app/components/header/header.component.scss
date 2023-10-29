@@ -12,3 +12,14 @@
   max-width: 15%;
   padding-left: 1%;
 }
+
+.cart-counter {
+  position: absolute;
+  top: -5px;
+  right: -6px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  padding: 2px 4px;
+  border-radius: 10px;
+ }
