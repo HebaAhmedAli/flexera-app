@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
 
 @Component({
@@ -8,8 +9,13 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class HeaderComponent  implements OnInit {
 
-  constructor(public cartService: CartService) { }
+  constructor(public cartService: CartService, private router: Router) { }
 
   ngOnInit() {}
+
+  navigateToCart() {
+    this.router.navigate(['/cart']);
+  }
+
 
 }

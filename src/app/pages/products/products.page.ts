@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsPage implements OnInit {
 
+
   segmentValue: string = 'devices';
+  selectedSortBy: number = 0;
 
   devicesProducts : any[]= [];
   materialsProducts :  any[] = [];
@@ -34,6 +36,13 @@ export class ProductsPage implements OnInit {
         price: '2000 EGP',
         description: 'The Description Description of...',
         img: 'assets/products/nano-pix.jpeg'
+
+      },
+      {
+        name: 'Hyper Light',
+        price: '1000 EGP',
+        description: 'The Description of the Hyper...',
+        img: 'assets/products/hyper-light.jpeg'
 
       },
       {
@@ -77,4 +86,8 @@ export class ProductsPage implements OnInit {
     ];
   }
 
+  changeSelectedSortBy(selectedNumber: number, modal: any) {
+    this.selectedSortBy = selectedNumber;
+    modal.dismiss();
+  }
 }

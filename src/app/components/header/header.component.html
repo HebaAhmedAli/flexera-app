@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
       <img src="assets/logo.png"  slot="start" class="logo-icon"/>
-     <ion-buttons slot="end">
+     <ion-buttons slot="end" (click)="navigateToCart()">
        <ion-button>
          <ion-icon slot="icon-only" name="cart" class="cart-icon"></ion-icon>
          <span class="cart-counter" *ngIf="cartService.getCartCounter() > 0">{{cartService.getCartCounter()}}</span>

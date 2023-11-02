@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <ion-content>
-  <ion-title>Hyper Light</ion-title>
+  <ion-title class="product-title">Hyper Light</ion-title>
     <div class="category-slider ion-padding-start">
       <div class="swiper-container" >
         <div class="swiper-wrapper">
@@ -39,15 +39,42 @@
           The long description of the Hyper Light Device.
         </div>
       </ion-row>
+
       <ion-row class="ion-text-center buttons-bottom " style="justify-content: center;">
         <div class="button-container">
-        <ion-button expand="block" class="main-button" (click)="cartService.increaseCartCounter()">Add to cart</ion-button>
-        <ion-button expand="block" class="main-button">View Installment Plan</ion-button>
+          <ion-row class="ion-text-center " style="justify-content: center;" *ngIf="productCounter > 0">
+            <ion-button expand="block" class="main-button plus-minus-button" (click)="removeProduct()">-</ion-button>
+            <span class="product-counter">{{productCounter}}</span>
+            <ion-button expand="block" class="main-button plus-minus-button" (click)="addProduct()">+</ion-button>
+          </ion-row>
+        <ion-button expand="block" class="main-button" (click)="addProduct()" *ngIf="productCounter === 0">Add to cart</ion-button>
+        <ion-button expand="block" class="main-button" id="open-modal">View Installment Plan</ion-button>
         </div>
       </ion-row>
 
     </ion-grid>
 
+    <ion-modal #modal trigger="open-modal">
+      <ng-template>
+        <ion-content>
+          <ion-toolbar>
+            <ion-title>Installment Plan</ion-title>
+            <ion-buttons slot="end">
+              <ion-button color="light" (click)="modal.dismiss()">Close</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+          <p class="ion-padding">
+            You will pay 200 pounds in advance.
+          </p>
+          <p class="ion-padding">
+            Then 200 pounds in installments for 10 months
+          </p>
+          <p class="ion-padding">
+            Or 400 pounds in installments for 5 months.
+          </p>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
 
 
  </ion-content>

@@ -9,6 +9,7 @@ import Swiper from 'swiper';
 })
 export class ProductDetailsPage implements OnInit {
   swiper: Swiper;
+  productCounter: number = 0;
 
   constructor(public cartService: CartService) {
     this.swiper = new Swiper('.swiper-container', {
@@ -46,6 +47,17 @@ export class ProductDetailsPage implements OnInit {
         prevEl: '.swiper-button-prev',
       },
     });
+ }
+
+ addProduct() {
+  this.productCounter = this.productCounter + 1;
+  this.cartService.increaseCartCounter();
+ }
+
+ removeProduct() {
+  if(this.productCounter === 0) return;
+  this.productCounter = this.productCounter - 1;
+  this.cartService.decreaseCartCounter();
  }
 
 }

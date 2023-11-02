@@ -14,7 +14,7 @@ export class CartService {
   }
 
   decreaseCartCounter(): void {
-    if(this.cartCounter = 0) return;
+    if(this.cartCounter === 0) return;
     this.cartCounter = this.cartCounter - 1;
   }
 

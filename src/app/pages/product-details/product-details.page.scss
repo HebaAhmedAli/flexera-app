@@ -47,10 +47,10 @@
   margin-right: auto;
 }
 
-ion-title {
+.product-title {
   margin: 5%;
-    margin-bottom: 0;
-    font-weight: bold;
+  margin-bottom: 0;
+  font-weight: bold;
 }
 
 .price {
@@ -67,4 +67,21 @@ ion-title {
   position: absolute;
   bottom: 0;
   width: 100%;
+}
+
+.plus-minus-button {
+  width: 40%;
+  font-size: 25px;
+  margin-bottom: 11px;
+}
+
+.product-counter {
+  width: 17%;
+  padding-top: 3%;
+  font-size: 25px;
+}
+
+p{
+  padding-top: 2px;
+  padding-bottom: 0px;
 }
