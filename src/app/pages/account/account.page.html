@@ -4,8 +4,36 @@
 <ion-content [fullscreen]="true">
  <ion-grid>
   <ion-row>
+    <ion-col class="name">
+      <ion-label>Welcome DR. Abd Elrahman</ion-label>
+    </ion-col>
+  </ion-row>
+  <ion-row>
 
       <img [src]="photoURL" class="image" (click)="openImagePicker()"/>
+      <ion-icon name="camera" class="camera" (click)="openImagePicker()"></ion-icon>
   </ion-row>
+  <ion-card>
+    <ion-card-content>
+      <div>
+        <ion-icon name="create" class="edit" routerLink="/edit-profile"></ion-icon>
+      <ion-grid>
+        <ion-row>
+          <ion-label>Name: Abd Elrhman Ahmed Morsy</ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-label>Email: aam@gmail.com</ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-label>Phone: 01270908334</ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-label>Address: Elshrok street esmail serry</ion-label>
+        </ion-row>
+      </ion-grid>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
  </ion-grid>
 </ion-content>

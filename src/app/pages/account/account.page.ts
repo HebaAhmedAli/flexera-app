@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
  import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
+import { SecureStorage } from 'src/app/services/secure-storage.service';
 
 @Component({
   selector: 'app-account',
@@ -7,27 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./account.page.scss'],
 })
 export class AccountPage implements OnInit {
-  photoURL: string = 'assets/default-profile.png';
+  photoURL: string = '';
 
-  constructor(private camera: Camera
+  constructor(private camera: Camera, private storage: SecureStorage
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.photoURL = await this.storage.get('photo');
+    console.log('iside init', this.photoURL);
+    if(!this.photoURL) this.photoURL = 'assets/default-profile.png';
+    console.log('iside init after check', this.photoURL);
   }
 
   openImagePicker() {
-    // this.imagePicker.hasReadPermission().then((permission) => {
-    //   if (permission) {
-    //     this.imagePicker.getPictures({ maximumImagesCount: 1 }).then((results) => {
-    //       if (results && results.length) {
-    //         this.photoURL = 'data:image/jpeg;base64,' + results[0];
-    //       }
-    //     });
-    //   } else {
-    //     this.imagePicker.requestReadPermission();
-    //   }
-    // });
-
     const options: CameraOptions = {
       quality: 100,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
@@ -35,11 +28,12 @@ export class AccountPage implements OnInit {
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
-    this.camera.getPicture(options).then((imageData) => {
+    this.camera.getPicture(options).then(async (imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
-      console.log(imageData);
       this.photoURL = 'data:image/jpeg;base64,'  + imageData;
+      console.log(this.photoURL);
+      await this.storage.set('photo', this.photoURL);
     }, (err) => {
       // Handle error
       console.log(err);

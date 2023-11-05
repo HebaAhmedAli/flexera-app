@@ -45,3 +45,8 @@ ion-row {
 h1 {
   font-weight: bold !important;
 }
+
+
+.main-button {
+  --background: linear-gradient(90deg, rgba(130, 130, 130, 1) 0%, rgba(206, 206, 206, 1) 100%) !important;
+}

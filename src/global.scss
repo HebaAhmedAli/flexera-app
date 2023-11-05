@@ -60,12 +60,13 @@
 }
 
 .main-button {
-    --background: linear-gradient(90deg, rgba(130, 130, 130, 1) 0%, rgba(206, 206, 206, 1) 100%);
+    --background: linear-gradient(90deg, rgba(64,64,64, 1) 0%, rgba(128,128,128, 1) 100%);
     --box-shadow: none;
     position: relative;
     height: 50px;
     margin-bottom: 15px;
 }
+
 
 .main-button::after {
     content: " ";
