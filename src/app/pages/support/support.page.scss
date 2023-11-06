@@ -2,6 +2,7 @@
   padding: 10px;
   text-align: center;
   font-weight: bold;
+  z-index: 10000;
 }
 
 .info-icon {
@@ -21,7 +22,7 @@
 }
 
 .info-grid {
-  margin-top: 15px;
+  margin-top: 30px;
   color: slategrey;
 }
 
@@ -33,12 +34,12 @@
 .social-row {
   text-align: center;
   display: block;
-  margin-top: 40px;
+  margin-top: 30px;
 
 }
 
 .social-icon {
-  zoom: 2;
+  zoom: 2.3;
   margin: 10px;
 }
 

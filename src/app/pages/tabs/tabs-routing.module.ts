@@ -24,6 +24,11 @@ const routes: Routes = [
         loadChildren: () => import('../support/support.module').then(m => m.SupportPageModule)
       },
       {
+        path: 'academy',
+        loadChildren: () => import('../academy/academy.module').then( m => m.AcademyPageModule)
+      }
+      ,
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'
