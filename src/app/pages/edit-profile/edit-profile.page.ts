@@ -7,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditProfilePage implements OnInit {
 
-  userName : string = 'Abd Elrhman Ahmed Morsy';
-  userEmail : string = 'aam@gmail.com';
-  userPhone: string = '01270908334';
-  userAddress : string = 'Elshrok street esmail serry';
+  title: string = 'Mr.';
+  name : string = 'Abd Elrhman Ahmed Morsy';
+  email : string = 'aam@gmail.com';
+  phone: string = '01270908334';
+  address : string = 'Elshrok street esmail serry';
+  speciality: string = 'GP';
+  uniStaff: string = 'No';
+  university: string = 'No';
+  age: string = '';
 
   constructor() { }
 

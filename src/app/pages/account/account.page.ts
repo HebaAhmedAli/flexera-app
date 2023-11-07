@@ -10,6 +10,16 @@ import { SecureStorage } from 'src/app/services/secure-storage.service';
 export class AccountPage implements OnInit {
   photoURL: string = '';
 
+  title: string = 'Mr.';
+  name : string = 'Abd Elrhman Ahmed Morsy';
+  email : string = 'aam@gmail.com';
+  phone: string = '01270908334';
+  address : string = 'Elshrok street esmail serry';
+  speciality: string = 'GP';
+  uniStaff: string = 'No';
+  university: string = 'No';
+  age: string = '';
+
   constructor(private camera: Camera, private storage: SecureStorage
   ) {}
 

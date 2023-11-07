@@ -201,3 +201,57 @@ ion-modal#example-modal ion-icon {
 ion-modal#example-modal .wrapper {
   margin-bottom: 10px;
 }
+
+ion-select::part(icon) {
+
+  right: 0 !important;
+  position: absolute !important;
+  --highlight-color: black;
+}
+
+
+
+// ion-select::part(popover) {
+
+//   right: calc(12px + var(--offset-x, 0px)) !important;
+//   transform-origin: right top !important;
+//   left: auto !important;
+// }
+
+
+// ion-popover {
+
+//   .popover-wrapper {
+//       .popover-content {
+//         right: calc(12px + var(--offset-x, 0px)) !important;
+//         transform-origin: right top !important;
+//         left: auto !important;
+//       }
+//   }
+// }
+
+
+
+ion-select:not(.select-wrapper) {
+  // --highlight-color-focused: grey;
+  --highlight-color-invalid: black;
+  --highlight-color-valid: black;
+  // --placeholder-color: grey;
+  // --ripple-color: grey;
+  color: black !important;
+
+  }
+
+
+
+
+
+  // ion-select:not(.label-text) {
+  //  color: black !important;
+  // }
+
+  //  ion-select:not(.select-text) {
+  //   // color: black !important;
+  //   color: grey !important;
+  //  }
+

@@ -9,9 +9,13 @@
     </ion-col>
   </ion-row>
   <ion-row>
-
+    <ion-col class="ion-text-center">
+    <div>
       <img [src]="photoURL" class="image" (click)="openImagePicker()"/>
       <ion-icon name="camera" class="camera" (click)="openImagePicker()"></ion-icon>
+    </div>
+
+    </ion-col>
   </ion-row>
   <ion-card>
     <ion-card-content>
@@ -19,16 +23,31 @@
         <ion-icon name="create" class="edit" routerLink="/edit-profile"></ion-icon>
       <ion-grid>
         <ion-row>
-          <ion-label>Name: Abd Elrhman Ahmed Morsy</ion-label>
+          <ion-label>Title: {{title}}</ion-label>
         </ion-row>
         <ion-row>
-          <ion-label>Email: aam@gmail.com</ion-label>
+          <ion-label>Name: {{name}}</ion-label>
         </ion-row>
         <ion-row>
-          <ion-label>Phone: 01270908334</ion-label>
+          <ion-label>Email: {{email}}</ion-label>
         </ion-row>
         <ion-row>
-          <ion-label>Address: Elshrok street esmail serry</ion-label>
+          <ion-label>Phone: {{phone}}</ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-label>Address: {{address}}</ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-label>Age: {{age}}</ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-label>Speciality: {{speciality}}</ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-label>Uni Staff: {{uniStaff}}</ion-label>
+        </ion-row>
+        <ion-row *ngIf="uniStaff === 'Yes'">
+          <ion-label>University: {{university}}</ion-label>
         </ion-row>
       </ion-grid>
       </div>

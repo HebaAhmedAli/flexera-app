@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SecureStorage } from 'src/app/services/secure-storage.service';
 
 @Component({
   selector: 'app-signup',
@@ -9,9 +10,15 @@ import { Router } from '@angular/router';
 export class SignupPage implements OnInit {
 
   showPassword: boolean = false;
+  showAdditional: boolean = true;
+
+  title: string = '';
+  speciality: string = '';
+  uniStaff: string = '';
 
   constructor(
     private router: Router,
+    private storage: SecureStorage
   ) { }
 
   ngOnInit() {
@@ -21,7 +28,8 @@ export class SignupPage implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
-  signup() {
+  async signup() {
+    await this.storage.set('mode', 'user');
     this.router.navigateByUrl('tabs');
   }
 

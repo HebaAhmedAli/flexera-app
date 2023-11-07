@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { SecureStorage } from 'src/app/services/secure-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,7 @@ export class LoginPage implements OnInit {
 
   constructor(
     private router: Router,
+    private storage: SecureStorage
   ) { }
 
   ngOnInit() {
@@ -21,7 +23,8 @@ export class LoginPage implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
-  login() {
+  async login() {
+    await this.storage.set('mode', 'user');
     this.router.navigateByUrl('tabs');
   }
 

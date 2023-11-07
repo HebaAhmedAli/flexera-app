@@ -16,7 +16,7 @@
     </ion-row>
     <ion-row class="ion-text-center" style="justify-content: center;">
       <div class="button-container">
-        <ion-button expand="block" class="main-button" routerLink="/tabs" routerDirection="forward">Continue as Guest</ion-button>
+        <ion-button expand="block" class="main-button" (click)="navigateToTabs()">Continue as Guest</ion-button>
         <ion-button expand="block" class="main-button" routerLink="/login" routerDirection="forward">Log in</ion-button>
         <ion-button expand="block" color="light" fill="clear" routerLink="/signup" routerDirection="forward">Don't have acccount? Signup</ion-button>
       </div>

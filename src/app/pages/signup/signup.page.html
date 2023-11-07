@@ -13,27 +13,83 @@
     <h1>Signup</h1>
 
     <div class="form-container">
+
+      <ion-list>
+        <ion-item>
+          <ion-select label="Title *" label-placement="floating" interface="popover" mode="md" [(ngModel)]="title">
+            <ion-select-option value="Mr.">Mr.</ion-select-option>
+            <ion-select-option value="Dr.">Dr.</ion-select-option>
+            <ion-select-option value="Ta.">Ta.</ion-select-option>
+            <ion-select-option value="Prof.">Prof.</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
       <ion-item>
         <ion-label position="floating">Name *</ion-label>
         <ion-input></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Email</ion-label>
+        <ion-label position="floating">Email *</ion-label>
         <ion-input></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Phone</ion-label>
+        <ion-label position="floating">Phone *</ion-label>
         <ion-input></ion-input>
       </ion-item>
-        <ion-item>
-          <ion-label position="floating">Address</ion-label>
-          <ion-input></ion-input>
-        </ion-item>
       <ion-item>
-        <ion-label position="floating">Password</ion-label>
+        <ion-label position="floating">Password *</ion-label>
         <ion-input type="{{ showPassword ? 'text' : 'password' }}"></ion-input>
         <ion-icon name="{{ showPassword ? 'eye-off' : 'eye' }}" slot="end" (click)="togglePasswordVisibility()"></ion-icon>
       </ion-item>
+      <br>
+
+      <ion-item lines="none" (click)="showAdditional = !showAdditional">
+        <h3>Optional Info</h3>
+        <ion-icon  name="{{ showAdditional ? 'caret-down-outline' : 'caret-forward-outline' }}" slot="end" ></ion-icon>
+      </ion-item>
+
+      <br>
+
+        <ion-item *ngIf="showAdditional">
+          <ion-label position="floating">Address</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="showAdditional">
+          <ion-label position="floating">Age</ion-label>
+          <ion-input type="number"></ion-input>
+        </ion-item>
+
+        <ion-list *ngIf="showAdditional">
+          <ion-item>
+            <ion-select  label="Speciality" label-placement="floating" interface="popover" mode="md" [(ngModel)]="speciality">
+              <ion-select-option value="GP">GP</ion-select-option>
+              <ion-select-option value="Restorative">Restorative</ion-select-option>
+              <ion-select-option value="Endodontics">Endodontics</ion-select-option>
+              <ion-select-option value="Prosthodontics">Prosthodontics</ion-select-option>
+              <ion-select-option value="Surgery">Surgery</ion-select-option>
+              <ion-select-option value="Implantology">Implantology</ion-select-option>
+              <ion-select-option value="Pedodontics">Pedodontics</ion-select-option>
+              <ion-select-option value="Orthodontics">Orthodontics</ion-select-option>
+              <ion-select-option value="Periodontics">Periodontics</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+
+        <ion-list *ngIf="showAdditional">
+          <ion-item>
+            <ion-select label="Uni Staff" label-placement="floating" interface="popover" mode="md" [(ngModel)]="uniStaff">
+              <ion-select-option value="Yes">Yes</ion-select-option>
+              <ion-select-option value="No">No</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+
+        <ion-item *ngIf="showAdditional && uniStaff === 'Yes'">
+          <ion-label position="floating">University</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+
 
       <ion-button expand="block" class="main-button" (click)="signup()">Sign Up</ion-button>
 

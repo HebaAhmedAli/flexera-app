@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { SecureStorage } from 'src/app/services/secure-storage.service';
 
 @Component({
   selector: 'app-welcome',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomePage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private storage: SecureStorage) { }
 
   ngOnInit() {
   }
 
+  async navigateToTabs() {
+    await this.storage.set('mode', 'guest');
+    this.router.navigateByUrl('tabs');
+  }
 }
