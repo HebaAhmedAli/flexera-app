@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
  import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
+import { ModalController } from '@ionic/angular';
+import { AccountImageModalComponent } from 'src/app/components/account-image-modal/account-image-modal.component';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
 
 @Component({
@@ -20,7 +22,34 @@ export class AccountPage implements OnInit {
   university: string = 'No';
   age: string = '';
 
-  constructor(private camera: Camera, private storage: SecureStorage
+  openImageModal = false;
+  isActionSheetOpen = false;
+  public actionSheetButtons = [
+    {
+      text: 'View Image',
+      data: {
+        action: 'view',
+      },
+    },
+    {
+      text: 'Change Image',
+      data: {
+        action: 'change',
+      },
+    },
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      data: {
+        action: 'cancel',
+      },
+    },
+  ];
+
+
+
+  constructor(private camera: Camera, private storage: SecureStorage,
+    private modalController: ModalController
   ) {}
 
   async ngOnInit() {
@@ -51,6 +80,30 @@ export class AccountPage implements OnInit {
     });
  }
 
+  setOpenOfActionSheet(isOpen: boolean) {
+    this.isActionSheetOpen = isOpen;
+  }
+
+  async openImageViewer() {
+    const modal = await this.modalController.create({
+      component: AccountImageModalComponent,
+      cssClass: 'image-modal',
+      componentProps: {
+        photoURL: this.photoURL
+      }
+    });
+    return await modal.present();
+  }
+
+  onActionSheetDismiss(event: any) {
+    this.setOpenOfActionSheet(false);
+    console.log(event.detail.data.action);
+    if(event.detail.data.action === 'change') {
+      this.openImagePicker();
+    } else if(event.detail.data.action === 'view') {
+      this.openImageViewer();
+    }
+  }
 
 
 }

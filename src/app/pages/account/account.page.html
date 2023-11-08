@@ -11,8 +11,8 @@
   <ion-row>
     <ion-col class="ion-text-center">
     <div>
-      <img [src]="photoURL" class="image" (click)="openImagePicker()"/>
-      <ion-icon name="camera" class="camera" (click)="openImagePicker()"></ion-icon>
+      <img [src]="photoURL" class="image" (click)="setOpenOfActionSheet(true)"/>
+      <ion-icon name="camera" class="camera" (click)="setOpenOfActionSheet(true)"></ion-icon>
     </div>
 
     </ion-col>
@@ -55,4 +55,12 @@
   </ion-card>
 
  </ion-grid>
+
+ <ion-action-sheet mode="ios"
+  [isOpen]="isActionSheetOpen"
+  [buttons]="actionSheetButtons"
+  (didDismiss)="onActionSheetDismiss($event)"
+></ion-action-sheet>
+
+
 </ion-content>
