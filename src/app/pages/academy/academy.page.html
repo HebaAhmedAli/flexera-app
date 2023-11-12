@@ -1,9 +1,30 @@
 <app-header></app-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">academy</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-segment value="current" color="dark" mode="md" [(ngModel)]="segmentValue">
+    <ion-segment-button value="current">
+      <ion-label>Upcoming Courses</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="old">
+      <ion-label>Our Courses</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+
+
+<ion-grid>
+  <ion-row *ngFor="let course of (segmentValue === 'current' ? currentCourses : oldCourses)">
+    <ion-col>
+      <ion-card class="ion-padding" routerLink="/course-details">
+        <ion-card-title class="card-title">
+          {{course}}
+        </ion-card-title>
+        <ion-card-subtitle class="card-sub-title">
+          (16:17 DEC)
+        </ion-card-subtitle>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
 </ion-content>

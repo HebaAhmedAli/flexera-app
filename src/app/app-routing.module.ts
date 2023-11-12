@@ -38,7 +38,11 @@ const routes: Routes = [
   {
     path: 'edit-profile',
     loadChildren: () => import('./pages/edit-profile/edit-profile.module').then( m => m.EditProfilePageModule)
+  },  {
+    path: 'course-details',
+    loadChildren: () => import('./pages/course-details/course-details.module').then( m => m.CourseDetailsPageModule)
   }
+
 
 ];
 @NgModule({

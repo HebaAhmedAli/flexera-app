@@ -14,7 +14,7 @@ export class EditProfilePage implements OnInit {
   address : string = 'Elshrok street esmail serry';
   speciality: string = 'GP';
   uniStaff: string = 'No';
-  university: string = 'No';
+  university: string = '';
   age: string = '';
 
   constructor() { }

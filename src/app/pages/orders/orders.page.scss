@@ -1,0 +1,49 @@
+
+.card-title {
+  padding-bottom: 5px;
+  --color: white !important;
+}
+
+.card-sub-title {
+  --color: lightgrey !important;
+}
+
+ion-card {
+  background: black;
+  padding: 0px;
+  color: white;
+}
+
+ion-item {
+  --background: black !important;
+  --color: white !important;
+  width: 100%;
+}
+
+ion-icon {
+  color: white !important;
+}
+
+ion-card-content {
+  padding: 0px;
+}
+
+.total-price {
+  padding-left: 23px;
+  padding-bottom: 5px;
+}
+
+.name{
+  padding-left: 18px;
+  padding-bottom: 5px;
+}
+
+.price-col {
+  text-align: end;
+  padding-right: 30px;
+}
+
+.line {
+  border-top: 1px solid white;
+  margin: 5px;
+}

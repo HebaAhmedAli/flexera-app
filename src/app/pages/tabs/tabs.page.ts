@@ -15,7 +15,7 @@ export class TabsPage {
   constructor(private location: Location, private platform: Platform, private storage: SecureStorage) {
     this.platform.backButton.subscribeWithPriority(-1, async () => {
       const mode = await this.storage.get('mode');
-      console.log(mode);
+      console.log(mode, this.ionTabs.outlet.canGoBack());
       if (!this.ionTabs.outlet.canGoBack() && mode === 'guest') {
         this.location.back();
       }
