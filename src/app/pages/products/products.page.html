@@ -5,7 +5,7 @@
   <ion-grid style="padding-bottom: 0px; margin-bottom: -5px;">
     <ion-row routerLink="/products">
       <ion-col>
-        <img src="assets/categories/fanta.png" class="category-img"/>
+        <img [src]="categoryImg" class="category-img"/>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -28,7 +28,7 @@
              <ion-card-subtitle>{{ product.description }}</ion-card-subtitle>
            </ion-card-header>
            <ion-card-content>
-            {{ product.price }}
+            {{ product.price }} EGP
            </ion-card-content>
            <!-- <ion-fab vertical="bottom" horizontal="end" class="add-fab">
              <ion-fab-button>

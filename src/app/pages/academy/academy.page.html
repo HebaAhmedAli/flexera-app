@@ -1,6 +1,21 @@
 <app-header></app-header>
 
 <ion-content [fullscreen]="true">
+
+  <ion-grid style="padding-bottom: 0px; height: 37%;">
+    <!-- <ion-row>
+      <ion-col class="ion-text-center" style="font-size: 20px;">
+        To login to tds academy press <a style="padding-left: 3px;
+        color: orange;"> Here </a>.
+      </ion-col>
+    </ion-row> -->
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <img src="assets/academy.png" class="category-img"/>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
   <ion-segment value="current" color="dark" mode="md" [(ngModel)]="segmentValue">
     <ion-segment-button value="current">
       <ion-label>Upcoming Courses</ion-label>
@@ -26,5 +41,11 @@
     </ion-col>
   </ion-row>
 </ion-grid>
+
+<ion-fab vertical="bottom" horizontal="end" class="add-fab" slot="fixed">
+  <ion-fab-button>
+    <a href="https://www.facebook.com/tds.dental.academy?mibextid=ZbWKwL" target="_blank">Login</a>
+  </ion-fab-button>
+</ion-fab>
 
 </ion-content>

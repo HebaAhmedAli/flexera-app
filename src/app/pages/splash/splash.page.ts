@@ -11,9 +11,9 @@ import { NavController } from '@ionic/angular';
 export class SplashPage implements OnInit {
 
   constructor(private navCtrl: NavController, private splash: SplashScreen) {
-    setTimeout(() => {
-      this.navCtrl.navigateForward('welcome');
-    }, 4000);
+    // setTimeout(() => {
+    //   this.navCtrl.navigateForward('welcome');
+    // }, 2000);
 
   }
 

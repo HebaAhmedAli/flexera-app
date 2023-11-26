@@ -47,3 +47,16 @@ ion-card-content {
   border-top: 1px solid white;
   margin: 5px;
 }
+
+
+.pending {
+  color: red;
+}
+
+.inprocess {
+  color: yellow;
+}
+
+.done {
+  color: green;
+}

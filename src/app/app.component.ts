@@ -18,14 +18,6 @@ export class AppComponent {
   constructor(private platform: Platform, private modalCtrl: ModalController, private navCtrl: NavController, private splash: SplashScreen) {
     this.platform.ready().then(async () => {
       this.splash.hide();
-
-      // console.log('iside platform ready');
-      // let splash = await modalCtrl.create(
-      //   {
-      //     component: SplashComponent,
-      //     cssClass: 'splash-modal'
-      //    });
-      // splash.present();
       this.navCtrl.navigateForward('/', { animated: false });
     });
   }

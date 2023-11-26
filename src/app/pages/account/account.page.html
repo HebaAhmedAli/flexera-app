@@ -22,11 +22,9 @@
       <div>
         <ion-icon name="create" class="edit" routerLink="/edit-profile"></ion-icon>
       <ion-grid>
+
         <ion-row>
-          <ion-label>Title: {{title}}</ion-label>
-        </ion-row>
-        <ion-row>
-          <ion-label>Name: {{name}}</ion-label>
+          <ion-label>Name: {{title}} {{name}}</ion-label>
         </ion-row>
         <ion-row>
           <ion-label>Email: {{email}}</ion-label>
@@ -44,7 +42,7 @@
           <ion-label>Speciality: {{speciality}}</ion-label>
         </ion-row>
         <ion-row>
-          <ion-label>Uni Staff: {{uniStaff}}</ion-label>
+          <ion-label>University Staff: {{uniStaff}}</ion-label>
         </ion-row>
         <ion-row *ngIf="uniStaff === 'Yes'">
           <ion-label>University: {{university}}</ion-label>

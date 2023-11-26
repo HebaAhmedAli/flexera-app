@@ -8,10 +8,15 @@ import { SecureStorage } from 'src/app/services/secure-storage.service';
   styleUrls: ['./welcome.page.scss'],
 })
 export class WelcomePage implements OnInit {
-
+  splashMode : boolean = false;
   constructor(private router: Router, private storage: SecureStorage) { }
 
   ngOnInit() {
+    if(this.splashMode) {
+      setTimeout(() => {
+        this.router.navigateByUrl('tabs');
+      }, 5100);
+    }
   }
 
   async navigateToTabs() {

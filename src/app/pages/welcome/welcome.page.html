@@ -5,16 +5,31 @@
 <ion-content class="ion-text-center">
   <div class="full-container">
   <ion-grid>
-    <ion-row class="ion-text-center welcome-title">
-      <div class="page-header">
+    <ion-row class="ion-text-center welcome-title" [ngClass]="{hidden: splashMode}">
+      <div class="page-header fade-in">
         <h1>Welcome to TDS</h1>
       </div>
     </ion-row>
-    <ion-row class="ion-text-center" style="justify-content: center;">
+    <!-- <ion-row class="ion-text-center" style="justify-content: center;">
       <img src="assets/logo-4.png"/>
       <img src="assets/tds.png" class="tds-word-img"/>
-    </ion-row>
-    <ion-row class="ion-text-center" style="justify-content: center;">
+    </ion-row> -->
+
+    <ion-grid>
+      <ion-row class="ion-text-center animated-row">
+        <img src="assets/splash/logo.png" class="logo"/>
+      </ion-row>
+      <ion-row class="ion-text-center animated-row">
+        <img src="assets/splash/t.png" class="t"/>
+        <img src="assets/splash/d.png" class="d"/>
+        <img src="assets/splash/s.png" class="s"/>
+      </ion-row>
+      <ion-row class="ion-text-center animated-row" style="padding-left: 5px; padding-right: 5px;">
+        <img src="assets/splash/full-word.png" class="full-word" />
+      </ion-row>
+    </ion-grid>
+
+    <ion-row class="ion-text-center fade-in" style="justify-content: center;" [ngClass]="{hidden: splashMode}">
       <div class="button-container">
         <ion-button expand="block" class="main-button" (click)="navigateToTabs()">Continue as Guest</ion-button>
         <ion-button expand="block" class="main-button" routerLink="/login" routerDirection="forward">Log in</ion-button>
