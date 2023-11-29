@@ -1,26 +1,21 @@
 <app-header></app-header>
 
-<ion-content>
-  <ion-title class="product-title">Hyper Light</ion-title>
+<ion-content *ngIf="product">
+  <ion-title class="product-title">{{product.name}}</ion-title>
     <div class="category-slider ion-padding-start">
       <div class="swiper-container" >
         <div class="swiper-wrapper">
 
-          <div class="swiper-slide">
-            <img src="assets/products/hyper-light.jpeg">
-          </div>
-          <div class="swiper-slide">
-            <video *ngIf="swiper.activeIndex === 1" width="100%" height="auto" controls autoplay>
+          <div class="swiper-slide" *ngFor="let galleryItem of product.gallery;let i=index;">
+            <img *ngIf="galleryItem.type === 'img'" src="assets/products/hyper-light.jpeg">
+            <video *ngIf="swiper.activeIndex === i && galleryItem.type === 'video'" width="100%" height="auto" controls autoplay>
               <source src="assets/products/test2.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
-            <video *ngIf="swiper.activeIndex !== 1" width="100%" height="auto" controls>
-              <source src="assets/products/test.mp4" type="video/mp4">
+            <video *ngIf="swiper.activeIndex !== i && galleryItem.type === 'video'" width="100%" height="auto" controls>
+              <source src="assets/products/test2.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
-          </div>
-          <div class="swiper-slide">
-            <img src="assets/products/hyper-light.jpeg">
           </div>
         </div>
         <!-- Add Pagination -->
@@ -31,28 +26,11 @@
     <ion-grid>
       <ion-row>
         <div class="button-container price">
-        1000 EGP
+        {{product.price}} EGP
         </div>
       </ion-row>
       <ion-row>
-        <div class="button-container description">
-        Portable X-Ray Unit
-        <br>
-        Focal spot: 0.4mm
-        <br>
-        Tube Voltage: 65KV
-        <br>
-        Tube Current: 2mA
-        <br>
-        Weight: 1.8KG
-        <br>
-        Battery: 2000mAH*4
-        <br>
-        Exposure Time Range: 0.02-2 Sec
-        <br><br>
-        Engineered for Accurate Images
-        Designed with Safety in Mind
-        </div>
+        <div [innerHTML]="product.longDescription" class="button-container description"></div>
       </ion-row>
 
       <ion-row class="ion-text-center buttons-bottom " style="justify-content: center;">
@@ -78,15 +56,8 @@
               <ion-button color="light" (click)="modal.dismiss()">Close</ion-button>
             </ion-buttons>
           </ion-toolbar>
-          <p class="ion-padding">
-            You will pay 200 pounds in advance.
-          </p>
-          <p class="ion-padding">
-            Then 200 pounds in installments for 10 months
-          </p>
-          <p class="ion-padding">
-            Or 400 pounds in installments for 5 months.
-          </p>
+          <div style="padding-left: 16px;" [innerHTML]="product.installmentPlan">
+          </div>
         </ion-content>
       </ng-template>
     </ion-modal>

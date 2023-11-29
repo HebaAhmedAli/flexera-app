@@ -3,34 +3,10 @@
 <ion-content>
 
  <ion-grid>
-  <ion-row [routerLink]="['/products',{categoryImg: 'assets/categories/eighteeth.png', categoryId: 1}]">
+  <ion-row  *ngFor="let category of categories" [routerLink]="['/products',{categoryImg: category.img, categoryId: category.id}]">
     <ion-col>
-      <img src="assets/categories/eighteeth.png" style="padding-right: 10px;"/>
+      <img [src]="category.img" style="padding-right: 10px;"/>
     </ion-col>
   </ion-row>
-
-  <ion-row [routerLink]="['/products',{categoryImg: 'assets/categories/fanta.png', categoryId: 2}]">
-    <ion-col>
-      <img src="assets/categories/fanta.png"/>
-    </ion-col>
-  </ion-row>
-
-  <ion-row [routerLink]="['/products',{categoryImg: 'assets/categories/examvision-2.png', categoryId: 3}]">
-    <ion-col>
-      <img src="assets/categories/examvision-2.png"/>
-    </ion-col>
-  </ion-row>
-
-  <ion-row [routerLink]="['/products',{categoryImg: 'assets/categories/deppeler-2.png', categoryId: 4}]">
-    <ion-col>
-      <img src="assets/categories/deppeler-2.png"/>
-    </ion-col>
-  </ion-row>
-  <ion-row [routerLink]="['/products',{categoryImg: 'assets/categories/beyond-2.png', categoryId: 5}]">
-    <ion-col >
-      <img src="assets/categories/beyond-2.png"/>
-    </ion-col>
-  </ion-row>
-
  </ion-grid>
 </ion-content>

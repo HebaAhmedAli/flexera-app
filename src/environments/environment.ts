@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  secretKeyStorage: '47d382fedd3b6c8375736fefa1143883'
+  secretKeyStorage: '47d382fedd3b6c8375736fefa1143883',
+  baseUrl: 'http://localhost:8080'
 };
 
 /*

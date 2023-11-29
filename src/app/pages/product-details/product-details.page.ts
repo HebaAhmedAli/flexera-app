@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProductModel } from 'src/app/models/product.model';
 import { CartService } from 'src/app/services/cart.service';
+import { ProductService } from 'src/app/services/product.service';
 import Swiper from 'swiper';
 
 @Component({
@@ -10,8 +13,11 @@ import Swiper from 'swiper';
 export class ProductDetailsPage implements OnInit {
   swiper: Swiper;
   productCounter: number = 0;
+  productId: number = 0;
 
-  constructor(public cartService: CartService) {
+  product!: ProductModel;
+
+  constructor(public cartService: CartService, private productService: ProductService, private route: ActivatedRoute) {
     this.swiper = new Swiper('.swiper-container', {
       // Optional parameters
       direction: 'horizontal',
@@ -29,6 +35,12 @@ export class ProductDetailsPage implements OnInit {
   }
 
   ngOnInit() {
+    this.productId = Number(this.route.snapshot.paramMap.get('productId') as string);
+    this.productService.getProductById(this.productId).subscribe(data => {
+      this.product = data;
+    }, err => {
+      console.log(err);
+    })
   }
 
   ionViewDidEnter() {

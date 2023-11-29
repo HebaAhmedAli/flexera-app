@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ProductModel } from 'src/app/models/product.model';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-products',
@@ -10,91 +12,42 @@ export class ProductsPage implements OnInit {
 
 
   segmentValue: string = 'devices';
-  selectedSortBy: number = 0;
+  selectedSortBy: string = 'lowest-price';
   categoryImg: string = '';
   categoryId: number = 0;
-  devicesProducts : any[]= [];
-  materialsProducts :  any[] = [];
-  constructor(private router: ActivatedRoute) {
+  allProducts : Array<ProductModel> = [];
+  devicesProducts : Array<ProductModel> = [];
+  materialsProducts :  Array<ProductModel> = [];
+  constructor(private router: ActivatedRoute, private categoryService: CategoryService) {
 
   }
 
   ngOnInit() {
     this.categoryImg = this.router.snapshot.paramMap.get('categoryImg') as string;
     this.categoryId = Number(this.router.snapshot.paramMap.get('categoryId') as string);
-
-    this.devicesProducts = [
-      {
-        name: 'Hyper Light',
-        price: 1000,
-        description: 'Portable X-Ray Unit...',
-        img: 'assets/products/hyper-light.jpeg'
-
-      },
-      {
-        name: 'Nano pix',
-        price: 2000,
-        description: 'Premium x-Ray Premium x-Ray...',
-        img: 'assets/products/nano-pix.jpeg'
-
-      },
-      {
-        name: 'Nano pix',
-        price: 2000,
-        description: 'The Description Description of...',
-        img: 'assets/products/nano-pix.jpeg'
-
-      },
-      {
-        name: 'Hyper Light',
-        price: 1000,
-        description: 'The Description of the Hyper...',
-        img: 'assets/products/hyper-light.jpeg'
-
-      },
-      {
-        name: 'Hyper Light',
-        price: 1000,
-        description: 'The Description of the Hyper...',
-        img: 'assets/products/hyper-light.jpeg'
-
-      }
-    ];
-
-    this.materialsProducts = [
-      {
-        name: 'Material Device',
-        price: 1000,
-        description: 'Premium x-Ray.',
-        img: 'assets/products/material-device.jpeg'
-
-      },
-      {
-        name: 'Digital Device',
-        price: 2000,
-        description: 'Premium x-Ray Premium x-Ray...',
-        img: 'assets/products/digital-device.jpeg'
-
-      },
-      {
-        name: 'Material Device',
-        price: 2000,
-        description: 'The Description Description of...',
-        img: 'assets/products/material-device.jpeg'
-
-      },
-      {
-        name: 'Digital Device',
-        price: 1000,
-        description: 'The Description of the Hyper...',
-        img: 'assets/products/digital-device.jpeg'
-
-      }
-    ];
+    this.categoryService.getProductsOfCategory(this.categoryId).subscribe(data => {
+      this.allProducts = data.sort((p1, p2) => p1.price - p2.price);
+      this.devicesProducts = this.allProducts .filter(product => product.type === 'device');
+      this.materialsProducts = this.allProducts .filter(product => product.type === 'material');
+    },
+    err => {
+      console.log(err);
+    });
   }
 
-  changeSelectedSortBy(selectedNumber: number, modal: any) {
-    this.selectedSortBy = selectedNumber;
+  changeSelectedSortBy(selectedSort: string, modal: any) {
+    this.selectedSortBy = selectedSort;
+    if (this.selectedSortBy === 'best-selling') {
+      this.allProducts = this.allProducts.sort((p1, p2) => p2.sellingRate - p1.sellingRate);
+    } else if(this.selectedSortBy === 'name') {
+      this.allProducts = this.allProducts.sort((p1, p2) => p1.name.localeCompare(p2.name));
+    } else if(this.selectedSortBy === 'highest-price') {
+      this.allProducts = this.allProducts.sort((p1, p2) => p2.price - p1.price);
+    } else {
+      this.allProducts = this.allProducts.sort((p1, p2) => p1.price - p2.price);
+    }
+    this.devicesProducts = this.allProducts .filter(product => product.type === 'device');
+    this.materialsProducts = this.allProducts .filter(product => product.type === 'material');
     modal.dismiss();
   }
 }
