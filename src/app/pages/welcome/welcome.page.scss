@@ -226,23 +226,23 @@ ion-row {
 .t {
   // -webkit-animation: slide-in-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 	//         animation: slide-in-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-  -webkit-animation: bounce-in-top 1.1s both;
-	        animation: bounce-in-top 1.1s both;
+  -webkit-animation: bounce-in-top 0.5s both;
+	        animation: bounce-in-top 0.5s both;
 }
 
 .d {
   // -webkit-animation: slide-in-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s both;
 	//         animation: slide-in-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s both;
-    -webkit-animation: bounce-in-top 1.1s 1s both;
-    animation: bounce-in-top 1.1s 1s both;
+    -webkit-animation: bounce-in-top 0.5s 0.5s both;
+    animation: bounce-in-top 0.5s 0.5s both;
 }
 
 
 .s {
   // -webkit-animation: slide-in-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2s both;
 	//         animation: slide-in-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2s both;
-  -webkit-animation: bounce-in-top 1.1s 2s both;
-    animation: bounce-in-top 1.1s 2s both;
+  -webkit-animation: bounce-in-top 0.5s 1s both;
+    animation: bounce-in-top 0.5s 1s both;
 }
 
 .logo {
@@ -250,7 +250,7 @@ ion-row {
   // animation: slide-in-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 3s both;
 
   -webkit-animation: rotate-in-center 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: rotate-in-center 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 3s both;
+	        animation: rotate-in-center 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s both;
 }
 
 
@@ -293,8 +293,8 @@ ion-row {
 
 
 .full-word {
-  -webkit-animation: slide-in-left 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 4s both;
-	        animation: slide-in-left 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 4s both;
+  -webkit-animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.5s both;
+	        animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.5s both;
 }
 
 
@@ -366,8 +366,8 @@ ion-row {
 }
 
 .fade-in {
-	-webkit-animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 5s both;
-	        animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) 5s both;
+	-webkit-animation: fade-in 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) 3.0s both;
+	        animation: fade-in 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) 3.0s both;
 }
 
 

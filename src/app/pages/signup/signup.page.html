@@ -12,36 +12,77 @@
 
   <div class="ion-padding container">
     <h1>Signup</h1>
+    <form [formGroup]="signupForm" (ngSubmit)="signup()">
 
     <div class="form-container">
 
       <ion-list>
-        <ion-item>
-          <ion-select label="Title *" label-placement="floating" interface="popover" mode="md" [(ngModel)]="title">
+        <ion-item [ngClass]="{'invalid': title?.invalid && (title?.dirty || title?.touched)}">
+          <ion-select label="Title *" label-placement="floating" interface="popover" mode="md" formControlName="title">
             <ion-select-option value="Mr.">Mr.</ion-select-option>
             <ion-select-option value="Dr.">Dr.</ion-select-option>
             <ion-select-option value="TA.">TA.</ion-select-option>
             <ion-select-option value="Prof.">Prof.</ion-select-option>
           </ion-select>
+
         </ion-item>
       </ion-list>
+      <div class="error-container" *ngIf="title?.invalid && (title?.dirty || title?.touched)">
+        <span>
+          Title is required
+        </span>
+      </div>
+
       <ion-item>
         <ion-label position="floating">Name *</ion-label>
-        <ion-input></ion-input>
+        <ion-input formControlName="name"></ion-input>
       </ion-item>
+      <div class="error-container" *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+        <span *ngIf="name?.errors?.required">
+          Name is required
+        </span>
+      </div>
+
       <ion-item>
         <ion-label position="floating">Email *</ion-label>
-        <ion-input></ion-input>
+        <ion-input formControlName="email"></ion-input>
       </ion-item>
+      <div class="error-container" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+        <span *ngIf="email?.errors?.required">
+          Email is required
+        </span>
+        <span *ngIf="email?.errors?.pattern">
+          Please enter a valid email address
+        </span>
+      </div>
+
       <ion-item>
         <ion-label position="floating">Phone *</ion-label>
-        <ion-input></ion-input>
+        <ion-input formControlName="phone" type="tel"></ion-input>
       </ion-item>
+      <div class="error-container" *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)">
+        <span *ngIf="phone?.errors?.required">
+          Phone is required
+        </span>
+        <span *ngIf="phone?.errors?.pattern">
+          Please enter a valid phone number
+        </span>
+      </div>
+
       <ion-item>
         <ion-label position="floating">Password *</ion-label>
-        <ion-input type="{{ showPassword ? 'text' : 'password' }}"></ion-input>
+        <ion-input formControlName="password" type="{{ showPassword ? 'text' : 'password' }}"></ion-input>
         <ion-icon name="{{ showPassword ? 'eye-off' : 'eye' }}" slot="end" (click)="togglePasswordVisibility()"></ion-icon>
       </ion-item>
+      <div class="error-container" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+        <span *ngIf="password?.errors?.required">
+          Password is required
+        </span>
+        <span *ngIf="password?.errors?.pattern">
+          Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.
+        </span>
+      </div>
+
       <br>
 
       <ion-item lines="none" (click)="showAdditional = !showAdditional">
@@ -49,21 +90,23 @@
         <ion-icon  name="{{ showAdditional ? 'caret-down-outline' : 'caret-forward-outline' }}" slot="end" ></ion-icon>
       </ion-item>
 
+
+
       <br>
 
         <ion-item *ngIf="showAdditional">
           <ion-label position="floating">Address</ion-label>
-          <ion-input></ion-input>
+          <ion-input formControlName="address"></ion-input>
         </ion-item>
 
         <ion-item *ngIf="showAdditional">
           <ion-label position="floating">Age</ion-label>
-          <ion-input type="number"></ion-input>
+          <ion-input type="number" formControlName="age"></ion-input>
         </ion-item>
 
         <ion-list *ngIf="showAdditional">
           <ion-item>
-            <ion-select  label="Speciality" label-placement="floating" interface="popover" mode="md" [(ngModel)]="speciality">
+            <ion-select formControlName="speciality" label="Speciality" label-placement="floating" interface="popover" mode="md">
               <ion-select-option value="GP">GP</ion-select-option>
               <ion-select-option value="Restorative">Restorative</ion-select-option>
               <ion-select-option value="Endodontics">Endodontics</ion-select-option>
@@ -79,24 +122,25 @@
 
         <ion-list *ngIf="showAdditional">
           <ion-item>
-            <ion-select label="University Staff" label-placement="floating" interface="popover" mode="md" [(ngModel)]="uniStaff">
+            <ion-select formControlName="uniStaff" label="University Staff" label-placement="floating" interface="popover" mode="md" >
               <ion-select-option value="Yes">Yes</ion-select-option>
               <ion-select-option value="No">No</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-list>
 
-        <ion-item *ngIf="showAdditional && uniStaff === 'Yes'">
+        <ion-item *ngIf="showAdditional && uniStaff?.value === 'Yes'">
           <ion-label position="floating">University</ion-label>
-          <ion-input></ion-input>
+          <ion-input formControlName="university"></ion-input>
         </ion-item>
 
 
-      <ion-button expand="block" class="main-button" (click)="signup()">Sign Up</ion-button>
+      <ion-button expand="block" class="main-button"  type="submit">Sign Up</ion-button>
 
       <div class="sign-up">
         Already have an account? <ion-button color="dark" fill="clear" routerLink="/login" routerDirection="forward">Sign in</ion-button>
       </div>
     </div>
+    </form>
   </div>
 </ion-content>

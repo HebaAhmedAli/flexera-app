@@ -56,3 +56,12 @@ ion-toolbar {
 ion-label {
   color: dimgrey !important;
 }
+
+span {
+  color: red;
+}
+
+
+.invalid {
+  --border-color: red !important;
+}

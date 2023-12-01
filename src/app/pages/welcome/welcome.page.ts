@@ -15,7 +15,7 @@ export class WelcomePage implements OnInit {
     if(this.splashMode) {
       setTimeout(() => {
         this.router.navigateByUrl('tabs');
-      }, 5100);
+      }, 3100);
     }
   }
 
