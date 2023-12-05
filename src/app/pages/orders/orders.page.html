@@ -2,6 +2,7 @@
 
 
 <ion-content [fullscreen]="true">
+  <div *ngIf="mode !== 'guest'">
   <ion-segment value="current" color="dark" mode="md" [(ngModel)]="segmentValue">
     <ion-segment-button value="current">
       <ion-label>Current Orders</ion-label>
@@ -79,5 +80,27 @@
     </ion-col>
   </ion-row>
 </ion-grid>
+</div>
+<div *ngIf="mode === 'guest'" style="padding: 10px;">
+<ion-grid>
+  <ion-row class="ion-padding">
+    <ion-col class="ion-text-center">
+     <h1 style="font-weight: bold;"> You are not Logged in</h1>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-padding" style="margin-top: 10px;">
+    <ion-col class="ion-text-center">
+      <img src="assets/lock.png">
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-padding" style="margin-top: 10px;">
+    <ion-col class="ion-text-center ion-padding">
+      <div class="button-container">
+        <ion-button expand="block" class="main-button" routerLink="/login" routerDirection="forward">Navigate to Login</ion-button>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</div>
 
 </ion-content>

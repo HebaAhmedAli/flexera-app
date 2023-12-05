@@ -2,6 +2,7 @@
 
 
 <ion-content [fullscreen]="true">
+  <div *ngIf="mode !== 'guest'">
  <ion-grid>
   <ion-row>
     <ion-col class="name">
@@ -54,11 +55,37 @@
 
  </ion-grid>
 
+
  <ion-action-sheet mode="ios"
   [isOpen]="isActionSheetOpen"
   [buttons]="actionSheetButtons"
   (didDismiss)="onActionSheetDismiss($event)"
 ></ion-action-sheet>
 
+
+</div>
+
+
+<div *ngIf="mode === 'guest'">
+  <ion-grid>
+    <ion-row class="ion-padding">
+      <ion-col class="ion-text-center">
+       <h1 style="font-weight: bold;"> You are not Logged in</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding">
+      <ion-col class="ion-text-center">
+        <img src="assets/lock.png">
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding">
+      <ion-col class="ion-text-center ion-padding">
+        <div class="button-container">
+          <ion-button expand="block" class="main-button" routerLink="/login" routerDirection="forward">Navigate to Login</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  </div>
 
 </ion-content>

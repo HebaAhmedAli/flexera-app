@@ -22,6 +22,8 @@ export class AccountPage implements OnInit {
   university: string = '';
   age: string = '';
 
+  mode: string = '';
+
   openImageModal = false;
   isActionSheetOpen = false;
   public actionSheetButtons = [
@@ -53,10 +55,17 @@ export class AccountPage implements OnInit {
   ) {}
 
   async ngOnInit() {
+    this.mode = await this.storage.get('mode');
+
     this.photoURL = await this.storage.get('photo');
     console.log('iside init', this.photoURL);
     if(!this.photoURL) this.photoURL = 'assets/default-profile.png';
     console.log('iside init after check', this.photoURL);
+  }
+
+  async ionViewDidEnter() {
+    this.mode = await this.storage.get('mode');
+
   }
 
   openImagePicker() {

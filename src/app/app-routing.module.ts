@@ -46,7 +46,17 @@ const routes: Routes = [
   {
     path: 'splash',
     loadChildren: () => import('./pages/splash/splash.module').then( m => m.SplashPageModule)
+  },
+  {
+    path: 'checkout',
+    loadChildren: () => import('./pages/checkout/checkout.module').then( m => m.CheckoutPageModule)
+  },
+  {
+    path: 'order-success',
+    loadChildren: () => import('./pages/order-success/order-success.module').then( m => m.OrderSuccessPageModule)
   }
+
+
 
 
 ];

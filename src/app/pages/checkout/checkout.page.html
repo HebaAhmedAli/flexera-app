@@ -1,0 +1,160 @@
+<app-header></app-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col class="summary-title ion-text-center">
+        Order summary
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-card class="ion-padding">
+
+    <ion-card-content class="card-sub-title">
+
+
+    <ion-grid class="ion-no-padding ion-no-margin">
+      <ion-row>
+        <ion-col class="ion-padding">
+          <h1>  Order No: {{order.no}}</h1>
+
+        </ion-col>
+    </ion-row>
+      <ion-row class="padding-top-bottom">
+        <ion-col size="5">
+          <h2 class="name">Hyper Light</h2>
+        </ion-col>
+        <ion-col>
+            x 1
+        </ion-col>
+        <ion-col class="price-col">
+          100 EGP
+        </ion-col>
+      </ion-row>
+      <ion-row class="padding-top-bottom">
+        <ion-col size="5">
+          <h2 class="name">Nano Pix</h2>
+        </ion-col>
+        <ion-col>
+            x 2
+        </ion-col>
+        <ion-col class="price-col">
+          500 EGP
+        </ion-col>
+      </ion-row>
+      <ion-row class="padding-top-bottom">
+        <ion-col size="5">
+          <h2 class="name">Digital Device</h2>
+        </ion-col>
+        <ion-col>
+            x 3
+        </ion-col>
+        <ion-col class="price-col">
+          400 EGP
+        </ion-col>
+      </ion-row>
+      <ion-row >
+        <ion-col>
+          <div class="line"></div>
+
+        </ion-col>
+      </ion-row>
+      <ion-row class="padding-top-bottom">
+        <h2 class="total-price"> Total Price: {{order.price}} EGP</h2>
+      </ion-row>
+    </ion-grid>
+
+</ion-card-content>
+</ion-card>
+<ion-card class="ion-padding">
+  <ion-card-content class="card-sub-title">
+  <ion-grid class="ion-no-padding ion-no-margin">
+    <ion-row>
+      <ion-col class="ion-padding" style="padding-bottom: 0px;">
+        <h1>     Your Delivery Address:
+        </h1>
+      </ion-col>
+  </ion-row>
+    <ion-row class="padding-top-bottom">
+      <ion-col >
+        <ion-item *ngIf="editAddress">
+          <ion-input [(ngModel)]="address"></ion-input>
+        </ion-item>
+        <ion-item lines="none" *ngIf="!editAddress">
+          <h2 >{{address}}</h2>
+          <ion-icon slot="end" name="create" (click)="editAddress = !editAddress"></ion-icon>
+        </ion-item>
+      </ion-col>
+      <ion-col *ngIf="editAddress" size="2">
+        <ion-icon name="checkmark-done-circle-outline" style="zoom: 3;padding-top: 8px;" (click)="editAddress = !editAddress"></ion-icon>
+      </ion-col>
+      </ion-row>
+      </ion-grid>
+  </ion-card-content>
+  </ion-card>
+<ion-grid>
+  <ion-row>
+    <ion-col class="sub-title">
+      Payment Methods Instructions:
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class="ion-text-center payments">
+
+      <img src="assets/instapay.png">
+
+    </ion-col>
+    <ion-col class="ion-text-center payments">
+
+      <img src="assets/vodafone-cash.jpeg" style="margin-top: 5px;">
+
+    </ion-col>
+    <ion-col class="ion-text-center payments">
+
+      <img src="assets/etisalat-cash.jpg" style="zoom: 0.113;">
+
+    </ion-col>
+    <ion-col class="ion-text-center payments">
+
+      <img src="assets/cash.png" style="width: 80%; height: 80%;">
+
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col class="sub-title">
+      Select your preferred method:
+    </ion-col>
+  </ion-row>
+  <ion-row>
+      <ion-radio-group value="cash" [(ngModel)]="paymentMethod">
+        <ion-row class="ion-padding padding-top-bottom">
+          <ion-radio value="instapay" labelPlacement="end">Pay via Instapay</ion-radio>
+        </ion-row>
+        <ion-row class="ion-padding padding-top-bottom">
+          <ion-radio value="vodafone-cash" labelPlacement="end">Pay via Vodafone Cash</ion-radio>
+        </ion-row>
+        <ion-row class="ion-padding padding-top-bottom">
+          <ion-radio value="etisalat-cash" labelPlacement="end">Pay via Etisalat Cash</ion-radio>
+        </ion-row>
+        <ion-row class="ion-padding padding-top-bottom">
+          <ion-radio value="cash" labelPlacement="end">Cash on Delivery</ion-radio>
+        </ion-row>
+      </ion-radio-group>
+  </ion-row>
+
+  <ion-row>
+    <ion-col class="note">
+      Note: If you select to pay via instapay or vodafone chash you will need to upload a screenshot from the receipt after submitting your order to complete it.
+    </ion-col>
+  </ion-row>
+
+
+  <ion-row class="ion-text-center buttons-bottom " style="justify-content: center;">
+    <div class="button-container" style="width: 85%;">
+    <ion-button expand="block" class="main-button" routerLink="/order-success">Submit</ion-button>
+    </div>
+  </ion-row>
+</ion-grid>
+
+</ion-content>

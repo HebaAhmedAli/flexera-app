@@ -1,0 +1,31 @@
+<app-header></app-header>
+
+<ion-content [fullscreen]="true">
+    <ion-grid>
+      <ion-row class="ion-padding">
+        <ion-col class="ion-text-center">
+         <h1 style="font-weight: bold;"> You Order has been placed successfully!</h1>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-padding">
+        <ion-col class="ion-text-center">
+          <img src="assets/success.png" style="zoom: 0.5 !important;">
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-padding" *ngIf="!done">
+        <ion-col class="ion-text-center">
+         <h3 style="color: red;">Please Upload a screenshot from the receipt to complete your order </h3>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-padding">
+        <ion-col class="ion-text-center ion-padding">
+              <ion-item lines="none">
+                <ion-label class="main-button main-label" (click)="actionButtonClick()" >
+                  {{ done ? 'Done' : 'Upload receipt screenshot'}}</ion-label>
+              </ion-item>
+              <input #uploadInput type="file" id="img" name="img" accept="image/*" (change)="onFileChanged($event)" />
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
