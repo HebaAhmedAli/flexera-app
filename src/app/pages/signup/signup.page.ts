@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SignUpRequestModel } from 'src/app/models/signup-request.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
 
 @Component({
@@ -12,6 +14,9 @@ export class SignupPage implements OnInit {
 
   showPassword: boolean = false;
   showAdditional: boolean = true;
+  isAlertOpen: boolean = false;
+  message: string = '';
+  status: number = 0;
 
  signupForm = new FormGroup({
   title: new FormControl('', Validators.required),
@@ -28,7 +33,8 @@ export class SignupPage implements OnInit {
 
   constructor(
     private router: Router,
-    private storage: SecureStorage
+    private storage: SecureStorage,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -40,18 +46,47 @@ export class SignupPage implements OnInit {
 
   async signup() {
     if (this.signupForm.valid) {
-      console.log('Form is valid', this.signupForm.value);
-      await this.storage.set('mode', 'user');
-      this.router.navigateByUrl('tabs');
+      //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
+      const signUpRequest = new SignUpRequestModel();
+      signUpRequest.title = this.title?.value as string;
+      signUpRequest.name = this.name?.value as string;
+      signUpRequest.email = this.email?.value as string;
+      signUpRequest.phone = this.phone?.value as string;
+      signUpRequest.password = this.password?.value as string;
+      signUpRequest.address = this.address?.value as string;
+      signUpRequest.age = Number(this.age?.value);
+      signUpRequest.speciality = this.speciality?.value as string;
+      signUpRequest.uniStaff = this.uniStaff?.value as string;
+      signUpRequest.university = this.university?.value as string;
+      this.authService.signUp(signUpRequest).subscribe(async (response: any) => {
+        if(response.status === 200) {
+          this.message = 'You are registered successfully. Navigate to login';
+        } else {
+          this.message = response.error.message;
+        }
+        this.status = response.status;
+        this.isAlertOpen = true;
+      }, error => {
+        this.message = error.error.message;
+        this.status = error.status;
+        this.isAlertOpen = true;
+      }
+      );
+
     } else {
-      console.log('Form is invalid', this.signupForm.errors);
-
-
       Object.keys(this.signupForm.controls).forEach(key => {
         this.signupForm.get(key)?.markAsTouched();
       });
     }
 
+  }
+
+  async alertDismiss() {
+    this.isAlertOpen = false;
+    if(this.status === 200) {
+      await this.storage.set('mode', 'user');
+      this.router.navigateByUrl('login');
+    }
   }
 
 

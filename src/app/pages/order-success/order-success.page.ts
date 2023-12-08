@@ -52,18 +52,7 @@ export class OrderSuccessPage implements OnInit {
       }
       );
   }
-    //Gets called when the user clicks on retieve image button to get the image from back end
-    getImage() {
-    //Make a call to Sprinf Boot to get the Image Bytes.
-    this.httpClient.get(`${environment.baseUrl}/api/v1/image/get` + this.imageName)
-      .subscribe(
-        (        res: any) => {
-          this.retrieveResonse = res;
-          this.base64Data = this.retrieveResonse.picByte;
-          this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
-        }
-      );
-  }
+
 
   actionButtonClick() {
     !this.done ? this.myUploadInput.nativeElement.click() :this. router.navigateByUrl('/tabs/home');

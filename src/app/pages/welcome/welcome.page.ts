@@ -11,9 +11,13 @@ export class WelcomePage implements OnInit {
   splashMode : boolean = false;
   constructor(private router: Router, private storage: SecureStorage) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    const token = await this.storage.get('token');
+    console.log(token);
+    if(token) this.splashMode = true;
     if(this.splashMode) {
-      setTimeout(() => {
+      setTimeout(async () => {
+        await this.storage.set('mode', 'user');
         this.router.navigateByUrl('tabs');
       }, 3100);
     }
