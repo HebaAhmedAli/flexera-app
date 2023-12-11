@@ -2,13 +2,14 @@
 
 
 <ion-content class="ion-padding">
-  <div class="ion-padding container">
+  <div class="ion-padding container" *ngIf="profileForm">
     <h1>Change Profile Info</h1>
+    <form [formGroup]="profileForm" (ngSubmit)="save()">
 
     <div class="form-container">
       <ion-list>
         <ion-item>
-          <ion-select label="Title" label-placement="floating" interface="popover"  mode="md" [(ngModel)]="title">
+          <ion-select label="Title" label-placement="floating" interface="popover"  mode="md" formControlName="title">
             <ion-select-option value="Mr.">Mr.</ion-select-option>
             <ion-select-option value="Dr.">Dr.</ion-select-option>
             <ion-select-option value="TA.">TA.</ion-select-option>
@@ -19,31 +20,31 @@
 
       <ion-item>
         <ion-label position="floating">Name</ion-label>
-        <ion-input [(ngModel)]="name"></ion-input>
+        <ion-input formControlName="name"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating" >Email</ion-label>
-        <ion-input [disabled]="true" [(ngModel)]="email"></ion-input>
+        <ion-input [disabled]="true" formControlName="email"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Phone</ion-label>
-        <ion-input  [disabled]="true" [(ngModel)]="phone"></ion-input>
+        <ion-input  [disabled]="true" formControlName="phone"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Address</ion-label>
-        <ion-input [(ngModel)]="address"></ion-input>
+        <ion-input formControlName="address"></ion-input>
       </ion-item>
 
       <ion-item >
         <ion-label position="floating">Age</ion-label>
-        <ion-input type="number" [(ngModel)]="age"></ion-input>
+        <ion-input type="number" formControlName="age"></ion-input>
       </ion-item>
 
       <ion-list >
         <ion-item>
-          <ion-select label="Speciality" label-placement="floating" interface="popover" mode="md" [(ngModel)]="speciality">
+          <ion-select label="Speciality" label-placement="floating" interface="popover" mode="md" formControlName="speciality">
             <ion-select-option value="GP">GP</ion-select-option>
             <ion-select-option value="Restorative">Restorative</ion-select-option>
             <ion-select-option value="Endodontics">Endodontics</ion-select-option>
@@ -59,7 +60,7 @@
 
       <ion-list>
         <ion-item>
-          <ion-select label="University Staff" label-placement="floating" interface="popover" mode="md" [(ngModel)]="uniStaff">
+          <ion-select label="University Staff" label-placement="floating" interface="popover" mode="md" formControlName="uniStaff">
             <ion-select-option value="Yes">Yes</ion-select-option>
             <ion-select-option value="No">No</ion-select-option>
           </ion-select>
@@ -68,13 +69,14 @@
 
       <ion-item *ngIf="uniStaff === 'Yes'">
         <ion-label position="floating">University</ion-label>
-        <ion-input [(ngModel)]="university"></ion-input>
+        <ion-input formControlName="university"></ion-input>
       </ion-item>
 
 
-      <ion-button expand="block" class="main-button" routerLink="/tabs/account">Save</ion-button>
+      <ion-button expand="block" class="main-button" routerLink="/tabs/account" type="submit">Save</ion-button>
 
 
     </div>
+    </form>
   </div>
 </ion-content>
