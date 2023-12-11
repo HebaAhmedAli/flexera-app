@@ -5,6 +5,7 @@ import { ModalController, NavController, Platform } from '@ionic/angular';
 
 
 import { register } from 'swiper/element/bundle';
+import { CartService } from './services/cart.service';
 
 register();
 
@@ -15,9 +16,10 @@ register();
 })
 export class AppComponent {
 
-  constructor(private platform: Platform, private modalCtrl: ModalController, private navCtrl: NavController, private splash: SplashScreen) {
+  constructor(private platform: Platform, private cartService: CartService, private navCtrl: NavController, private splash: SplashScreen) {
     this.platform.ready().then(async () => {
       this.splash.hide();
+      this.cartService.initializeCart();
       this.navCtrl.navigateForward('/', { animated: false });
     });
   }

@@ -48,6 +48,7 @@ export class LoginPage implements OnInit {
           this.loginResponse = response.body;
           await this.storage.set('mode', 'user');
           await this.storage.set('token', this.loginResponse.tokenType + ' ' + this.loginResponse.accessToken);
+          await this.storage.set('user', this.loginResponse.user);
           this.router.navigateByUrl('tabs');
         } else {
           this.isAlertOpen = true;

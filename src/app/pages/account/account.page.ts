@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
  import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { ModalController } from '@ionic/angular';
 import { AccountImageModalComponent } from 'src/app/components/account-image-modal/account-image-modal.component';
+import { UserModel } from 'src/app/models/user.model';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
 
 @Component({
@@ -12,15 +13,7 @@ import { SecureStorage } from 'src/app/services/secure-storage.service';
 export class AccountPage implements OnInit {
   photoURL: string = '';
 
-  title: string = 'Mr.';
-  name : string = 'Abd Elrhman Ahmed Morsy';
-  email : string = 'aam@gmail.com';
-  phone: string = '01270908334';
-  address : string = 'Elshrok street esmail serry';
-  speciality: string = 'GP';
-  uniStaff: string = 'No';
-  university: string = '';
-  age: string = '';
+  user!: UserModel;
 
   mode: string = '';
 
@@ -56,7 +49,7 @@ export class AccountPage implements OnInit {
 
   async ngOnInit() {
     this.mode = await this.storage.get('mode');
-
+    this.user = await this.storage.get('user') as UserModel;
     this.photoURL = await this.storage.get('photo');
     console.log('iside init', this.photoURL);
     if(!this.photoURL) this.photoURL = 'assets/default-profile.png';

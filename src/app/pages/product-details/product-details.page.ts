@@ -12,7 +12,6 @@ import Swiper from 'swiper';
 })
 export class ProductDetailsPage implements OnInit {
   swiper: Swiper;
-  productCounter: number = 0;
   productId: number = 0;
 
   product!: ProductModel;
@@ -62,14 +61,17 @@ export class ProductDetailsPage implements OnInit {
  }
 
  addProduct() {
-  this.productCounter = this.productCounter + 1;
-  this.cartService.increaseCartCounter();
+  this.cartService.addProductToCart(this.product);
  }
 
  removeProduct() {
   if(this.productCounter === 0) return;
-  this.productCounter = this.productCounter - 1;
-  this.cartService.decreaseCartCounter();
+  this.cartService.decreaseProductQuantityInCart(this.product);
+ }
+
+
+ get productCounter(): number {
+  return this.cartService.getProductQuantityIncart(this.product);
  }
 
 }

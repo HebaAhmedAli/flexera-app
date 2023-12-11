@@ -16,43 +16,22 @@
     <ion-grid class="ion-no-padding ion-no-margin">
       <ion-row>
         <ion-col class="ion-padding">
-          <h1>  Order No: {{order.no}}</h1>
+          <h1>  Order Details:</h1>
 
         </ion-col>
     </ion-row>
-      <ion-row class="padding-top-bottom">
+      <ion-row *ngFor="let item of order?.orderItems" class="padding-top-bottom">
         <ion-col size="5">
-          <h2 class="name">Hyper Light</h2>
+          <h2 class="name">{{item.product.name}}</h2>
         </ion-col>
         <ion-col>
-            x 1
+            x {{item.quantity}}
         </ion-col>
         <ion-col class="price-col">
-          100 EGP
+          {{item.quantity * item.product.price}} EGP
         </ion-col>
       </ion-row>
-      <ion-row class="padding-top-bottom">
-        <ion-col size="5">
-          <h2 class="name">Nano Pix</h2>
-        </ion-col>
-        <ion-col>
-            x 2
-        </ion-col>
-        <ion-col class="price-col">
-          500 EGP
-        </ion-col>
-      </ion-row>
-      <ion-row class="padding-top-bottom">
-        <ion-col size="5">
-          <h2 class="name">Digital Device</h2>
-        </ion-col>
-        <ion-col>
-            x 3
-        </ion-col>
-        <ion-col class="price-col">
-          400 EGP
-        </ion-col>
-      </ion-row>
+
       <ion-row >
         <ion-col>
           <div class="line"></div>
@@ -60,7 +39,7 @@
         </ion-col>
       </ion-row>
       <ion-row class="padding-top-bottom">
-        <h2 class="total-price"> Total Price: {{order.price}} EGP</h2>
+        <h2 class="total-price"> Total Price: {{totalPrice}} EGP</h2>
       </ion-row>
     </ion-grid>
 
