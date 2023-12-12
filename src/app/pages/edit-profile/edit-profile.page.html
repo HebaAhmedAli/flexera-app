@@ -25,11 +25,11 @@
 
       <ion-item>
         <ion-label position="floating" >Email</ion-label>
-        <ion-input [disabled]="true" formControlName="email"></ion-input>
+        <ion-input formControlName="email"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Phone</ion-label>
-        <ion-input  [disabled]="true" formControlName="phone"></ion-input>
+        <ion-input  formControlName="phone"></ion-input>
       </ion-item>
 
       <ion-item>
@@ -73,10 +73,17 @@
       </ion-item>
 
 
-      <ion-button expand="block" class="main-button" routerLink="/tabs/account" type="submit">Save</ion-button>
+      <ion-button expand="block" class="main-button" type="submit" [disabled]="profileForm.invalid || profileForm.pristine">Save</ion-button>
 
 
     </div>
     </form>
   </div>
 </ion-content>
+
+<ion-alert
+[isOpen]="isAlertOpen"
+[message]="message"
+[buttons]="['OK']"
+(didDismiss)="alertDismiss()"
+></ion-alert>
