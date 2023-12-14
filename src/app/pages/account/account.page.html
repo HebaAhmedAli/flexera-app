@@ -6,7 +6,7 @@
  <ion-grid>
   <ion-row>
     <ion-col class="name">
-      <ion-label>Welcome {{user.title}} {{user.name}}</ion-label>
+      <ion-label *ngIf="user">Welcome {{user.title}} {{user.name}}</ion-label>
     </ion-col>
   </ion-row>
   <ion-row>
@@ -22,7 +22,7 @@
     <ion-card-content>
       <div>
         <ion-icon name="create" class="edit" routerLink="/edit-profile"></ion-icon>
-      <ion-grid>
+      <ion-grid *ngIf="user">
 
         <ion-row>
           <ion-label>Name: {{user.title}} {{user.name}}</ion-label>

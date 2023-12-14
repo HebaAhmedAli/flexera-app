@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { UserModel } from 'src/app/models/user.model';
 import { ProfileService } from 'src/app/services/profile.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
@@ -17,7 +18,7 @@ export class EditProfilePage implements OnInit {
   isAlertOpen = false;
   message?: string;
 
-  constructor(private storage: SecureStorage, private profileService: ProfileService, private router: Router) { }
+  constructor(private storage: SecureStorage, private profileService: ProfileService, private router: Router, private navCtrl: NavController) { }
 
   async ngOnInit() {
     this.user = await this.storage.get('user') as UserModel;
@@ -45,6 +46,7 @@ export class EditProfilePage implements OnInit {
 
   save() {
     const updatedUser: Partial<UserModel> = {
+      id: this.user?.id,
       title: this.profileForm.controls['title'].value,
       name: this.profileForm.controls['name'].value,
       address: this.profileForm.controls['address'].value,
@@ -68,6 +70,6 @@ export class EditProfilePage implements OnInit {
 
   async alertDismiss() {
     this.isAlertOpen = false;
-    this.router.navigate(['/tabs/account']);
+    this.navCtrl.navigateBack(['/tabs/account']);
   }
 }

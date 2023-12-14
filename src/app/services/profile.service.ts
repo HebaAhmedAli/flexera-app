@@ -16,8 +16,8 @@ export class ProfileService {
   constructor(private httpClient: HttpClient, private storage: SecureStorage) { }
 
   public updateProfile(user: Partial<UserModel>): Observable<UserModel> {
-    return this.httpClient.put<UserModel>(
-      `${environment.baseUrl}/api/v1/profile/`, user
+    return this.httpClient.patch<UserModel>(
+      `${environment.baseUrl}/api/v1/profile`, user
     );
   }
 }

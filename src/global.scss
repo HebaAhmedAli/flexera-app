@@ -232,7 +232,8 @@ ion-select:not(.select-wrapper) {
     padding: 10px
   }
 
-  ion-modal.image-modal::part(backdrop) {
+  ion-modal.image-modal::part(backdrop),
+  ion-modal.payment-modal::part(backdrop) {
     // background: rgba(209, 213, 219);
     opacity: 1;
   }
@@ -246,6 +247,13 @@ ion-select:not(.select-wrapper) {
     --height: 100%;
     --width: 100%;
 
+  }
+
+  ion-modal.payment-modal{
+    --height: 30%;
+    --border-radius: 16px;
+    --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    padding: 10px
   }
 
 

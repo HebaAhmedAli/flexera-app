@@ -1,5 +1,7 @@
 export class UserModel {
 
+  id!: number;
+
   title!: string;
 
 

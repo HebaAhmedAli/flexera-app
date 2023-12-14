@@ -78,17 +78,17 @@
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col class="ion-text-center payments">
+    <ion-col class="ion-text-center payments" (click)="openPaymentInstructionsModal('instapay')">
 
       <img src="assets/instapay.png">
 
     </ion-col>
-    <ion-col class="ion-text-center payments">
+    <ion-col class="ion-text-center payments" (click)="openPaymentInstructionsModal('vodafone-cash')">
 
       <img src="assets/vodafone-cash.jpeg" style="margin-top: 5px;">
 
     </ion-col>
-    <ion-col class="ion-text-center payments">
+    <ion-col class="ion-text-center payments" (click)="openPaymentInstructionsModal('etisalat-cash')">
 
       <img src="assets/etisalat-cash.jpg" style="zoom: 0.113;">
 

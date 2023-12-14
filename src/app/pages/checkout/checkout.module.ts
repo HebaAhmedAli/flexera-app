@@ -8,6 +8,7 @@ import { CheckoutPageRoutingModule } from './checkout-routing.module';
 
 import { CheckoutPage } from './checkout.page';
 import { SharedModule } from 'src/app/shared.module';
+import { PaymentInstructionsModalComponent } from 'src/app/components/payment-instructions-modal/payment-instructions-modal.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { SharedModule } from 'src/app/shared.module';
     CheckoutPageRoutingModule,
     SharedModule
   ],
-  declarations: [CheckoutPage]
+  declarations: [CheckoutPage, PaymentInstructionsModalComponent]
 })
 export class CheckoutPageModule {}

@@ -58,7 +58,7 @@ export class AccountPage implements OnInit {
 
   async ionViewDidEnter() {
     this.mode = await this.storage.get('mode');
-
+    this.user = await this.storage.get('user') as UserModel;
   }
 
   openImagePicker() {
