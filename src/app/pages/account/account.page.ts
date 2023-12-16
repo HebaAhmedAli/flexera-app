@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AccountImageModalComponent } from 'src/app/components/account-image-modal/account-image-modal.component';
 import { UserModel } from 'src/app/models/user.model';
+import { ProfileService } from 'src/app/services/profile.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
 
 @Component({
@@ -44,7 +45,8 @@ export class AccountPage implements OnInit {
 
 
   constructor(private camera: Camera, private storage: SecureStorage,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private profileService: ProfileService
   ) {}
 
   async ngOnInit() {
@@ -58,7 +60,9 @@ export class AccountPage implements OnInit {
 
   async ionViewDidEnter() {
     this.mode = await this.storage.get('mode');
-    this.user = await this.storage.get('user') as UserModel;
+    this.profileService.userUpdated.subscribe({
+      next: async () => this.user = await this.storage.get('user') as UserModel
+    })
   }
 
   openImagePicker() {

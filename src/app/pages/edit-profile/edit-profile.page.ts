@@ -57,8 +57,9 @@ export class EditProfilePage implements OnInit {
     }
 
     this.profileService.updateProfile(updatedUser).subscribe(
-      (res) => {
-        this.storage.set('user', res);
+      async (res) => {
+        await this.storage.set('user', res);
+        this.profileService.userUpdated.next();
         this.isAlertOpen = true;
         this.message = 'Profile has been successfully updated';
       }, () => {
