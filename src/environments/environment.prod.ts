@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
   secretKeyStorage: '47d382fedd3b6c8375736fefa1143883',
-  baseUrl: 'http://localhost:8080'
+  baseUrl: 'http://46.101.195.56:8080'
 
 };

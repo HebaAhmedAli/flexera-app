@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -19,10 +19,18 @@ export class OrderSuccessPage implements OnInit {
   retrieveResonse: any;
   message!: string;
   imageName: any;
+  orderId!: string;
+  orderStatus!: String;
 
-  constructor(private httpClient: HttpClient, public router: Router) { }
+  constructor(private httpClient: HttpClient, public router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+        this.orderId = params.orderId as string;
+        this.orderStatus = params.orderStatus as string;
+        this.done = this.orderStatus === 'not-completed' ? false : true;
+    });
+
   }
 
   //Gets called when the user selects an image
@@ -38,9 +46,10 @@ export class OrderSuccessPage implements OnInit {
     //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+    uploadImageData.append('orderId', this.orderId);
 
     //Make a call to the Spring Boot Application to save the image
-    this.httpClient.post(`${environment.baseUrl}/api/v1/image/upload`, uploadImageData, { observe: 'response' })
+    this.httpClient.post(`${environment.baseUrl}/api/v1/upload-receipt`, uploadImageData, { observe: 'response' })
       .subscribe((response: any) => {
         console.log(response)
         if (response.status === 200) {

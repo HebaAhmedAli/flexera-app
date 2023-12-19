@@ -35,7 +35,9 @@
               "src/theme/variables.scss",
               "src/global.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "json-ignore"]
           },
           "configurations": {
             "production": {

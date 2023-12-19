@@ -1,8 +1,8 @@
+import { jsonIgnore } from "json-ignore";
 import { OrderItemModel } from "./order-item.model";
 
 export class OrderModel {
   id!: number;
-  userId!: number;
   paymentMethod!: string;
   receiptUrl!: string;
   status!: string;
