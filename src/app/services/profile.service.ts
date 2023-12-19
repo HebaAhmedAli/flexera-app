@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CategoryModel } from '../models/category.model';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ProductModel } from '../models/product.model';
 import { UserModel } from '../models/user.model';
@@ -12,6 +12,7 @@ import { SecureStorage } from './secure-storage.service';
 })
 export class ProfileService {
 
+  userUpdated: Subject<void> = new Subject();
 
   constructor(private httpClient: HttpClient, private storage: SecureStorage) { }
 
