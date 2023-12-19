@@ -131,9 +131,16 @@
 
   <ion-row class="ion-text-center buttons-bottom " style="justify-content: center;">
     <div class="button-container" style="width: 85%;">
-    <ion-button expand="block" class="main-button" routerLink="/order-success">Submit</ion-button>
+    <ion-button expand="block" class="main-button" (click)="createOrder()" [disabled]="!this.address">Submit</ion-button>
     </div>
   </ion-row>
 </ion-grid>
+
+<ion-alert
+[isOpen]="isAlertOpen"
+[message]="message"
+[buttons]="['OK']"
+(didDismiss)="alertDismiss()"
+></ion-alert>
 
 </ion-content>
