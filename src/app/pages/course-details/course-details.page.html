@@ -5,17 +5,17 @@
 <ion-grid>
   <ion-row>
     <ion-col>
-      <img src="assets/courses/course-1.jpeg"/>
+      <img [src]="image"/>
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col>
-      <h1>Broken file bypass & retrieval</h1>
+      <h1>{{course?.title}}</h1>
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col>
-      <div dir="rtl" [innerHTML]="courseDetails">
+      <div dir="rtl" [innerHTML]="course?.details">
       </div>
     </ion-col>
   </ion-row>

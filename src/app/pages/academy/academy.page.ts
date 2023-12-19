@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Course } from 'src/app/models/course.model';
+import { AcademyService } from 'src/app/services/academy.service';
 
 @Component({
   selector: 'app-academy',
@@ -8,14 +10,28 @@ import { Component, OnInit } from '@angular/core';
 export class AcademyPage implements OnInit {
   segmentValue = 'current';
 
-  currentCourses = ['Broken file bypass & retrieval.', 'Course 1.', 'Course 2.'
-  , 'Course 3.', 'Course 4.'];
+  currentCourses: Course[] = [];
+  oldCourses: Course[] = [];
+  loading = true;
 
-  oldCourses = ['old Broken file bypass & retrieval.', 'old Course 1.', 'old Course 2.'
-  , 'old Course 3.', 'old Course 4.', 'old Course 5.', 'old Course 6.']
-  constructor() { }
+  constructor(private academyService: AcademyService) { }
 
   ngOnInit() {
+    this.getCourses();
+  }
+
+  getCourses() {
+    this.academyService.getCourses().subscribe(courses => {
+      this.currentCourses = courses.filter(course => course.upcoming);
+      this.oldCourses = courses.filter(course => !course.upcoming);
+      this.loading = false;
+    }), () => {
+      this.loading = false;
+    }
+  }
+
+  navigateToCourseDetails() {
+
   }
 
 }

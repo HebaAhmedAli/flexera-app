@@ -256,4 +256,15 @@ ion-select:not(.select-wrapper) {
     padding: 10px
   }
 
+.flex{
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.flex-column {
+  flex-direction: column;
+}
 
