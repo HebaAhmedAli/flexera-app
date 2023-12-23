@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { OrderModel } from 'src/app/models/order.model';
+import { OrderService } from 'src/app/services/order.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-orders',
@@ -9,21 +13,80 @@ import { SecureStorage } from 'src/app/services/secure-storage.service';
 export class OrdersPage implements OnInit {
   segmentValue = 'current';
   mode = '';
-  currentOrders = [{no: '#22345', price: 1000, expanded: true, status: 'Pending'} , {no: '#222222', price: 2000, expanded: false, status: 'In Process'}, {no: '#221111', price: 1000, expanded: false, status: 'In Process'},
-  {no: '#22333', price: 1000, expanded: false, status: 'Pending'}, {no: '212444', price: 3000, expanded: false, status: 'Pending'}];
+  selectedFile!: File;
 
-  oldOrders = [{no: '#12345', price: 1000, expanded: false, status: 'Done'} , {no: '#122222', price: 3000, expanded: false, status: 'Done'}, {no: '#121111', price: 1000, expanded: false, status: 'Done'},
-  {no: '#12333', price: 1000, expanded: false, status: 'Done'}, {no: '#12444', price: 2000, expanded: false, status: 'Done'}];
-  constructor(private storage: SecureStorage) { }
+  currentOrders! : OrderModel[];
+
+  oldOrders!: OrderModel[];
+
+  allOrders: OrderModel[] = [];
+
+  @ViewChild('myUploadInput', { static: true }) myUploadInput!: ElementRef<HTMLInputElement>;
+  currentOrderToAttach!: OrderModel;
+
+
+  constructor(private storage: SecureStorage, private orderService: OrderService, private httpClient: HttpClient) { }
 
   async ngOnInit() {
     this.mode = await this.storage.get('mode');
 
   }
 
-  async ionViewDidEnter() {
-    this.mode = await this.storage.get('mode');
 
+
+
+  async ionViewWillEnter() {
+    this.mode = await this.storage.get('mode');
+    if(this.mode === 'user') {
+      this.orderService.getOrders().subscribe(data => {
+        this.allOrders = data;
+        this.oldOrders = this.allOrders.filter(order => order.status === 'Done');
+        this.currentOrders = this.allOrders.filter(order => order.status !== 'Done');
+
+      },
+      err => {
+        console.log(err);
+      })
+    }
+
+  }
+
+  //Gets called when the user selects an image
+  public onFileChanged(event: any) {
+    //Select File
+    this.selectedFile = event.target.files[0];
+    this.onUpload();
+  }
+  //Gets called when the user clicks on submit to upload the image
+  onUpload() {
+    console.log(this.selectedFile);
+
+    //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
+    const uploadImageData = new FormData();
+    uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+    uploadImageData.append('orderId', String(this.currentOrderToAttach.id));
+
+    //Make a call to the Spring Boot Application to save the image
+    this.httpClient.post(`${environment.baseUrl}/api/v1/upload-receipt`, uploadImageData, { observe: 'response' })
+      .subscribe((response: any) => {
+        console.log(response)
+        if (response.status === 200) {
+          const index = this.allOrders.findIndex(order => order.id === this.currentOrderToAttach.id);
+          this.allOrders[index].status = 'Pending';
+          this.oldOrders = this.allOrders.filter(order => order.status === 'Done');
+          this.currentOrders = this.allOrders.filter(order => order.status !== 'Done');
+
+        } else {
+          alert('Image not uploaded successfully');
+        }
+      }
+      );
+  }
+
+
+  actionButtonClick(order: OrderModel) {
+    this.currentOrderToAttach = order;
+    this.myUploadInput.nativeElement.click();
   }
 
 }

@@ -54,10 +54,31 @@
         </h1>
       </ion-col>
   </ion-row>
+  <!-- <ion-row>
+    <ion-list>
+      <ion-item>
+        <ion-select  label="City" label-placement="floating" interface="popover" mode="md" [(ngModel)]="city">
+          <ion-select-option value="Cairo">Cairo</ion-select-option>
+          <ion-select-option value="Giza">Giza</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+  </ion-row>
+  <ion-row>
+    <ion-list *ngIf="city">
+      <ion-item>
+        <ion-select  label="Area" label-placement="floating" interface="popover" mode="md" [(ngModel)]="area">
+          <ion-select-option value="Sherouk">Sherouk</ion-select-option>
+          <ion-select-option value="Maadi">Maadi</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </ion-row> -->
     <ion-row class="padding-top-bottom">
       <ion-col >
         <ion-item *ngIf="editAddress">
-          <ion-input [(ngModel)]="address"></ion-input>
+          <ion-input [(ngModel)]="address" placeholder="Apartment / Building / Street"></ion-input>
         </ion-item>
         <ion-item lines="none" *ngIf="!editAddress">
           <h2 >{{address}}</h2>
@@ -68,6 +89,7 @@
         <ion-icon name="checkmark-done-circle-outline" style="zoom: 3;padding-top: 8px;" (click)="editAddress = !editAddress"></ion-icon>
       </ion-col>
       </ion-row>
+
       </ion-grid>
   </ion-card-content>
   </ion-card>

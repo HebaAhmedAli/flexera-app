@@ -28,7 +28,7 @@ export class OrderSuccessPage implements OnInit {
     this.route.queryParams.subscribe(params => {
         this.orderId = params.orderId as string;
         this.orderStatus = params.orderStatus as string;
-        this.done = this.orderStatus === 'not-completed' ? false : true;
+        this.done = this.orderStatus === 'Incomplete' ? false : true;
     });
 
   }

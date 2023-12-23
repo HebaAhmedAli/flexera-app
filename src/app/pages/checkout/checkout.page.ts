@@ -20,6 +20,9 @@ export class CheckoutPage implements OnInit {
   order!: OrderModel;
   message!: string;
   isAlertOpen = false;
+  city!: string;
+  area!: string;
+
 
   constructor(private cartService: CartService, private storage: SecureStorage, private modalController: ModalController, private orderService: OrderService
     , private router: Router) { }
@@ -27,7 +30,6 @@ export class CheckoutPage implements OnInit {
   async ngOnInit() {
     this.address =  (await this.storage.get('user') as UserModel).address;
     this.order = this.cartService.order;
-
   }
 
   get totalPrice() {
@@ -48,6 +50,7 @@ export class CheckoutPage implements OnInit {
             orderStatus: (response.body as OrderModel).status
           }
         };
+        this.cartService.emptyTheCart();
         this.router.navigate(['/order-success'], navigationExtras);
       } else {
         this.message = response.error.message;

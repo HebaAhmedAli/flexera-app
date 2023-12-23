@@ -3,6 +3,7 @@ import { OrderItemModel } from "./order-item.model";
 
 export class OrderModel {
   id!: number;
+  no!: number;
   paymentMethod!: string;
   receiptUrl!: string;
   status!: string;
@@ -12,4 +13,5 @@ export class OrderModel {
   locationLng!: string;
   date!: Date;
   orderItems!: OrderItemModel[];
+  expanded: boolean = false;
 }

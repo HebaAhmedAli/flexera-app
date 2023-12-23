@@ -2,7 +2,7 @@
 
 
 <ion-content [fullscreen]="true">
-  <div *ngIf="mode !== 'guest'">
+  <div *ngIf="allOrders.length > 0 && mode !== 'guest'">
   <ion-segment value="current" color="dark" mode="md" [(ngModel)]="segmentValue">
     <ion-segment-button value="current">
       <ion-label>Current Orders</ion-label>
@@ -16,13 +16,13 @@
 <ion-grid>
   <ion-row *ngFor="let order of (segmentValue === 'current' ? currentOrders : oldOrders)">
     <ion-col>
-      <ion-card class="ion-padding" (click)="order.expanded = !order.expanded">
+      <ion-card class="ion-padding" >
 
         <ion-card-content class="card-sub-title">
-          <ion-grid>
+          <ion-grid (click)="order.expanded = !order.expanded">
             <ion-row>
               <ion-item>
-                <h1 style="font-size: 20px;">  Order No: {{order.no}} <label [ngClass]="{'pending': order.status === 'Pending', 'inprocess': order.status === 'In Process', 'done': order.status === 'Done'}">
+                <h1 style="font-size: 20px;">  Order No: #{{order.no}} <label [ngClass]="{'pending': order.status === 'Pending', 'inprocess': order.status === 'Inprogress', 'done': order.status === 'Done','incomplete': order.status === 'Incomplete'}">
                   ({{order.status}})
                 </label></h1>
                 <ion-icon  name="{{ order.expanded ? 'caret-down-outline' : 'caret-forward-outline' }}"  slot="end" ></ion-icon>
@@ -30,39 +30,18 @@
             </ion-row>
 
             <ion-grid class="ion-no-padding ion-no-margin" *ngIf="order.expanded">
-              <ion-row>
+              <ion-row *ngFor="let item of order.orderItems">
                 <ion-col size="5">
-                  <h2 class="name">Hyper Light</h2>
+                  <h2 class="name">{{item.product.name}}</h2>
                 </ion-col>
                 <ion-col>
-                    x 1
+                    x {{item.quantity}}
                 </ion-col>
                 <ion-col class="price-col">
-                  100 EGP
+                  {{item.quantity * item.product.price}} EGP
                 </ion-col>
               </ion-row>
-              <ion-row>
-                <ion-col size="5">
-                  <h2 class="name">Nano Pix</h2>
-                </ion-col>
-                <ion-col>
-                    x 2
-                </ion-col>
-                <ion-col class="price-col">
-                  500 EGP
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col size="5">
-                  <h2 class="name">Digital Device</h2>
-                </ion-col>
-                <ion-col>
-                    x 3
-                </ion-col>
-                <ion-col class="price-col">
-                  400 EGP
-                </ion-col>
-              </ion-row>
+
               <ion-row>
                 <ion-col>
                   <div class="line"></div>
@@ -72,7 +51,17 @@
             </ion-grid>
           </ion-grid>
           <ion-row>
-            <h2 class="total-price"> Total Price: {{order.price}} EGP</h2>
+            <ion-item>
+              <h2 class="total-price"> Total Price: {{order.totalPrice}} EGP</h2>
+              <ion-icon id="hover-trigger" name="attach-outline" slot="end" style="margin-right: 5px; z-index: 100000;" *ngIf="order.status === 'Incomplete'" (click)="actionButtonClick(order)"></ion-icon>
+              <!-- <ion-button id="hover-trigger">click</ion-button> -->
+              <ion-popover trigger="hover-trigger" triggerAction="hover">
+                <ng-template>
+                  <ion-content class="ion-padding">Click to upload receipt</ion-content>
+                </ng-template>
+              </ion-popover>
+            </ion-item>
+
           </ion-row>
         </ion-card-content>
       </ion-card>
@@ -81,6 +70,11 @@
   </ion-row>
 </ion-grid>
 </div>
+
+<input #myUploadInput type="file" id="img" name="img" accept="image/*" (change)="onFileChanged($event)" />
+
+<img *ngIf="allOrders.length === 0 && mode !== 'guest'" src="assets/no-order.jpg" style="width: 100%; margin-top: 20%;">
+
 <div *ngIf="mode === 'guest'" style="padding: 10px;">
 <ion-grid>
   <ion-row class="ion-padding">

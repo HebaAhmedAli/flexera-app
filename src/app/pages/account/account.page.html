@@ -25,7 +25,7 @@
       <ion-grid *ngIf="user">
 
         <ion-row>
-          <ion-label>Name: {{user.title}} {{user.name}}</ion-label>
+          <ion-label>Full Name: {{user.title}} {{user.name}}</ion-label>
         </ion-row>
         <ion-row>
           <ion-label>Email: {{user.email}}</ion-label>
@@ -52,7 +52,13 @@
       </div>
     </ion-card-content>
   </ion-card>
-
+  <ion-row class="ion-padding">
+    <ion-col class="ion-text-center ion-padding">
+      <div class="button-container">
+        <ion-button expand="block" class="main-button"  routerDirection="forward" (click)="logout()">Logout</ion-button>
+      </div>
+    </ion-col>
+  </ion-row>
  </ion-grid>
 
 

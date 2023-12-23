@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
  import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { ModalController } from '@ionic/angular';
 import { AccountImageModalComponent } from 'src/app/components/account-image-modal/account-image-modal.component';
@@ -46,7 +47,8 @@ export class AccountPage implements OnInit {
 
   constructor(private camera: Camera, private storage: SecureStorage,
     private modalController: ModalController,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private router: Router
   ) {}
 
   async ngOnInit() {
@@ -63,6 +65,12 @@ export class AccountPage implements OnInit {
     this.profileService.userUpdated.subscribe({
       next: async () => this.user = await this.storage.get('user') as UserModel
     })
+  }
+
+  async ionViewWillEnter() {
+    console.log('inside ionViewWillEnter')
+    this.mode = await this.storage.get('mode');
+    this.user = await this.storage.get('user') as UserModel;
   }
 
   openImagePicker() {
@@ -111,5 +119,11 @@ export class AccountPage implements OnInit {
     }
   }
 
+  async logout() {
+    await this.storage.set('user', undefined);
+    await this.storage.set('mode', 'guest')
+    await this.storage.set('token', undefined);
+    this.router.navigateByUrl('/welcome');
+  }
 
 }

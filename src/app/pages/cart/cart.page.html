@@ -18,7 +18,7 @@
      </ion-item>
   </ion-list>
 
-  <ion-card *ngIf="cartOrder.orderItems.length !== 0">
+  <ion-card *ngIf="cartOrder.orderItems.length !== 0  && mode !== 'guest'">
      <ion-card-header>
        <ion-card-title>Cart Summary</ion-card-title>
      </ion-card-header>

@@ -34,12 +34,12 @@
       </div>
 
       <ion-item>
-        <ion-label position="floating">Name *</ion-label>
+        <ion-label position="floating">Full Name *</ion-label>
         <ion-input formControlName="name"></ion-input>
       </ion-item>
       <div class="error-container" *ngIf="name?.invalid && (name?.dirty || name?.touched)">
         <span *ngIf="name?.errors?.required">
-          Name is required
+          Full Name is required
         </span>
       </div>
 

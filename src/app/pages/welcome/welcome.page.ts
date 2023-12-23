@@ -12,6 +12,9 @@ export class WelcomePage implements OnInit {
   constructor(private router: Router, private storage: SecureStorage) { }
 
   async ngOnInit() {
+  }
+
+  async ionViewWillEnter() {
     const token = await this.storage.get('token');
     console.log(token);
     if(token) this.splashMode = true;

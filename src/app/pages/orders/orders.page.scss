@@ -29,7 +29,7 @@ ion-card-content {
 }
 
 .total-price {
-  padding-left: 23px;
+  padding-left: 7px;
   padding-bottom: 5px;
 }
 
@@ -50,7 +50,7 @@ ion-card-content {
 
 
 .pending {
-  color: red;
+  color: blue;
 }
 
 .inprocess {
@@ -59,4 +59,12 @@ ion-card-content {
 
 .done {
   color: green;
+}
+
+.incomplete {
+  color: red;
+}
+
+input[type="file"] {
+  width: 0px;
 }

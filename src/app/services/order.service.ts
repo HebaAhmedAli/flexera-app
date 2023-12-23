@@ -36,4 +36,9 @@ export class OrderService {
     return this.httpClient.post(`${environment.baseUrl}/api/v1/create-order`, orderIgnoredJson, { observe: 'response' });
   }
 
+  public getOrders(): Observable<Array<OrderModel>> {
+    return this.httpClient.get<Array<OrderModel>>(
+      `${environment.baseUrl}/api/v1/my-orders`
+    );
+  }
 }

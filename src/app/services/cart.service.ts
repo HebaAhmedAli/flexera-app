@@ -84,4 +84,10 @@ export class CartService {
     return 0;
   }
 
+  emptyTheCart() {
+    this.storage.set('cart-order', null);
+    this.order = new OrderModel();
+    this.order.orderItems = new Array<OrderItemModel>()
+  }
+
 }
