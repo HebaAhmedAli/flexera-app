@@ -17,7 +17,11 @@ export class WelcomePage implements OnInit {
   async ionViewWillEnter() {
     const token = await this.storage.get('token');
     console.log(token);
-    if(token) this.splashMode = true;
+    if(token) {
+      this.splashMode = true;
+    } else {
+      this.splashMode = false;
+    }
     if(this.splashMode) {
       setTimeout(async () => {
         await this.storage.set('mode', 'user');
