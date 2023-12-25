@@ -25,6 +25,10 @@ export class OrderService {
     orderIgnoredJson.deliveryAddress = order.deliveryAddress;
     orderIgnoredJson.paymentMethod = order.paymentMethod;
     orderIgnoredJson.totalPrice = order.totalPrice;
+    orderIgnoredJson.cityName = order.cityName;
+    orderIgnoredJson.areaName = order.areaName;
+    orderIgnoredJson.locationLat = order.locationLat;
+    orderIgnoredJson.locationLng = order.locationLng;
 
     orderIgnoredJson.orderItems = new Array<OrderItemModel>();
     order.orderItems.forEach(item => {

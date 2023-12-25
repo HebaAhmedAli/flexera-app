@@ -11,6 +11,8 @@ export class OrderModel {
   deliveryAddress!: string;
   locationLat!: string;
   locationLng!: string;
+  cityName!: string;
+  areaName!: string;
   date!: Date;
   orderItems!: OrderItemModel[];
   expanded: boolean = false;
