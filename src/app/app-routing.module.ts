@@ -54,7 +54,12 @@ const routes: Routes = [
   {
     path: 'order-success',
     loadChildren: () => import('./pages/order-success/order-success.module').then( m => m.OrderSuccessPageModule)
+  },
+  {
+    path: 'forget-password',
+    loadChildren: () => import('./pages/forget-password/forget-password.module').then( m => m.ForgetPasswordPageModule)
   }
+
 
 
 
