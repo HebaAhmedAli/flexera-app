@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -18,6 +18,7 @@ import { PaymentInstructionsModalComponent } from 'src/app/components/payment-in
     CheckoutPageRoutingModule,
     SharedModule
   ],
-  declarations: [CheckoutPage, PaymentInstructionsModalComponent]
+  declarations: [CheckoutPage, PaymentInstructionsModalComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CheckoutPageModule {}

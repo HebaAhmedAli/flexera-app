@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { PaymentInstructionsModalComponent } from 'src/app/components/payment-instructions-modal/payment-instructions-modal.component';
+import { AreaModel } from 'src/app/models/area.model';
+import { CityModel } from 'src/app/models/city.model';
 import { OrderModel } from 'src/app/models/order.model';
 import { UserModel } from 'src/app/models/user.model';
 import { CartService } from 'src/app/services/cart.service';
+import { CityService } from 'src/app/services/city.service';
 import { OrderService } from 'src/app/services/order.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
 
@@ -15,21 +18,32 @@ import { SecureStorage } from 'src/app/services/secure-storage.service';
 })
 export class CheckoutPage implements OnInit {
   paymentMethod = 'cash';
-  address = '';
-  editAddress = false;
+  address!: string;
+  editAddress = true;
   order!: OrderModel;
   message!: string;
   isAlertOpen = false;
-  city!: string;
-  area!: string;
+  city!: CityModel;
+  area!: AreaModel;
+  googleMapAddressDetails!: string;
+  cities: CityModel[] = [];
+  areas: AreaModel[] = [];
+  locationLat!: string;
+  locationLng!: string;
 
 
   constructor(private cartService: CartService, private storage: SecureStorage, private modalController: ModalController, private orderService: OrderService
-    , private router: Router) { }
+    , private router: Router, private cityService: CityService) { }
 
   async ngOnInit() {
-    this.address =  (await this.storage.get('user') as UserModel).address;
+    // this.address =  (await this.storage.get('user') as UserModel).address;
     this.order = this.cartService.order;
+    this.cityService.getCities().subscribe(data => {
+      this.cities = data;
+    },
+    err => {
+      console.log(err);
+    })
   }
 
   get totalPrice() {
@@ -38,9 +52,18 @@ export class CheckoutPage implements OnInit {
 
 
   async createOrder() {
+    if(!this.address || !this.city || !this.area || !this.googleMapAddressDetails) {
+      this.message = 'You must fill addrees details to continue.'
+      this.isAlertOpen = true;
+      return;
+    }
     this.order.deliveryAddress = this.address;
     this.order.paymentMethod = this.paymentMethod;
     this.order.totalPrice = this.totalPrice;
+    this.order.cityName = this.city.name;
+    this.order.areaName = this.area.name;
+    this.order.locationLat = this.locationLat;
+    this.order.locationLng = this.locationLng;
     this.orderService.createOrder(this.order).subscribe(async (response: any) => {
       console.log(response);
       if(response.status === 200) {
@@ -82,5 +105,14 @@ export class CheckoutPage implements OnInit {
 
   }
 
+  selectLocationOnMap() {
+    this.googleMapAddressDetails = 'Map detailed address';
+    // TO DO: Set lat and lng
+    console.log('to be implemented')
+  }
+
+  citySelected(event: any) {
+    console.log(event);
+  }
 
 }

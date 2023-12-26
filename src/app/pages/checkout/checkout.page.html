@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" *ngIf="order">
   <ion-grid>
     <ion-row>
       <ion-col class="summary-title ion-text-center">
@@ -54,42 +54,57 @@
         </h1>
       </ion-col>
   </ion-row>
-  <!-- <ion-row>
-    <ion-list>
-      <ion-item>
-        <ion-select  label="City" label-placement="floating" interface="popover" mode="md" [(ngModel)]="city">
-          <ion-select-option value="Cairo">Cairo</ion-select-option>
-          <ion-select-option value="Giza">Giza</ion-select-option>
+  <ion-row>
+    <ion-list class="address-list">
+      <ion-item class="address-item">
+        <ion-select class="checkout" label="City" label-placement="floating" interface="popover" mode="md" [(ngModel)]="city">
+          <div *ngFor="let cityItem of cities;" >
+            <ion-select-option [value]="cityItem">{{cityItem.name}}</ion-select-option>
+          </div>
         </ion-select>
       </ion-item>
     </ion-list>
 
   </ion-row>
   <ion-row>
-    <ion-list *ngIf="city">
-      <ion-item>
-        <ion-select  label="Area" label-placement="floating" interface="popover" mode="md" [(ngModel)]="area">
-          <ion-select-option value="Sherouk">Sherouk</ion-select-option>
-          <ion-select-option value="Maadi">Maadi</ion-select-option>
+    <ion-list *ngIf="city"  class="address-list">
+      <ion-item class="address-item">
+        <ion-select class="checkout" label="Area" label-placement="floating" interface="popover" mode="md" [(ngModel)]="area">
+          <div *ngFor="let araeItem of city?.areas;" >
+            <ion-select-option [value]="araeItem">{{araeItem.name}}</ion-select-option>
+          </div>
         </ion-select>
       </ion-item>
     </ion-list>
-  </ion-row> -->
+  </ion-row>
     <ion-row class="padding-top-bottom">
       <ion-col >
         <ion-item *ngIf="editAddress">
           <ion-input [(ngModel)]="address" placeholder="Apartment / Building / Street"></ion-input>
         </ion-item>
-        <ion-item lines="none" *ngIf="!editAddress">
+        <!-- <ion-item lines="none" *ngIf="!editAddress">
           <h2 >{{address}}</h2>
           <ion-icon slot="end" name="create" (click)="editAddress = !editAddress"></ion-icon>
-        </ion-item>
+        </ion-item> -->
       </ion-col>
-      <ion-col *ngIf="editAddress" size="2">
+      <!-- <ion-col *ngIf="editAddress" size="2">
         <ion-icon name="checkmark-done-circle-outline" style="zoom: 3;padding-top: 8px;" (click)="editAddress = !editAddress"></ion-icon>
-      </ion-col>
+      </ion-col> -->
       </ion-row>
-
+      <!-- <ion-row>
+        <ion-col class="ion-text-center ion-padding">
+          <div class="button-container">
+            <ion-button expand="block" class="main-button">Select location on google map</ion-button>
+          </div>
+        </ion-col>
+      </ion-row> -->
+      <ion-row class="padding-top-bottom">
+        <ion-col >
+          <ion-item *ngIf="editAddress">
+            <ion-input [(ngModel)]="googleMapAddressDetails" placeholder="Select Location on Google Map" (click)="selectLocationOnMap()" readonly="true"></ion-input>
+          </ion-item>
+        </ion-col>
+        </ion-row>
       </ion-grid>
   </ion-card-content>
   </ion-card>
@@ -146,14 +161,14 @@
 
   <ion-row>
     <ion-col class="note">
-      Note: If you select to pay via instapay or vodafone chash you will need to upload a screenshot from the receipt after submitting your order to complete it.
+      Note: If you select to pay via Instapay or Vodafone cash or Etisalat cash you will need to upload a screenshot from the receipt after submitting your order to complete it.
     </ion-col>
   </ion-row>
 
 
   <ion-row class="ion-text-center buttons-bottom " style="justify-content: center;">
     <div class="button-container" style="width: 85%;">
-    <ion-button expand="block" class="main-button" (click)="createOrder()" [disabled]="!this.address">Submit</ion-button>
+    <ion-button expand="block" class="main-button" (click)="createOrder()">Submit</ion-button>
     </div>
   </ion-row>
 </ion-grid>
