@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="dark">
+
+    <ion-buttons slot="start">
+      <button ion-button (click)="close()" class="toolbar-button">Cancel</button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <button ion-button (click)="save()" class="toolbar-button">
+        Save
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+
+    <ion-searchbar
+      [(ngModel)]="query"
+      (ionInput)="searchPlace()"
+      style="padding: 0px !important;"
+    ></ion-searchbar>
+
+  <ion-list style="padding-top: 0px !important; padding-bottom: 0px !important;">
+    <ion-item *ngFor="let place of places" (touchstart)="selectPlace(place)"
+      >{{place.description}}</ion-item
+    >
+  </ion-list>
+</ion-header>
+
+<ion-content>
+  <div #pleaseConnect id="please-connect">
+    <p>Please connect to the Internet...</p>
+  </div>
+
+  <div #map id="map">
+    <ion-spinner></ion-spinner>
+  </div>
+</ion-content>

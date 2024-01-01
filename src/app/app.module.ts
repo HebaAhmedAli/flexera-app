@@ -11,21 +11,25 @@ import { SplashScreen } from '@awesome-cordova-plugins/splash-screen/ngx';
 import {  HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { Network } from '@awesome-cordova-plugins/network/ngx';
+import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule ],
   providers: [ Camera,
      Storage,
-     SplashScreen, 
-    { 
+     SplashScreen,
+     Network,
+     Geolocation,
+    {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true 
+      multi: true
     }
     ],
   bootstrap: [AppComponent],

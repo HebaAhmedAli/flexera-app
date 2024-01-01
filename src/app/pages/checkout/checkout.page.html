@@ -101,7 +101,7 @@
       <ion-row class="padding-top-bottom">
         <ion-col >
           <ion-item *ngIf="editAddress">
-            <ion-input [(ngModel)]="googleMapAddressDetails" placeholder="Select Location on Google Map" (click)="selectLocationOnMap()" readonly="true"></ion-input>
+            <ion-input [(ngModel)]="googleMapAddressDetails" placeholder="Select Location on Google Map" (click)="selectLocationOnMap()" readonly="true" [(ngModel)]="location.name"></ion-input>
           </ion-item>
         </ion-col>
         </ion-row>

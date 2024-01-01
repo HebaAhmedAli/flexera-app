@@ -10,6 +10,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { CityService } from 'src/app/services/city.service';
 import { OrderService } from 'src/app/services/order.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
+import { SelectLocationPage } from '../select-location/select-location.page';
 
 @Component({
   selector: 'app-checkout',
@@ -28,9 +29,8 @@ export class CheckoutPage implements OnInit {
   googleMapAddressDetails!: string;
   cities: CityModel[] = [];
   areas: AreaModel[] = [];
-  locationLat!: string;
-  locationLng!: string;
 
+  location: any = {lat: null, lng: null, name: ''};
 
   constructor(private cartService: CartService, private storage: SecureStorage, private modalController: ModalController, private orderService: OrderService
     , private router: Router, private cityService: CityService) { }
@@ -62,8 +62,8 @@ export class CheckoutPage implements OnInit {
     this.order.totalPrice = this.totalPrice;
     this.order.cityName = this.city.name;
     this.order.areaName = this.area.name;
-    this.order.locationLat = this.locationLat;
-    this.order.locationLng = this.locationLng;
+    this.order.locationLat = this.location.lat;
+    this.order.locationLng = this.location.lng;
     this.orderService.createOrder(this.order).subscribe(async (response: any) => {
       console.log(response);
       if(response.status === 200) {
@@ -105,11 +105,23 @@ export class CheckoutPage implements OnInit {
 
   }
 
-  selectLocationOnMap() {
+  async selectLocationOnMap() {
     this.googleMapAddressDetails = 'Map detailed address';
     // TO DO: Set lat and lng
+    let modal = await this.modalController.create({
+      component: SelectLocationPage
+    });
+
+    modal.onDidDismiss().then((location: any) => {
+        this.location = location.data;
+        console.log(location);
+    });
+
+    modal.present();
     console.log('to be implemented')
   }
+
+
 
   citySelected(event: any) {
     console.log(event);

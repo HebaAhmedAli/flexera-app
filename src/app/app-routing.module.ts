@@ -58,7 +58,11 @@ const routes: Routes = [
   {
     path: 'forget-password',
     loadChildren: () => import('./pages/forget-password/forget-password.module').then( m => m.ForgetPasswordPageModule)
+  },  {
+    path: 'select-location',
+    loadChildren: () => import('./pages/select-location/select-location.module').then( m => m.SelectLocationPageModule)
   }
+
 
 
 
