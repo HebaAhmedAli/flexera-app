@@ -29,5 +29,10 @@ export class HeaderComponent  implements OnInit {
     this.router.navigate(['/notifications']);
   }
 
+  navigateToHome() {
+    this.router.navigate(['/tabs/home']);
+
+  }
+
 
 }

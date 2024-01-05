@@ -1,6 +1,6 @@
 .category-slider{
-  margin-bottom: 20px;
-  .swiper-slide {
+  margin-bottom: -5px;
+    .swiper-slide {
     width: 85vw!important;
     height: 30vh;
     margin-right: 10px;
@@ -54,17 +54,18 @@
 }
 
 .price {
-  margin-bottom: 3%;
-  font-weight: 500;
+  font-weight: bold;
+  margin-left: 10%;
 }
 
 .description {
+  margin-top: 10px;
   margin-bottom: 3%;
   font-weight: 500;
 }
 
 .buttons-bottom {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
 }
@@ -116,4 +117,11 @@ ion-modal#plan-modal ion-toolbar {
   display: flex;
   column-gap: 10px;
   margin-top: 10px;
+}
+
+
+ion-row {
+  video {
+    height: 70%;
+  }
 }

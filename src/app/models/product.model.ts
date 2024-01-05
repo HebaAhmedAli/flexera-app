@@ -6,9 +6,11 @@ export class ProductModel {
   price!: number;
   description!: string;
   longDescription!: string;
+  maintenance!: string;
   img!: string;
   type!: string;
   sellingRate!: number;
   installmentPlan!: string;
   gallery!: Array<GalleryItem>;
+  warranty!: number;
 }

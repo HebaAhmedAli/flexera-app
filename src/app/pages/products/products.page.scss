@@ -12,7 +12,7 @@ ion-col {
 
 
 img {
-  height: 120px;
+  height: 150px;
   width: 100%;
 }
 
@@ -23,15 +23,28 @@ ion-card {
 
 
 ion-card-header {
-  height: 100px;
+  height: 65px;
+  padding: 2px;
 }
 
 ion-card-title {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  text-align: center;
+  font-weight: bold;
 }
 
+ion-card-subtitle {
+  text-align: center;
+}
+
+ion-card-content {
+  text-align: center;
+  color: #008ECC;
+    font-weight: bold;
+
+}
 ion-title {
   padding: 5px;
   text-align: center;
