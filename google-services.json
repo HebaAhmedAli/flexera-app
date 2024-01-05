@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "532462744387",
+    "project_id": "tds-app-409620",
+    "storage_bucket": "tds-app-409620.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:532462744387:android:4e7f66fb72fb21317af5f6",
+        "android_client_info": {
+          "package_name": "com.tds"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3bp3ZdN90rtVwWUItyOTdrhKFqFdWf90"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

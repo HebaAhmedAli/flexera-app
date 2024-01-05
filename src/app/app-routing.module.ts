@@ -61,6 +61,10 @@ const routes: Routes = [
   },  {
     path: 'select-location',
     loadChildren: () => import('./pages/select-location/select-location.module').then( m => m.SelectLocationPageModule)
+  },
+  {
+    path: 'notifications',
+    loadChildren: () => import('./pages/notifications/notifications.module').then( m => m.NotificationsPageModule)
   }
 
 

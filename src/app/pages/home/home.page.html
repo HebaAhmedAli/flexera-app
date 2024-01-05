@@ -5,7 +5,7 @@
  <ion-grid>
   <ion-row  *ngFor="let category of categories" [routerLink]="['/products',{categoryImg: category.img, categoryId: category.id}]">
     <ion-col>
-      <img [src]="category.img" style="padding-right: 10px;"/>
+      <img [src]="category.img"/>
     </ion-col>
   </ion-row>
  </ion-grid>

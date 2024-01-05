@@ -13,6 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
+// import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +24,8 @@ import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
      SplashScreen,
      Network,
      Geolocation,
+    // FCM,
+    FirebaseX,
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy

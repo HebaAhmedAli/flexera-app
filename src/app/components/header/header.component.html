@@ -1,12 +1,19 @@
 <ion-header>
   <ion-toolbar>
       <img src="assets/logo-4.png"  slot="start" class="logo-icon"/>
+      <ion-buttons slot="end" (click)="navigateToNotifications()">
+        <ion-button>
+          <ion-icon slot="icon-only" name="notifications" class="cart-icon"></ion-icon>
+          <span class="cart-counter" *ngIf="notificationService.getUnreadNotificationsCount() > 0">{{notificationService.getUnreadNotificationsCount()}}</span>
+        </ion-button>
+      </ion-buttons>
      <ion-buttons slot="end" (click)="navigateToCart()">
        <ion-button>
          <ion-icon slot="icon-only" name="cart" class="cart-icon"></ion-icon>
          <span class="cart-counter" *ngIf="cartService.getCartCounter() > 0">{{cartService.getCartCounter()}}</span>
        </ion-button>
      </ion-buttons>
+
      <ion-title class="header-title">
        TDS
      </ion-title>
