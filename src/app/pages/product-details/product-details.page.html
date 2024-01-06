@@ -2,6 +2,9 @@
 
 <ion-content *ngIf="product">
   <ion-title class="product-title">{{product.name}}</ion-title>
+  <div class="button-container price">
+    {{product.price}} EGP
+    </div>
     <div class="category-slider ion-padding-start">
       <div class="swiper-container" >
         <div class="swiper-wrapper">
@@ -23,14 +26,32 @@
 
       </div>
     </div>
+    <ion-segment value="current" color="dark" mode="md" [(ngModel)]="segmentValue">
+      <ion-segment-button value="description">
+        <ion-label>Description</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="warranty" *ngIf="product.warranty > 0">
+        <ion-label>Warranty</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="maintenance" >
+        <ion-label>Maintenance</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
     <ion-grid>
-      <ion-row>
-        <div class="button-container price">
-        {{product.price}} EGP
-        </div>
+
+      <ion-row class="button-container description" *ngIf="segmentValue === 'warranty'">
+        <div >Product Warranty: {{product.warranty}}</div>
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="segmentValue === 'description'">
         <div [innerHTML]="product.longDescription" class="button-container description"></div>
+
+      </ion-row>
+      <ion-row  *ngIf="segmentValue === 'maintenance'" >
+
+        <div [innerHTML]="product.maintenance" class="button-container description">
+
+        </div>
       </ion-row>
 
       <ion-row class="ion-text-center buttons-bottom " style="justify-content: center;">
@@ -59,11 +80,13 @@
           <div style="padding-left: 16px;" [innerHTML]="product.installmentPlan">
           </div>
           <div style="padding: 16px;">To use any of these installment plans please contact us on:
-          <div class="whats-contact"> 
+          <div class="whats-contact">
             <a href="https://api.whatsapp.com/send?phone=0201090737501&text=I want to use the installment plan"  target="_blank">
               <ion-icon name="logo-whatsapp" class="social-icon  whatsapp-icon"></ion-icon>
             </a>
-            <b>02 01090737501</b>
+            <a href="https://api.whatsapp.com/send?phone=0201090737501&text=I want to use the installment plan" style="text-decoration: none;"  target="_blank">
+              <b>02 01090737501</b>
+            </a>
           </div>
         </div>
         </ion-content>

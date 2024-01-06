@@ -20,11 +20,10 @@ export class CourseDetailsPage implements OnInit, OnDestroy {
   constructor(private academyService: AcademyService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.subscriptions.push(this.activatedRoute.queryParams.subscribe(params => {
-      if(params['course_id']) {
-        this.getCourseDetails(params['course_id']);
-      }
-    }));
+    const courseId = Number(this.activatedRoute.snapshot.paramMap.get('course_id') as string);
+    if(courseId) {
+      this.getCourseDetails(courseId);
+    }
   }
 
   getCourseDetails(courseId: number) {

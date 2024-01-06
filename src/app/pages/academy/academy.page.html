@@ -29,7 +29,7 @@
 <ion-grid *ngIf="(segmentValue === 'current' ? currentCourses.length : oldCourses.length); else noCourses">
   <ion-row *ngFor="let course of (segmentValue === 'current' ? currentCourses : oldCourses)">
     <ion-col>
-      <ion-card class="ion-padding" routerLink="/course-details" [queryParams]="{course_id: course.id}">
+      <ion-card class="ion-padding" [routerLink]="['/course-details',{course_id: course.id}]">
         <ion-card-title class="card-title">
           {{course.title}}
         </ion-card-title>
