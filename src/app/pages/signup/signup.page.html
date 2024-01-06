@@ -134,8 +134,13 @@
           <ion-input formControlName="university"></ion-input>
         </ion-item>
 
+        <ion-item>
+          <ion-checkbox formControlName="termsAndConditions"></ion-checkbox>
+          <ion-label>Accept <a (click)="openTermsAndConditions()">Terms and Conditions</a></ion-label>
+        </ion-item>
 
-      <ion-button expand="block" class="main-button"  type="submit">Sign Up</ion-button>
+
+      <ion-button expand="block" class="main-button" [disabled]="signupForm.invalid" type="submit">Sign Up</ion-button>
 
       <div class="sign-up">
         Already have an account? <ion-button color="dark" fill="clear" routerLink="/login" routerDirection="forward">Sign in</ion-button>

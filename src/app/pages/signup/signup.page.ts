@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { TermsAndConditionsComponent } from 'src/app/components/terms-and-conditions/terms-and-conditions.component';
 import { SignUpRequestModel } from 'src/app/models/signup-request.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
@@ -28,13 +30,15 @@ export class SignupPage implements OnInit {
   age: new FormControl(''),
   speciality: new FormControl(''),
   uniStaff: new FormControl(''),
-  university: new FormControl('')
+  university: new FormControl(''),
+  termsAndConditions: new FormControl(false, Validators.requiredTrue)
 });
 
   constructor(
     private router: Router,
     private storage: SecureStorage,
-    private authService: AuthService
+    private authService: AuthService,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -42,6 +46,14 @@ export class SignupPage implements OnInit {
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
+  }
+
+  async openTermsAndConditions() {
+    const modal = await this.modalController.create({
+      component: TermsAndConditionsComponent,
+      cssClass: 'image-modal'
+    });
+    return await modal.present();
   }
 
   async signup() {
