@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FingerprintAIO } from '@awesome-cordova-plugins/fingerprint-aio/ngx';
 import { NavController } from '@ionic/angular';
 import { LoginRequestModel } from 'src/app/models/login-request.model';
 import { LoginResponseModel } from 'src/app/models/login-response.model';
@@ -30,7 +31,17 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    // this.checkBiometricLoginFirstTime();
   }
+
+  // async checkBiometricLoginFirstTime() {
+  //   const enableBiometric = await this.storage.get('enableBiometric');
+  //   if(enableBiometric !== undefined || enableBiometric !== null) {
+
+  //   } else{
+
+  //   }
+  // }
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -41,24 +52,7 @@ export class LoginPage implements OnInit {
       const loginRequest = new LoginRequestModel();
       loginRequest.email = this.loginForm.get('email')?.value as string;
       loginRequest.password = this.loginForm.get('password')?.value as string;
-
-      this.authService.login(loginRequest).subscribe(async (response: any) => {
-        if(response.status === 200) {
-          console.log(response);
-          this.loginResponse = response.body;
-          await this.storage.set('mode', 'user');
-          await this.storage.set('token', this.loginResponse.tokenType + ' ' + this.loginResponse.accessToken);
-          await this.storage.set('user', this.loginResponse.user);
-          this.router.navigateByUrl('tabs');
-        } else {
-          this.isAlertOpen = true;
-          this.message = response.error.message;
-        }
-      }, error => {
-        this.message = error.error.message;
-        this.isAlertOpen = true;
-      }
-      );
+      this.authenticateUser(loginRequest);
     } else {
       console.log('Form is invalid', this.loginForm.errors);
 
@@ -68,6 +62,61 @@ export class LoginPage implements OnInit {
     }
 
   }
+
+  authenticateUser(loginRequest: LoginRequestModel) {
+    this.authService.login(loginRequest).subscribe(async (response: any) => {
+      if(response.status === 200) {
+        console.log(response);
+        this.loginResponse = response.body;
+        await this.storage.set('mode', 'user');
+        await this.storage.set('token', this.loginResponse.tokenType + ' ' + this.loginResponse.accessToken);
+        await this.storage.set('user', this.loginResponse.user);
+        this.router.navigateByUrl('tabs');
+      } else {
+        this.isAlertOpen = true;
+        this.message = response.error.message;
+      }
+    }, error => {
+      this.message = error.error.message;
+      this.isAlertOpen = true;
+    }
+    );
+  }
+
+
+  // loadBiometric() {
+  //   this.fp.loadBiometricSecret({}).then(res => {
+  //     console.log('loadBiometric');
+  //     alert(res);
+  //   }).catch(err => {
+  //     alert(err);
+  //   })
+  // }
+
+  // onClickBiometricLogin() {
+  //   console.log('onClickBiometricLogin');
+  //   this.fp.isAvailable().then((result) => {
+  //     //'finger' | 'face' | 'biometric'
+  //     // alert(result);
+  //     this.fp.show({
+  //       title: 'TDS'
+  //     }).then(() => {
+  //       // alert(success);
+  //       this.loginBiometric();
+  //     })
+  //   }).catch((err) => {
+  //     alert({err});
+  //   });
+  // }
+
+  // async loginBiometric() {
+  //  const userEmail = await this.storage.get('userEmail');
+  //  const password = await this.storage.get('password');
+  //  const loginRequest = new LoginRequestModel();
+  //  loginRequest.email = userEmail;
+  //  loginRequest.password = password;
+  //  this.authenticateUser(loginRequest);
+  // }
 
   async alertDismiss() {
     this.isAlertOpen = false;

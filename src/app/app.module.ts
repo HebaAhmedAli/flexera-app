@@ -15,6 +15,7 @@ import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 // import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
+import {FingerprintAIO} from '@awesome-cordova-plugins/fingerprint-aio/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,8 @@ import { FirebaseX } from '@ionic-native/firebase-x/ngx';
      Geolocation,
     // FCM,
     FirebaseX,
+    // Biometric Auth
+    FingerprintAIO,
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy
