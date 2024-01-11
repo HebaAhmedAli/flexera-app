@@ -25,7 +25,7 @@
         <ion-icon name="{{ showPassword ? 'eye-off' : 'eye' }}" slot="end" (click)="togglePasswordVisibility()"></ion-icon>
       </ion-item>
 
-      <ion-button expand="block" class="main-button" type="submit">Log in</ion-button>
+        <ion-button expand="block" class="main-button" type="submit">Log in</ion-button>
 
       <div class="sign-up">
         Don't have an account? <ion-button color="dark" fill="clear" routerLink="/signup" routerDirection="forward">Sign up</ion-button>
@@ -34,6 +34,16 @@
         Forgot password?
         <ion-button color="dark" fill="clear" routerLink="/forget-password" routerDirection="forward">Reset Password</ion-button>
       </div>
+
+      <!-- <ion-button expand="block" class="main-button" *ngIf="enableBiometric" (click)="onClickBiometricLogin()">
+        <ion-icon name="finger-print-outline"></ion-icon>
+        Fingerprint
+      </ion-button> -->
+
+      <!-- <ion-button expand="block" class="main-button" (click)="loadBiometric()">
+        <ion-icon name="finger-print-outline"></ion-icon>
+        load Fingerprint
+      </ion-button> -->
     </div>
   </div>
   </form>
