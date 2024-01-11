@@ -23,10 +23,12 @@
             <ion-row>
               <ion-item>
                 <h1 style="font-size: 20px;">  Order No: #{{order.no}} <label [ngClass]="{'pending': order.status === 'Pending', 'inprocess': order.status === 'Inprogress', 'done': order.status === 'Done','incomplete': order.status === 'Incomplete'}">
-                  ({{order.status}})
+                  ({{order.status }})
                 </label></h1>
                 <ion-icon  name="{{ order.expanded ? 'caret-down-outline' : 'caret-forward-outline' }}"  slot="end" ></ion-icon>
               </ion-item>
+              <h3 *ngIf="order.status === 'Incomplete'" class="note">Please Upload payment receipt</h3>
+
             </ion-row>
 
             <ion-grid class="ion-no-padding ion-no-margin" *ngIf="order.expanded">
@@ -53,7 +55,9 @@
           <ion-row>
             <ion-item>
               <h2 class="total-price"> Total Price: {{order.totalPrice}} EGP</h2>
-              <ion-icon id="hover-trigger" name="attach-outline" slot="end" style="margin-right: 5px; z-index: 100000;" *ngIf="order.status === 'Incomplete'" (click)="actionButtonClick(order)"></ion-icon>
+              <ion-icon id="hover-trigger" name="attach-outline" slot="end" style="margin-right: -5px; z-index: 100000; zoom: 1.1;" *ngIf="order.status === 'Incomplete'" (click)="actionButtonClick(order)"></ion-icon>
+              <ion-icon  name="trash-outline" slot="end" style="margin-right: 5px; z-index: 100000;" *ngIf="order.status === 'Incomplete' || order.status === 'Pending'" (click)="openActionSheet(order)"></ion-icon>
+
               <!-- <ion-button id="hover-trigger">click</ion-button> -->
               <ion-popover trigger="hover-trigger" triggerAction="hover">
                 <ng-template>
@@ -67,7 +71,11 @@
       </ion-card>
 
     </ion-col>
+
   </ion-row>
+
+
+
 </ion-grid>
 </div>
 
@@ -98,3 +106,9 @@
 </div>
 
 </ion-content>
+
+<ion-action-sheet mode="ios"
+[isOpen]="isActionSheetOpen"
+[buttons]="actionSheetButtons"
+(didDismiss)="onActionSheetDismiss($event)"
+></ion-action-sheet>

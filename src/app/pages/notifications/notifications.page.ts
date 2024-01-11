@@ -22,5 +22,11 @@ export class NotificationsPage {
 
   }
 
+  deleteNotification(item: NotificationModel) {
+    item.deleted = true;
+    this.storage.set('notifications', this.notificationService.notifications);
+
+  }
+
 
 }

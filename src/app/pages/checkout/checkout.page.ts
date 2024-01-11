@@ -47,7 +47,13 @@ export class CheckoutPage implements OnInit {
   }
 
   get totalPrice() {
-    return this.cartService.calculateTotalPrice();
+    var total = this.cartService.calculateTotalPrice();
+    const percentage = 1; // TODO: Get from data base.
+    total += (percentage * total / 100)
+    if(this.paymentMethod !== 'pickup') {
+      total += this.area?.price ? this.area?.price : 0;
+    }
+    return total;
   }
 
 
@@ -59,7 +65,7 @@ export class CheckoutPage implements OnInit {
     }
     this.order.deliveryAddress = this.address;
     this.order.paymentMethod = this.paymentMethod;
-    this.order.totalPrice = this.totalPrice;
+    this.order.totalPrice = this.totalPrice ;
     this.order.cityName = this.city.name;
     this.order.areaName = this.area.name;
     this.order.locationLat = this.location.lat;

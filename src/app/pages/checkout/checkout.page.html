@@ -31,7 +31,16 @@
           {{item.quantity * item.product.price}} EGP
         </ion-col>
       </ion-row>
-
+      <ion-row class="padding-top-bottom" *ngIf="area?.price" style="color: red;">
+          <ion-col size="5">
+            <h2 class="name">Delivery Fees</h2>
+          </ion-col>
+          <ion-col>
+          </ion-col>
+          <ion-col class="price-col">
+            {{area.price}} EGP
+          </ion-col>
+      </ion-row>
       <ion-row >
         <ion-col>
           <div class="line"></div>
@@ -130,11 +139,11 @@
       <img src="assets/etisalat-cash.jpg" style="zoom: 0.113;">
 
     </ion-col>
-    <ion-col class="ion-text-center payments">
+    <!-- <ion-col class="ion-text-center payments">
 
       <img src="assets/cash.png" style="width: 80%; height: 80%;">
 
-    </ion-col>
+    </ion-col> -->
   </ion-row>
 
   <ion-row>
@@ -156,12 +165,15 @@
         <ion-row class="ion-padding padding-top-bottom">
           <ion-radio value="cash" labelPlacement="end">Cash on Delivery</ion-radio>
         </ion-row>
+        <ion-row class="ion-padding padding-top-bottom">
+          <ion-radio value="pickup" labelPlacement="end">Pickup from company</ion-radio>
+        </ion-row>
       </ion-radio-group>
   </ion-row>
 
   <ion-row>
     <ion-col class="note">
-      Note: If you select to pay via Instapay or Vodafone cash or Etisalat cash you will need to upload a screenshot from the receipt after submitting your order to complete it.
+      Note: If you select to pay via Instapay or Vodafone cash or Etisalat cash you will need to upload a screenshot from the payment receipt after submitting your order to complete it.
     </ion-col>
   </ion-row>
 

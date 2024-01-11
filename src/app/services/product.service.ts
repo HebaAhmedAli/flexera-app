@@ -18,4 +18,11 @@ export class ProductService {
       `${environment.baseUrl}/api/v1/products/${productId}`
     );
   }
+
+  public getAllProducts(): Observable<Array<ProductModel>> {
+    return this.httpClient.get<Array<ProductModel>>(
+      `${environment.baseUrl}/api/v1/products`
+    );
+  }
+
 }

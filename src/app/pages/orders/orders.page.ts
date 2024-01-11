@@ -24,6 +24,25 @@ export class OrdersPage implements OnInit {
   @ViewChild('myUploadInput', { static: true }) myUploadInput!: ElementRef<HTMLInputElement>;
   currentOrderToAttach!: OrderModel;
 
+  isActionSheetOpen = false;
+
+  orderToDelete!: OrderModel;
+
+  public actionSheetButtons = [
+    {
+      text: 'Confirm Delete The Order',
+      data: {
+        action: 'delete',
+      },
+    },
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      data: {
+        action: 'cancel',
+      },
+    },
+  ];
 
   constructor(private storage: SecureStorage, private orderService: OrderService, private httpClient: HttpClient) { }
 
@@ -38,17 +57,21 @@ export class OrdersPage implements OnInit {
   async ionViewWillEnter() {
     this.mode = await this.storage.get('mode');
     if(this.mode === 'user') {
-      this.orderService.getOrders().subscribe(data => {
-        this.allOrders = data;
-        this.oldOrders = this.allOrders.filter(order => order.status === 'Done');
-        this.currentOrders = this.allOrders.filter(order => order.status !== 'Done');
-
-      },
-      err => {
-        console.log(err);
-      })
+      this.getOrders();
     }
 
+  }
+
+  getOrders() {
+    this.orderService.getOrders().subscribe(data => {
+      this.allOrders = data;
+      this.oldOrders = this.allOrders.filter(order => order.status === 'Done');
+      this.currentOrders = this.allOrders.filter(order => order.status !== 'Done');
+
+    },
+    err => {
+      console.log(err);
+    })
   }
 
   //Gets called when the user selects an image
@@ -89,4 +112,29 @@ export class OrdersPage implements OnInit {
     this.myUploadInput.nativeElement.click();
   }
 
+  onActionSheetDismiss(event: any) {
+    this.isActionSheetOpen = false;
+    if(event.detail.data.action === 'delete') {
+      this.deleteOrder();
+    }
+  }
+
+  openActionSheet(order: OrderModel) {
+    this.isActionSheetOpen = true;
+    this.orderToDelete = order;
+  }
+
+  deleteOrder() {
+    console.log(this.orderToDelete);
+    this.orderService.deleteOrder(this.orderToDelete.id).subscribe(response => {
+      console.log(response, response.status)
+      if (response.status === 200) {
+
+        this.getOrders();
+      }
+    },
+    err => {
+      console.log(err);
+    })
+  }
 }

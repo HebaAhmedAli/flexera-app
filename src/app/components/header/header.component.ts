@@ -26,7 +26,10 @@ export class HeaderComponent  implements OnInit {
   }
 
   navigateToNotifications() {
+    console.log('navigateToNotifications')
+    //this.router.navigate(['/tabs/home'], { replaceUrl: true });
     this.router.navigate(['/notifications']);
+
   }
 
   navigateToHome() {

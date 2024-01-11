@@ -45,4 +45,10 @@ export class OrderService {
       `${environment.baseUrl}/api/v1/my-orders`
     );
   }
+
+  public deleteOrder(orderId: any): Observable<HttpResponse<Object>> {
+    return this.httpClient.delete<HttpResponse<Object>>(
+      `${environment.baseUrl}/api/v1/orders/${orderId}`,  { observe: 'response' }
+    );
+  }
 }

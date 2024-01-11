@@ -65,6 +65,14 @@ const routes: Routes = [
   {
     path: 'notifications',
     loadChildren: () => import('./pages/notifications/notifications.module').then( m => m.NotificationsPageModule)
+  },
+  {
+    path: 'my-devices',
+    loadChildren: () => import('./pages/my-devices/my-devices.module').then( m => m.MyDevicesPageModule)
+  },
+  {
+    path: 'add-device',
+    loadChildren: () => import('./pages/add-device/add-device.module').then( m => m.AddDevicePageModule)
   }
 
 

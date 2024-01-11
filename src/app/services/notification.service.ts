@@ -34,6 +34,7 @@ export class NotificationService {
         this.notifications.forEach(item => {
           const savedNot = savedNotifications.find(not => not.id === item.id);
           item.read = savedNot?.read ? true : false;
+          item.deleted = savedNot?.deleted ? true : false;
         });
       }
       this.unreadNotificationsCount = this.notifications.filter(not => not.read === false).length;
@@ -47,6 +48,10 @@ export class NotificationService {
 
   getUnreadNotificationsCount(): number {
     return this.unreadNotificationsCount;
+  }
+
+  getUndeletedNotifications(): NotificationModel[] {
+    return this.notifications.filter(not => !not.deleted)
   }
 
 }

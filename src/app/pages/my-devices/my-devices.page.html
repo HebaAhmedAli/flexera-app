@@ -1,0 +1,135 @@
+<app-header></app-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-grid class="ion-text-center">
+
+
+    <ion-row class="ion-margin">
+      <ion-col style="border: none;">
+
+      <div class="button-container" style="font-size: 25px;">
+        Your Devices
+      </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-grid style="margin-top: -20px;">
+      <ion-row *ngFor="let device of myDevices;">
+        <ion-col>
+            <ion-card>
+              <ion-card-content>
+              <ion-grid>
+                  <ion-row>
+                    <ion-label>Product Name: {{device.product.name}}</ion-label>
+                  </ion-row>
+                  <ion-row>
+                    <ion-label>Serial Number: {{device.serialNumber}}</ion-label>
+                  </ion-row>
+                  <ion-row>
+                    <ion-label>Warranty Period: {{device.warrantyPeriod}}</ion-label>
+                  </ion-row>
+                  <ion-row>
+                    <ion-label>Warranty Start Date: {{device.warrantyStartDate}}</ion-label>
+                  </ion-row>
+                  <ion-row>
+                    <ion-label>Count Down: {{getWarrantyCountDown(device)}}</ion-label>
+                  </ion-row>
+
+             </ion-grid>
+              </ion-card-content>
+            </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- <ion-row class="header-row">
+      <ion-col>
+        <ion-text>Product Name</ion-text>
+      </ion-col>
+
+      <ion-col>
+        <ion-text>Serial no.</ion-text>
+      </ion-col>
+
+      <ion-col>
+        <ion-text>Warranty Period</ion-text>
+      </ion-col>
+
+      <ion-col>
+        <ion-text>Warranty Start Date</ion-text>
+      </ion-col>
+
+      <ion-col>
+        <ion-text>Count Down</ion-text>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col>
+        <ion-text>
+            Hyper Light
+        </ion-text>
+      </ion-col>
+
+        <ion-col>
+          <ion-text>
+            #1234
+          </ion-text>
+        </ion-col>
+
+        <ion-col>
+          <ion-text>
+            2 Years
+          </ion-text>
+        </ion-col>
+        <ion-col>
+          <ion-text>
+            20-12-2023
+          </ion-text>
+        </ion-col>
+        <ion-col>
+          <ion-text>
+            1 Year 11 Month 20 Day
+          </ion-text>
+        </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-text>
+            Hyper Light
+        </ion-text>
+      </ion-col>
+
+        <ion-col>
+          <ion-text>
+            #1234
+          </ion-text>
+        </ion-col>
+
+        <ion-col>
+          <ion-text>
+            2 Years
+          </ion-text>
+        </ion-col>
+        <ion-col>
+          <ion-text>
+            20-12-2023
+          </ion-text>
+        </ion-col>
+        <ion-col>
+          <ion-text>
+            1 Year 11 Month 20 Day
+          </ion-text>
+        </ion-col>
+    </ion-row> -->
+
+  </ion-grid>
+</ion-content>
+<ion-fab vertical="bottom" horizontal="end" class="add-fab" slot="fixed">
+  <ion-fab-button routerDirection="forward" routerLink="/add-device">
+    <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+</ion-fab>

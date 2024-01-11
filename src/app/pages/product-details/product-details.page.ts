@@ -17,6 +17,7 @@ export class ProductDetailsPage implements OnInit {
 
   product!: ProductModel;
   segmentValue: string = 'description';
+  isToastOpen = false;
 
   constructor(public cartService: CartService, private productService: ProductService, private route: ActivatedRoute) {
     this.swiper = new Swiper('.swiper-container', {
@@ -64,6 +65,7 @@ export class ProductDetailsPage implements OnInit {
 
  addProduct() {
   this.cartService.addProductToCart(this.product);
+  this.isToastOpen = true;
  }
 
  removeProduct() {

@@ -52,11 +52,22 @@
       </div>
     </ion-card-content>
   </ion-card>
+
   <ion-row class="ion-padding">
+    <ion-col class="ion-text-center ion-padding">
+
+      <div class="button-container">
+        <ion-button expand="block" class="main-button" routerLink="/my-devices">My Devices</ion-button>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-padding"  style="margin-top: -65px;">
     <ion-col class="ion-text-center ion-padding">
       <div class="button-container">
         <ion-button expand="block" class="main-button"  routerDirection="forward" (click)="logout()">Logout</ion-button>
       </div>
+
     </ion-col>
   </ion-row>
  </ion-grid>

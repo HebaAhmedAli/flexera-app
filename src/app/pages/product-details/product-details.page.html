@@ -93,5 +93,13 @@
       </ng-template>
     </ion-modal>
 
+    <ion-toast
+    [isOpen]="isToastOpen"
+    message="Added to cart successfully!"
+    [duration]="2000"
+    (didDismiss)="isToastOpen = false"
+    position="middle"
+  ></ion-toast>
+
 
  </ion-content>

@@ -1,0 +1,72 @@
+<app-header></app-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+        <ion-list style="width: 100%;">
+          <ion-item>
+            <ion-select label="Select Product Name" label-placement="floating" interface="popover" mode="md" [(ngModel)]="product">
+              <div *ngFor="let item of products;" >
+                <ion-select-option [value]="item">{{item.name}}</ion-select-option>
+
+              </div>
+
+            </ion-select>
+
+          </ion-item>
+        </ion-list>
+    </ion-row>
+    <ion-row >
+      <ion-col class="ion-padding">
+        <div class="button-container">
+          Upload the receipt:
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col class="ion-text-center ion-padding" style="padding-top: 0px;">
+        <div class="button-container">
+          <ion-button expand="block" class="main-button"  routerDirection="forward" (click)="actionButtonClick('receipt')">Upload</ion-button>
+          <input #receiptInput type="file" id="img" name="img" accept="image/*" (change)="onReceiptFileChanged($event)" />
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col class="ion-padding">
+        <div class="button-container">
+          Upload the device sticker:
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col class="ion-text-center ion-padding" style="padding-top: 0px;">
+        <div class="ion-text-center button-container">
+          <ion-button expand="block" class="main-button"  routerDirection="forward" (click)="actionButtonClick('sticker')">Upload</ion-button>
+          <input #stickerInput type="file" id="img" name="img" accept="image/*" (change)="onStickerFileChanged($event)" />
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col class="ion-padding">
+        <div class="button-container">
+          Finally add the device:
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center ion-padding" style="padding-top: 0px;">
+        <div class="button-container">
+          <ion-button expand="block" class="main-button" (click)="addTheDevice()" [disabled]="!receiptFile || !stickerFile || !product">Add</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+
+<ion-alert
+[isOpen]="isAlertOpen"
+[message]="message"
+[buttons]="['OK']"
+(didDismiss)="alertDismiss()"
+></ion-alert>
