@@ -49,7 +49,9 @@ export class CheckoutPage implements OnInit {
   get totalPrice() {
     var total = this.cartService.calculateTotalPrice();
     const percentage = 1; // TODO: Get from data base.
-    total += (percentage * total / 100)
+    if(this.paymentMethod === 'vodafone-cash' || this.paymentMethod ===  'etisalat-cash') {
+      total += (percentage * total / 100);
+     }
     if(this.paymentMethod !== 'pickup') {
       total += this.area?.price ? this.area?.price : 0;
     }

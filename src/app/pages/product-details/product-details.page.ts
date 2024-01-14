@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductModel } from 'src/app/models/product.model';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
+import { SecureStorage } from 'src/app/services/secure-storage.service';
 import Swiper from 'swiper';
 
 @Component({
@@ -18,8 +19,10 @@ export class ProductDetailsPage implements OnInit {
   product!: ProductModel;
   segmentValue: string = 'description';
   isToastOpen = false;
+  mode!: string;
+  isAlertOpen = false;
 
-  constructor(public cartService: CartService, private productService: ProductService, private route: ActivatedRoute) {
+  constructor(public cartService: CartService, private productService: ProductService, private route: ActivatedRoute, private storage: SecureStorage) {
     this.swiper = new Swiper('.swiper-container', {
       // Optional parameters
       direction: 'horizontal',
@@ -36,7 +39,8 @@ export class ProductDetailsPage implements OnInit {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.mode = await this.storage.get('mode');
     this.productId = Number(this.route.snapshot.paramMap.get('productId') as string);
     this.productService.getProductById(this.productId).subscribe(data => {
       this.product = data;
@@ -64,6 +68,11 @@ export class ProductDetailsPage implements OnInit {
  }
 
  addProduct() {
+
+  if(this.mode === 'guest') {
+    this.isAlertOpen = true;
+    return;
+  }
   this.cartService.addProductToCart(this.product);
   this.isToastOpen = true;
  }

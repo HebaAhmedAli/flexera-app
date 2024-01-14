@@ -16,8 +16,18 @@ export class TabsPage {
   constructor(private location: Location, private platform: Platform, private storage: SecureStorage, private router: Router) {
     this.platform.backButton.subscribeWithPriority(9999, async () => {
       const mode = await this.storage.get('mode');
-      if (this.router.routerState.snapshot.url !== '/tabs/home' || mode === 'guest') {
-        this.location.back();
+      console.log(this.router.routerState.snapshot.url);
+      if (this.router.routerState.snapshot.url === '/notifications') {
+       this.router.navigate(['/tabs/home']);
+      }
+      else if ((this.router.routerState.snapshot.url !== '/tabs/home' && !this.router.routerState.snapshot.url.includes('/order-success')) || mode === 'guest') {
+        if(this.router.routerState.snapshot.url === '/tabs/home') {
+          this.router.navigate(['/welcome'])
+        } else  if(this.router.routerState.snapshot.url !== '/welcome'){
+          this.location.back();
+
+        }
+
       }
     });
   }

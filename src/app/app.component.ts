@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { SplashScreen } from '@awesome-cordova-plugins/splash-screen/ngx';
 import { ModalController, NavController, Platform } from '@ionic/angular';
 
@@ -8,6 +8,7 @@ import { register } from 'swiper/element/bundle';
 import { CartService } from './services/cart.service';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { NotificationService } from './services/notification.service';
+import { GlobalService } from './services/global.service';
 
 register();
 
@@ -19,7 +20,19 @@ register();
 export class AppComponent {
 
   constructor(private platform: Platform, private cartService: CartService, private navCtrl: NavController, private splash: SplashScreen, private firebase: FirebaseX
-    , private notificationService: NotificationService) {
+    , private notificationService: NotificationService, private router: Router, private globalService: GlobalService) {
+
+      // this.router.events.subscribe(event => {
+      //   if (event instanceof NavigationEnd && event.url !== '/') {
+      //     console.log(event.url, this.router.routerState.snapshot.url);
+      //     if(this.globalService.lastUrl === '/notifications') {
+      //       if(event.url === '/cart' || event.url === '/tabs/home')
+      //       this.globalService.lastMainUrlBeforeNotifications = event.url;
+      //     }
+      //     this.globalService.lastUrl = event.url;
+      //   }
+      // });
+
     this.platform.ready().then(async () => {
       this.splash.hide();
       this.cartService.initializeCart();

@@ -154,13 +154,13 @@
   <ion-row>
       <ion-radio-group value="cash" [(ngModel)]="paymentMethod">
         <ion-row class="ion-padding padding-top-bottom">
-          <ion-radio value="instapay" labelPlacement="end">Pay via Instapay</ion-radio>
+          <ion-radio value="instapay" labelPlacement="end" (click)="openPaymentInstructionsModal('instapay')">Pay via Instapay</ion-radio>
         </ion-row>
         <ion-row class="ion-padding padding-top-bottom">
-          <ion-radio value="vodafone-cash" labelPlacement="end">Pay via Vodafone Cash</ion-radio>
+          <ion-radio value="vodafone-cash" labelPlacement="end" (click)="openPaymentInstructionsModal('vodafone-cash')">Pay via Vodafone Cash</ion-radio>
         </ion-row>
         <ion-row class="ion-padding padding-top-bottom">
-          <ion-radio value="etisalat-cash" labelPlacement="end">Pay via Etisalat Cash</ion-radio>
+          <ion-radio value="etisalat-cash" labelPlacement="end" (click)="openPaymentInstructionsModal('etisalat-cash')">Pay via Etisalat Cash</ion-radio>
         </ion-row>
         <ion-row class="ion-padding padding-top-bottom">
           <ion-radio value="cash" labelPlacement="end">Cash on Delivery</ion-radio>

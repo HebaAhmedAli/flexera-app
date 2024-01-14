@@ -1,10 +1,8 @@
 <app-header></app-header>
 
 <ion-content *ngIf="product">
-  <ion-title class="product-title">{{product.name}}</ion-title>
-  <div class="button-container price">
-    {{product.price}} EGP
-    </div>
+  <ion-title class="product-title ion-text-center">{{product.name}}</ion-title>
+
     <div class="category-slider ion-padding-start">
       <div class="swiper-container" >
         <div class="swiper-wrapper">
@@ -26,6 +24,7 @@
 
       </div>
     </div>
+
     <ion-segment value="current" color="dark" mode="md" [(ngModel)]="segmentValue">
       <ion-segment-button value="description">
         <ion-label>Description</ion-label>
@@ -39,7 +38,11 @@
     </ion-segment>
 
     <ion-grid>
-
+      <ion-row>
+        <div class="button-container price ">
+          {{product.price}} EGP
+          </div>
+      </ion-row>
       <ion-row class="button-container description" *ngIf="segmentValue === 'warranty'">
         <div >Product Warranty: {{product.warranty}}</div>
       </ion-row>
@@ -100,6 +103,13 @@
     (didDismiss)="isToastOpen = false"
     position="middle"
   ></ion-toast>
+
+<ion-alert
+[isOpen]="isAlertOpen"
+message="You need to login first to be able to add products to cart."
+[buttons]="['OK']"
+(didDismiss)="isAlertOpen = false"
+></ion-alert>
 
 
  </ion-content>

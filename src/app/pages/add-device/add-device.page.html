@@ -26,7 +26,7 @@
     <ion-row >
       <ion-col class="ion-text-center ion-padding" style="padding-top: 0px;">
         <div class="button-container">
-          <ion-button expand="block" class="main-button"  routerDirection="forward" (click)="actionButtonClick('receipt')">Upload</ion-button>
+          <ion-button expand="block" class="main-button"  routerDirection="forward" (click)="actionButtonClick('receipt')">{{receiptFile ? 'Done' : 'Upload'}}</ion-button>
           <input #receiptInput type="file" id="img" name="img" accept="image/*" (change)="onReceiptFileChanged($event)" />
         </div>
       </ion-col>
@@ -41,7 +41,7 @@
     <ion-row >
       <ion-col class="ion-text-center ion-padding" style="padding-top: 0px;">
         <div class="ion-text-center button-container">
-          <ion-button expand="block" class="main-button"  routerDirection="forward" (click)="actionButtonClick('sticker')">Upload</ion-button>
+          <ion-button expand="block" class="main-button"  routerDirection="forward" (click)="actionButtonClick('sticker')">{{stickerFile ? 'Done' : 'Upload'}}</ion-button>
           <input #stickerInput type="file" id="img" name="img" accept="image/*" (change)="onStickerFileChanged($event)" />
         </div>
       </ion-col>
