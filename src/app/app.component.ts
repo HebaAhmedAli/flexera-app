@@ -49,7 +49,12 @@ export class AppComponent {
 
           this.firebase.onMessageReceived().subscribe(data => {
             setTimeout(() => this.notificationService.getNotifications(), 1000);
-
+            if(this.notificationService.notInWelcome) {
+              this.router.navigate([data.url,{productId: data.urlItemId}]);
+            } else {
+              this.notificationService.notificationTapped = true;
+              this.notificationService.notificationData = data;
+            }
             console.log('inside onNotification', data);
             if (data.wasTapped) {
               console.log("Background");

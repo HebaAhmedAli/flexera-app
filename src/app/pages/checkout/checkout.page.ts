@@ -18,7 +18,7 @@ import { SelectLocationPage } from '../select-location/select-location.page';
   styleUrls: ['./checkout.page.scss'],
 })
 export class CheckoutPage implements OnInit {
-  paymentMethod = 'cash';
+  paymentMethod = 'pickup';
   address!: string;
   editAddress = true;
   order!: OrderModel;
@@ -30,6 +30,8 @@ export class CheckoutPage implements OnInit {
   cities: CityModel[] = [];
   areas: AreaModel[] = [];
 
+  totalPrice!: number;
+
   location: any = {lat: null, lng: null, name: ''};
 
   constructor(private cartService: CartService, private storage: SecureStorage, private modalController: ModalController, private orderService: OrderService
@@ -38,6 +40,7 @@ export class CheckoutPage implements OnInit {
   async ngOnInit() {
     // this.address =  (await this.storage.get('user') as UserModel).address;
     this.order = this.cartService.order;
+    this.calculateOrderTotalPrice();
     this.cityService.getCities().subscribe(data => {
       this.cities = data;
     },
@@ -46,16 +49,26 @@ export class CheckoutPage implements OnInit {
     })
   }
 
-  get totalPrice() {
-    var total = this.cartService.calculateTotalPrice();
-    const percentage = 1; // TODO: Get from data base.
-    if(this.paymentMethod === 'vodafone-cash' || this.paymentMethod ===  'etisalat-cash') {
-      total += (percentage * total / 100);
-     }
-    if(this.paymentMethod !== 'pickup') {
-      total += this.area?.price ? this.area?.price : 0;
+  calculateOrderTotalPrice(openModal: boolean = false) {
+    console.log('calculateOrderTotalPrice')
+    this.order.paymentMethod = this.paymentMethod;
+    this.order.areaId = this.area?.id;
+    this.orderService.getOrderTotalPrice(this.order).subscribe(async (response: any) => {
+      if(response.status === 200) {
+        this.totalPrice = response.body.totalPrice;
+        if(openModal && (this.paymentMethod === 'etisalat-cash' || this.paymentMethod === 'vodafone-cash' || this.paymentMethod === 'instapay')) {
+          this.openPaymentInstructionsModal(this.paymentMethod);
+        }
+      } else {
+        this.message = response.error.message;
+        this.isAlertOpen = true;
+      }
+    }, error => {
+      console.log(error)
+      this.message = error.error.message;
+      this.isAlertOpen = true;
     }
-    return total;
+    );
   }
 
 
@@ -67,9 +80,10 @@ export class CheckoutPage implements OnInit {
     }
     this.order.deliveryAddress = this.address;
     this.order.paymentMethod = this.paymentMethod;
-    this.order.totalPrice = this.totalPrice ;
+    this.order.totalPrice = this.totalPrice;
     this.order.cityName = this.city.name;
     this.order.areaName = this.area.name;
+    this.order.areaId = this.area.id;
     this.order.locationLat = this.location.lat;
     this.order.locationLng = this.location.lng;
     this.orderService.createOrder(this.order).subscribe(async (response: any) => {
@@ -129,10 +143,5 @@ export class CheckoutPage implements OnInit {
     console.log('to be implemented')
   }
 
-
-
-  citySelected(event: any) {
-    console.log(event);
-  }
 
 }

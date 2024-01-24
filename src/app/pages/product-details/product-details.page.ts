@@ -22,6 +22,10 @@ export class ProductDetailsPage implements OnInit {
   mode!: string;
   isAlertOpen = false;
 
+  toastMessage!: string;
+
+  whatsappLink!: string ;
+
   constructor(public cartService: CartService, private productService: ProductService, private route: ActivatedRoute, private storage: SecureStorage) {
     this.swiper = new Swiper('.swiper-container', {
       // Optional parameters
@@ -44,6 +48,7 @@ export class ProductDetailsPage implements OnInit {
     this.productId = Number(this.route.snapshot.paramMap.get('productId') as string);
     this.productService.getProductById(this.productId).subscribe(data => {
       this.product = data;
+      this.whatsappLink = "https://api.whatsapp.com/send?phone=0201090737501&text=I want to use the installment plan for product " + this.product.name;
     }, err => {
       console.log(err);
     })
@@ -74,12 +79,15 @@ export class ProductDetailsPage implements OnInit {
     return;
   }
   this.cartService.addProductToCart(this.product);
+  this.toastMessage = "Added to cart successfully!";
   this.isToastOpen = true;
  }
 
  removeProduct() {
   if(this.productCounter === 0) return;
   this.cartService.decreaseProductQuantityInCart(this.product);
+  this.toastMessage = "Removed from cart successfully!";
+  this.isToastOpen = true;
  }
 
 

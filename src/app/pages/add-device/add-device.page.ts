@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductModel } from 'src/app/models/product.model';
@@ -26,7 +27,7 @@ export class AddDevicePage implements OnInit {
 
   products: ProductModel[] = [];
 
-  constructor(private deviceService: DeviceService, private router: Router, private productService: ProductService) { }
+  constructor(private deviceService: DeviceService, private router: Router, private productService: ProductService, private location: Location) { }
 
   ngOnInit() {
 
@@ -92,7 +93,7 @@ export class AddDevicePage implements OnInit {
   async alertDismiss() {
     this.isAlertOpen = false;
     if(this.status === 200) {
-      this.router.navigate(['/my-devices']);
+      this.location.back();
     }
   }
 }

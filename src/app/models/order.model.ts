@@ -13,6 +13,7 @@ export class OrderModel {
   locationLng!: string;
   cityName!: string;
   areaName!: string;
+  areaId!: number;
   date!: Date;
   orderItems!: OrderItemModel[];
   expanded: boolean = false;

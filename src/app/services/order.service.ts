@@ -26,7 +26,7 @@ export class OrderService {
     orderIgnoredJson.paymentMethod = order.paymentMethod;
     orderIgnoredJson.totalPrice = order.totalPrice;
     orderIgnoredJson.cityName = order.cityName;
-    orderIgnoredJson.areaName = order.areaName;
+    orderIgnoredJson.areaId = order.areaId;
     orderIgnoredJson.locationLat = order.locationLat;
     orderIgnoredJson.locationLng = order.locationLng;
 
@@ -40,6 +40,21 @@ export class OrderService {
     return this.httpClient.post(`${environment.baseUrl}/api/v1/create-order`, orderIgnoredJson, { observe: 'response' });
   }
 
+  public getOrderTotalPrice(order: OrderModel): Observable<HttpResponse<Object>> {
+    // TODO: Make this work: const data = JSON.stringify(order, jsonIgnoreReplacer);
+    const orderIgnoredJson = new OrderModel();
+    orderIgnoredJson.paymentMethod = order.paymentMethod;
+    orderIgnoredJson.areaId = order.areaId;
+    orderIgnoredJson.orderItems = new Array<OrderItemModel>();
+    order.orderItems.forEach(item => {
+      const orderItem = new OrderItemModel();
+      orderItem.productId = item.productId;
+      orderItem.quantity = item.quantity;
+      orderIgnoredJson.orderItems.push(orderItem);
+    })
+    return this.httpClient.post(`${environment.baseUrl}/api/v1/get-order-total-price`, orderIgnoredJson, { observe: 'response' });
+  }
+
   public getOrders(): Observable<Array<OrderModel>> {
     return this.httpClient.get<Array<OrderModel>>(
       `${environment.baseUrl}/api/v1/my-orders`
@@ -51,4 +66,6 @@ export class OrderService {
       `${environment.baseUrl}/api/v1/orders/${orderId}`,  { observe: 'response' }
     );
   }
+
+
 }

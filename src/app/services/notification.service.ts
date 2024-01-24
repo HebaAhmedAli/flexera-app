@@ -15,6 +15,9 @@ export class NotificationService {
   unreadNotificationsCount: number = 0;
   unreadNotificationsCountSubject: Subject<number>;
 
+  notificationTapped = false;
+  notificationData!: NotificationModel;
+  notInWelcome = false;
 
   notifications: NotificationModel[] = [
   ];
@@ -28,16 +31,16 @@ export class NotificationService {
     this.httpClient.get<Array<NotificationModel>>(
       `${environment.baseUrl}/api/v1/notifications`
     ).subscribe(async data => {
-      this.notifications = data;
       const savedNotifications: NotificationModel[] = await this.storage.get('notifications');
       if(savedNotifications) {
-        this.notifications.forEach(item => {
+        data.forEach(item => {
           const savedNot = savedNotifications.find(not => not.id === item.id);
           item.read = savedNot?.read ? true : false;
           item.deleted = savedNot?.deleted ? true : false;
         });
       }
-      this.unreadNotificationsCount = this.notifications.filter(not => not.read === false).length;
+      this.notifications = data;
+      this.unreadNotificationsCount = this.getUndeletedNotifications().filter(not => not.read === false).length;
       this.unreadNotificationsCountSubject.next(this.unreadNotificationsCount);
       this.storage.set('notifications', this.notifications);
     },
@@ -47,8 +50,9 @@ export class NotificationService {
   }
 
   getUnreadNotificationsCount(): number {
-    return this.unreadNotificationsCount;
+    return this.getUndeletedNotifications().filter(not => not.read === false).length;
   }
+
 
   getUndeletedNotifications(): NotificationModel[] {
     return this.notifications.filter(not => !not.deleted)

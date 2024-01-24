@@ -31,7 +31,7 @@
           {{item.quantity * item.product.price}} EGP
         </ion-col>
       </ion-row>
-      <ion-row class="padding-top-bottom" *ngIf="area?.price" style="color: red;">
+      <ion-row class="padding-top-bottom" *ngIf="area?.price">
           <ion-col size="5">
             <h2 class="name">Delivery Fees</h2>
           </ion-col>
@@ -78,7 +78,7 @@
   <ion-row>
     <ion-list *ngIf="city"  class="address-list">
       <ion-item class="address-item">
-        <ion-select class="checkout" label="Area" label-placement="floating" interface="popover" mode="md" [(ngModel)]="area">
+        <ion-select class="checkout" label="Area" label-placement="floating" interface="popover" mode="md" [(ngModel)]="area" (ngModelChange)="calculateOrderTotalPrice()">
           <div *ngFor="let araeItem of city?.areas;" >
             <ion-select-option [value]="araeItem">{{araeItem.name}}</ion-select-option>
           </div>
@@ -152,17 +152,17 @@
     </ion-col>
   </ion-row>
   <ion-row>
-      <ion-radio-group value="cash" [(ngModel)]="paymentMethod">
+      <ion-radio-group value="cash" [(ngModel)]="paymentMethod" (ngModelChange)="calculateOrderTotalPrice(true)">
         <ion-row class="ion-padding padding-top-bottom">
-          <ion-radio value="instapay" labelPlacement="end" (click)="openPaymentInstructionsModal('instapay')">Pay via Instapay</ion-radio>
+          <ion-radio value="instapay" labelPlacement="end" >Pay via Instapay</ion-radio>
         </ion-row>
         <ion-row class="ion-padding padding-top-bottom">
-          <ion-radio value="vodafone-cash" labelPlacement="end" (click)="openPaymentInstructionsModal('vodafone-cash')">Pay via Vodafone Cash</ion-radio>
+          <ion-radio value="vodafone-cash" labelPlacement="end" >Pay via Vodafone Cash</ion-radio>
         </ion-row>
         <ion-row class="ion-padding padding-top-bottom">
-          <ion-radio value="etisalat-cash" labelPlacement="end" (click)="openPaymentInstructionsModal('etisalat-cash')">Pay via Etisalat Cash</ion-radio>
+          <ion-radio value="etisalat-cash" labelPlacement="end">Pay via Etisalat Cash</ion-radio>
         </ion-row>
-        <ion-row class="ion-padding padding-top-bottom">
+        <ion-row class="ion-padding padding-top-bottom" *ngIf="totalPrice && totalPrice <= 10000">
           <ion-radio value="cash" labelPlacement="end">Cash on Delivery</ion-radio>
         </ion-row>
         <ion-row class="ion-padding padding-top-bottom">

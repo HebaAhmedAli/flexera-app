@@ -6,6 +6,7 @@ import { TermsAndConditionsComponent } from 'src/app/components/terms-and-condit
 import { SignUpRequestModel } from 'src/app/models/signup-request.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-signup',
@@ -70,6 +71,7 @@ export class SignupPage implements OnInit {
       signUpRequest.speciality = this.speciality?.value as string;
       signUpRequest.uniStaff = this.uniStaff?.value as string;
       signUpRequest.university = this.university?.value as string;
+      signUpRequest.role = environment.role;
       this.authService.signUp(signUpRequest).subscribe(async (response: any) => {
         if(response.status === 200) {
           this.message = 'You are registered successfully. Navigate to login';

@@ -38,8 +38,8 @@
     </ion-segment>
 
     <ion-grid>
-      <ion-row>
-        <div class="button-container price ">
+      <ion-row *ngIf="segmentValue === 'description'">
+        <div class="button-container price " >
           {{product.price}} EGP
           </div>
       </ion-row>
@@ -84,10 +84,10 @@
           </div>
           <div style="padding: 16px;">To use any of these installment plans please contact us on:
           <div class="whats-contact">
-            <a href="https://api.whatsapp.com/send?phone=0201090737501&text=I want to use the installment plan"  target="_blank">
+            <a [href]="whatsappLink"  target="_blank">
               <ion-icon name="logo-whatsapp" class="social-icon  whatsapp-icon"></ion-icon>
             </a>
-            <a href="https://api.whatsapp.com/send?phone=0201090737501&text=I want to use the installment plan" style="text-decoration: none;"  target="_blank">
+            <a [href]="whatsappLink" style="text-decoration: none;"  target="_blank">
               <b>02 01090737501</b>
             </a>
           </div>
@@ -98,7 +98,7 @@
 
     <ion-toast
     [isOpen]="isToastOpen"
-    message="Added to cart successfully!"
+    [message]="toastMessage"
     [duration]="2000"
     (didDismiss)="isToastOpen = false"
     position="middle"

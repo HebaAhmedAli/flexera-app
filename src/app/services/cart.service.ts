@@ -68,13 +68,13 @@ export class CartService {
     return this.cartCounter;
   }
 
-  calculateTotalPrice(): number {
-    var totalPrice = 0;
-    this.order.orderItems.forEach(orderItem => {
-      totalPrice += orderItem.product.price * orderItem.quantity;
-    });
-    return totalPrice;
-  }
+  // calculateTotalPrice(): number {
+  //   var totalPrice = 0;
+  //   this.order.orderItems.forEach(orderItem => {
+  //     totalPrice += orderItem.product.price * orderItem.quantity;
+  //   });
+  //   return totalPrice;
+  // }
 
 
   getProductQuantityIncart(product: ProductModel): number {

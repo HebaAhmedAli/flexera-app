@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrderModel } from 'src/app/models/order.model';
 import { ProductModel } from 'src/app/models/product.model';
 import { CartService } from 'src/app/services/cart.service';
+import { OrderService } from 'src/app/services/order.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
 
 @Component({
@@ -13,21 +14,35 @@ export class CartPage implements OnInit {
 
   mode!: string;
   cartOrder!: OrderModel;
-  constructor(private cartService: CartService, private storage: SecureStorage) {
+
+  totalPrice!: number;
+  constructor(private cartService: CartService, private storage: SecureStorage, private orderService: OrderService) {
 
   }
 
   async ngOnInit() {
     this.cartOrder = this.cartService.order;
     this.mode =   await this.storage.get('mode');
+    if(this.mode !== 'guest') this.calculateOrderTotalPrice();
   }
 
   removeProductFromCart(product: ProductModel) {
     this.cartService.removeProductFromCart(product);
   }
 
-  get totalPrice() {
-    return this.cartService.calculateTotalPrice();
+
+  calculateOrderTotalPrice() {
+    console.log('calculateOrderTotalPrice')
+    this.cartOrder.paymentMethod = this.cartOrder.paymentMethod ? this.cartOrder.paymentMethod :  'pickup';
+
+    this.orderService.getOrderTotalPrice(this.cartOrder).subscribe(async (response: any) => {
+      if(response.status === 200) {
+        this.totalPrice = response.body.totalPrice;
+      }
+    }, error => {
+      console.log(error)
+    }
+    );
   }
 
 

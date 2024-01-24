@@ -25,4 +25,6 @@ export class SignUpRequestModel {
   uniStaff!: string;
 
   university!: string;
+
+  role!: string;
 }
