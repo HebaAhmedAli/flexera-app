@@ -13,4 +13,5 @@ export class ProductModel {
   installmentPlan!: string;
   gallery!: Array<GalleryItem>;
   warranty!: number;
+  priceAfterDiscount!: boolean;
 }

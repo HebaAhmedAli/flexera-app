@@ -4,6 +4,7 @@ import { ProductModel } from 'src/app/models/product.model';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
+import { environment } from 'src/environments/environment';
 import Swiper from 'swiper';
 
 @Component({
@@ -95,4 +96,7 @@ export class ProductDetailsPage implements OnInit {
   return this.cartService.getProductQuantityIncart(this.product);
  }
 
+ getImgUrl(url: string): string {
+  return environment.baseUrl + '/' + url;
+ }
 }

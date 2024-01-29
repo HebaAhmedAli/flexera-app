@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductModel } from 'src/app/models/product.model';
 import { CategoryService } from 'src/app/services/category.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-products',
@@ -26,8 +27,13 @@ export class ProductsPage implements OnInit {
     this.categoryImg = this.router.snapshot.paramMap.get('categoryImg') as string;
     this.categoryId = Number(this.router.snapshot.paramMap.get('categoryId') as string);
     this.categoryService.getProductsOfCategory(this.categoryId).subscribe(data => {
+      console.log( this.allProducts)
       this.allProducts = data.sort((p1, p2) => p1.price - p2.price);
+      console.log( this.allProducts)
+
       this.devicesProducts = this.allProducts .filter(product => product.type === 'device');
+      console.log( this.devicesProducts)
+
       this.materialsProducts = this.allProducts .filter(product => product.type === 'material');
     },
     err => {
@@ -50,4 +56,8 @@ export class ProductsPage implements OnInit {
     this.materialsProducts = this.allProducts .filter(product => product.type === 'material');
     modal.dismiss();
   }
+
+  getImgUrl(url: string): string {
+    return environment.baseUrl + '/' + url;
+   }
 }

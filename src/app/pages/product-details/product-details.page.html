@@ -8,13 +8,13 @@
         <div class="swiper-wrapper">
 
           <div class="swiper-slide" *ngFor="let galleryItem of product.gallery;let i=index;">
-            <img *ngIf="galleryItem.type === 'img'" src="assets/products/hyper-light.jpeg">
+            <img *ngIf="galleryItem.type === 'img'" [src]="getImgUrl(galleryItem.url)">
             <video *ngIf="swiper.activeIndex === i && galleryItem.type === 'video'" width="100%" height="auto" controls autoplay>
-              <source src="assets/products/test2.mp4" type="video/mp4">
+              <source [src]="getImgUrl(galleryItem.url)" type="video/mp4">
               Your browser does not support the video tag.
             </video>
             <video *ngIf="swiper.activeIndex !== i && galleryItem.type === 'video'" width="100%" height="auto" controls>
-              <source src="assets/products/test2.mp4" type="video/mp4">
+              <source [src]="getImgUrl(galleryItem.url)" type="video/mp4">
               Your browser does not support the video tag.
             </video>
           </div>
