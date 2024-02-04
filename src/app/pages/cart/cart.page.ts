@@ -4,6 +4,7 @@ import { ProductModel } from 'src/app/models/product.model';
 import { CartService } from 'src/app/services/cart.service';
 import { OrderService } from 'src/app/services/order.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-cart',
@@ -45,5 +46,8 @@ export class CartPage implements OnInit {
     );
   }
 
+  getImgUrl(url: string): string {
+    return environment.baseUrl + '/' + url;
+   }
 
 }

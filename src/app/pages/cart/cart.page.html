@@ -4,7 +4,7 @@
   <ion-list *ngIf="cartOrder.orderItems.length !== 0 && mode !== 'guest'">
      <ion-item *ngFor="let item of cartOrder.orderItems">
        <ion-thumbnail slot="start">
-         <img [src]="item.product.img">
+         <img [src]="getImgUrl(item.product.img)">
        </ion-thumbnail>
        <ion-label>
          <h2>{{ item.product.name }}</h2>

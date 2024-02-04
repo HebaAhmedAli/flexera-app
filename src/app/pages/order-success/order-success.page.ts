@@ -22,6 +22,8 @@ export class OrderSuccessPage implements OnInit {
   orderId!: string;
   orderStatus!: String;
 
+  text = 'Please Upload a screenshot from the payment receipt to complete your order';
+
   constructor(private httpClient: HttpClient, public router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -53,11 +55,16 @@ export class OrderSuccessPage implements OnInit {
       .subscribe((response: any) => {
         console.log(response)
         if (response.status === 200) {
+          this.text = 'Image uploaded successfully!';
           this.message = 'Image uploaded successfully';
           this.done = true;
         } else {
+          this.text = 'Image not uploaded successfully, please try again!';
           this.message = 'Image not uploaded successfully';
         }
+      }, err => {
+        console.log(err);
+        this.text = 'Image not uploaded successfully, please try again!';
       }
       );
   }
