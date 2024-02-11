@@ -6,4 +6,5 @@ export class NotificationModel {
   urlItemId?: number;
   read: boolean = false;
   deleted = false;
+  date!: string;
 }

@@ -40,6 +40,9 @@ export class NotificationService {
         });
       }
       this.notifications = data;
+
+      this.notifications = this.notifications.sort((not1, not2) => new Date(not2.date).getTime() - new Date(not1.date).getTime());
+
       this.unreadNotificationsCount = this.getUndeletedNotifications().filter(not => not.read === false).length;
       this.unreadNotificationsCountSubject.next(this.unreadNotificationsCount);
       this.storage.set('notifications', this.notifications);
