@@ -35,6 +35,7 @@ export class OrderService {
       const orderItem = new OrderItemModel();
       orderItem.productId = item.productId;
       orderItem.quantity = item.quantity;
+      orderItem.selectedSizesItems = item.selectedSizesItems;
       orderIgnoredJson.orderItems.push(orderItem);
     })
     return this.httpClient.post(`${environment.baseUrl}/api/v1/create-order`, orderIgnoredJson, { observe: 'response' });
@@ -47,10 +48,13 @@ export class OrderService {
     orderIgnoredJson.areaId = order.areaId;
     orderIgnoredJson.orderItems = new Array<OrderItemModel>();
     order.orderItems.forEach(item => {
-      const orderItem = new OrderItemModel();
-      orderItem.productId = item.productId;
-      orderItem.quantity = item.quantity;
-      orderIgnoredJson.orderItems.push(orderItem);
+        const orderItem = new OrderItemModel();
+        orderItem.productId = item.productId;
+        orderItem.quantity = item.quantity;
+        orderItem.selectedSizesItems = item.selectedSizesItems;
+        orderIgnoredJson.orderItems.push(orderItem);
+
+
     })
     return this.httpClient.post(`${environment.baseUrl}/api/v1/get-order-total-price`, orderIgnoredJson, { observe: 'response' });
   }

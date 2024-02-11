@@ -1,4 +1,5 @@
 import { GalleryItem } from "./gallery-item.model";
+import { ProductSizesModel } from "./product-sizes.model";
 
 export class ProductModel {
   id!: number;
@@ -13,5 +14,8 @@ export class ProductModel {
   installmentPlan!: string;
   gallery!: Array<GalleryItem>;
   warranty!: number;
-  priceAfterDiscount!: boolean;
+  priceAfterDiscount!: number;
+  available!: string;
+  sizes!: ProductSizesModel[];
+  enable!: boolean;
 }

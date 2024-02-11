@@ -20,7 +20,8 @@
 
         </ion-col>
     </ion-row>
-      <ion-row *ngFor="let item of order?.orderItems" class="padding-top-bottom">
+    <div *ngFor="let item of order?.orderItems" >
+      <ion-row class="padding-top-bottom" *ngIf="(item.selectedSizesItems ? item.selectedSizesItems  : [] ).length === 0">
         <ion-col size="5">
           <h2 class="name">{{item.product.name}}</h2>
         </ion-col>
@@ -28,9 +29,22 @@
             x {{item.quantity}}
         </ion-col>
         <ion-col class="price-col">
-          {{item.quantity * item.product.price}} EGP
+          {{item.quantity * getProductUpdatedPrice(item.product.id)}} EGP
         </ion-col>
       </ion-row>
+      <ion-row class="padding-top-bottom" *ngFor="let sizeItem of item.selectedSizesItems;">
+        <ion-col size="5">
+          <h2 class="name">{{sizeItem.productSize.name}}</h2>
+        </ion-col>
+        <ion-col>
+            x {{sizeItem.quantity}}
+        </ion-col>
+        <ion-col class="price-col">
+          {{sizeItem.quantity * getProductSizeUpdatedPrice(item.product.id, sizeItem.productSize.id)}} EGP
+        </ion-col>
+      </ion-row>
+    </div>
+
       <ion-row class="padding-top-bottom" *ngIf="area?.price">
           <ion-col size="5">
             <h2 class="name">Delivery Fees</h2>

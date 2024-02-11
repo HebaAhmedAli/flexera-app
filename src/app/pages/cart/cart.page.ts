@@ -3,6 +3,7 @@ import { OrderModel } from 'src/app/models/order.model';
 import { ProductModel } from 'src/app/models/product.model';
 import { CartService } from 'src/app/services/cart.service';
 import { OrderService } from 'src/app/services/order.service';
+import { ProductService } from 'src/app/services/product.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
 import { environment } from 'src/environments/environment';
 
@@ -17,18 +18,27 @@ export class CartPage implements OnInit {
   cartOrder!: OrderModel;
 
   totalPrice!: number;
-  constructor(private cartService: CartService, private storage: SecureStorage, private orderService: OrderService) {
+  products: ProductModel[] = [];
+  constructor(private cartService: CartService, private storage: SecureStorage, private orderService: OrderService, private productService: ProductService) {
 
   }
 
   async ngOnInit() {
-    this.cartOrder = this.cartService.order;
-    this.mode =   await this.storage.get('mode');
-    if(this.mode !== 'guest') this.calculateOrderTotalPrice();
+    this.productService.getAllProducts().subscribe(async data => {
+      this.products = data.filter(product => product.enable);
+      this.cartService.order.orderItems = this.cartService.order.orderItems.filter(item => this.products.find(product => item.product.id === product.id)?.available);
+      this.storage.set('cart-order',  this.cartService.order);
+      this.cartOrder = this.cartService.order;
+      this.mode =   await this.storage.get('mode');
+      if(this.mode !== 'guest') this.calculateOrderTotalPrice();
+    },
+    err => {
+      console.log(err);
+    })
   }
 
-  removeProductFromCart(product: ProductModel) {
-    this.cartService.removeProductFromCart(product);
+  removeProductFromCart(product: ProductModel, productSizeId: number | undefined) {
+    this.cartService.removeProductFromCart(product, productSizeId);
   }
 
 
@@ -49,5 +59,16 @@ export class CartPage implements OnInit {
   getImgUrl(url: string): string {
     return environment.baseUrl + '/' + url;
    }
+
+   getProductUpdatedPrice(productId: number): number {
+    const product = this.products.find(product => product.id === productId);
+    return (product ? product.priceAfterDiscount : 0 );
+  }
+
+  getProductSizeUpdatedPrice(productId: number, productSizeId: number): number {
+    const product = this.products.find(product => product.id === productId);
+    const productSize = product?.sizes.find(size => size.id === productSizeId);
+    return (productSize ? productSize.priceAfterDiscount : 0 );
+  }
 
 }

@@ -45,6 +45,7 @@
   width: 85%;
   margin-left: auto;
   margin-right: auto;
+  background: white;
 }
 
 .product-title {
@@ -130,4 +131,12 @@ ion-row {
   }
 }
 
+
+
+
+.old-price {
+  text-decoration-line: line-through;
+  text-decoration-color: red;
+  font-weight: 100;
+}
 

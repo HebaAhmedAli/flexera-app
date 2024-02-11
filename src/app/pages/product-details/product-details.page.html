@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <ion-content *ngIf="product">
-  <ion-title class="product-title ion-text-center">{{product.name}}</ion-title>
+  <ion-title class="product-title ion-text-center">{{selectedSize ? selectedSize.name : product.name}}</ion-title>
 
     <div class="category-slider ion-padding-start">
       <div class="swiper-container" >
@@ -26,28 +26,40 @@
     </div>
 
     <ion-segment value="current" color="dark" mode="md" [(ngModel)]="segmentValue">
-      <ion-segment-button value="description">
+      <ion-segment-button value="description" *ngIf="product.sizes.length === 0">
         <ion-label>Description</ion-label>
       </ion-segment-button>
       <ion-segment-button value="warranty" *ngIf="product.warranty > 0">
         <ion-label>Warranty</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="maintenance" >
+      <ion-segment-button value="maintenance" *ngIf="product.maintenance">
         <ion-label>Maintenance</ion-label>
       </ion-segment-button>
     </ion-segment>
 
     <ion-grid>
+      <ion-list style="width: 100%;" *ngIf="product.sizes.length > 0">
+        <ion-item style="--border-color: black;     margin-right: 3%;">
+          <ion-select label="Select Product Size*" label-placement="floating" interface="popover" mode="md"  [(ngModel)]="selectedSize">
+            <ion-select-option *ngFor="let size of product.sizes;" [value]="size">{{ size.name }} </ion-select-option>
+          </ion-select>
+
+        </ion-item>
+      </ion-list>
       <ion-row *ngIf="segmentValue === 'description'">
-        <div class="button-container price " >
-          {{product.price}} EGP
+        <div class="button-container price " [ngClass]="{'old-price' : (selectedSize ? selectedSize.price !== selectedSize.priceAfterDiscount :  product.price !== product.priceAfterDiscount)}">
+          {{ selectedSize ? selectedSize.price :  product.price}} EGP
           </div>
+          <div class="button-container price " *ngIf="selectedSize ? selectedSize.price !== selectedSize.priceAfterDiscount :  product.price !== product.priceAfterDiscount">
+            {{ selectedSize ? selectedSize.priceAfterDiscount :  product.priceAfterDiscount}} EGP
+            </div>
       </ion-row>
       <ion-row class="button-container description" *ngIf="segmentValue === 'warranty'">
         <div >Product Warranty: {{product.warranty}}</div>
       </ion-row>
       <ion-row *ngIf="segmentValue === 'description'">
-        <div [innerHTML]="product.longDescription" class="button-container description"></div>
+
+        <div [innerHTML]="selectedSize ? selectedSize.longDescription : product.longDescription" class="button-container description"></div>
 
       </ion-row>
       <ion-row  *ngIf="segmentValue === 'maintenance'" >
@@ -64,7 +76,10 @@
             <span class="product-counter">{{productCounter}}</span>
             <ion-button expand="block" class="main-button plus-minus-button" (click)="addProduct()">+</ion-button>
           </ion-row>
-        <ion-button expand="block" class="main-button" (click)="addProduct()" *ngIf="productCounter === 0">Add to cart</ion-button>
+        <ion-button expand="block" class="main-button"
+         [disabled]=" (product.sizes.length > 0 && !selectedSize) || (product.sizes.length > 0 && selectedSize && selectedSize.available.toString() === 'false') || (product.sizes.length === 0 && product.available.toString() === 'false')"
+          (click)="addProduct()" *ngIf="productCounter === 0">{{ (product.sizes.length > 0 && selectedSize && selectedSize.available.toString() === 'false') || (product.sizes.length === 0 && product.available.toString() === 'false') ? 'Out of Stock' :
+            (product.sizes.length > 0 && !selectedSize ? 'Select product size' : 'Add to cart')}} </ion-button>
         <ion-button expand="block" class="main-button" id="open-modal">View Installment Plan</ion-button>
         </div>
       </ion-row>

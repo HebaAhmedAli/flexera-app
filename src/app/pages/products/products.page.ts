@@ -28,11 +28,14 @@ export class ProductsPage implements OnInit {
     this.categoryId = Number(this.router.snapshot.paramMap.get('categoryId') as string);
     this.categoryService.getProductsOfCategory(this.categoryId).subscribe(data => {
       console.log( this.allProducts)
+      data = data.filter(product => product.enable);
+
       this.allProducts = data.sort((p1, p2) => p1.price - p2.price);
       console.log( this.allProducts)
 
       this.devicesProducts = this.allProducts .filter(product => product.type === 'device');
       console.log( this.devicesProducts)
+      if(this.devicesProducts.length === 0) this.segmentValue = 'material';
 
       this.materialsProducts = this.allProducts .filter(product => product.type === 'material');
     },

@@ -28,7 +28,10 @@
              <ion-card-subtitle>{{ product.description }}</ion-card-subtitle>
            </ion-card-header>
            <ion-card-content>
-            {{ product.price }} EGP
+            <div [ngClass]="{'old-price' : product.price !== product.priceAfterDiscount}">{{ product.price }} EGP </div>
+            <div *ngIf="product.price !== product.priceAfterDiscount">
+              {{ product.priceAfterDiscount }} EGP
+            </div>
            </ion-card-content>
            <!-- <ion-fab vertical="bottom" horizontal="end" class="add-fab">
              <ion-fab-button>

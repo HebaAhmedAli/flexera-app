@@ -5,10 +5,12 @@ import { PaymentInstructionsModalComponent } from 'src/app/components/payment-in
 import { AreaModel } from 'src/app/models/area.model';
 import { CityModel } from 'src/app/models/city.model';
 import { OrderModel } from 'src/app/models/order.model';
+import { ProductModel } from 'src/app/models/product.model';
 import { UserModel } from 'src/app/models/user.model';
 import { CartService } from 'src/app/services/cart.service';
 import { CityService } from 'src/app/services/city.service';
 import { OrderService } from 'src/app/services/order.service';
+import { ProductService } from 'src/app/services/product.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
 import { SelectLocationPage } from '../select-location/select-location.page';
 
@@ -34,13 +36,24 @@ export class CheckoutPage implements OnInit {
 
   location: any = {lat: null, lng: null, name: ''};
 
+  products: ProductModel[] = [];
+
   constructor(private cartService: CartService, private storage: SecureStorage, private modalController: ModalController, private orderService: OrderService
-    , private router: Router, private cityService: CityService) { }
+    , private router: Router, private cityService: CityService, private productService: ProductService) { }
 
   async ngOnInit() {
     // this.address =  (await this.storage.get('user') as UserModel).address;
-    this.order = this.cartService.order;
-    this.calculateOrderTotalPrice();
+    this.productService.getAllProducts().subscribe(data => {
+      this.products = data.filter(product => product.enable);
+      this.cartService.order.orderItems = this.cartService.order.orderItems.filter(item => this.products.find(product => item.product.id === product.id)?.available);
+      this.storage.set('cart-order',  this.cartService.order);
+      this.order = this.cartService.order;
+      this.calculateOrderTotalPrice();
+    },
+    err => {
+      console.log(err);
+    })
+
     this.cityService.getCities().subscribe(data => {
       this.cities = data;
     },
@@ -143,5 +156,16 @@ export class CheckoutPage implements OnInit {
     console.log('to be implemented')
   }
 
+
+  getProductUpdatedPrice(productId: number): number {
+    const product = this.products.find(product => product.id === productId);
+    return (product ? product.priceAfterDiscount : 0 );
+  }
+
+  getProductSizeUpdatedPrice(productId: number, productSizeId: number): number {
+    const product = this.products.find(product => product.id === productId);
+    const productSize = product?.sizes.find(size => size.id === productSizeId);
+    return (productSize ? productSize.priceAfterDiscount : 0 );
+  }
 
 }

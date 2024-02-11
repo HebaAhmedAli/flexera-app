@@ -1,21 +1,37 @@
 <app-header></app-header>
 
- <ion-content>
+ <ion-content  *ngIf="cartOrder">
   <ion-list *ngIf="cartOrder.orderItems.length !== 0 && mode !== 'guest'">
-     <ion-item *ngFor="let item of cartOrder.orderItems">
+    <div  *ngFor="let item of cartOrder.orderItems">
+     <ion-item *ngIf="(item.selectedSizesItems ? item.selectedSizesItems  : [] ).length === 0">
        <ion-thumbnail slot="start">
          <img [src]="getImgUrl(item.product.img)">
        </ion-thumbnail>
        <ion-label>
          <h2>{{ item.product.name }}</h2>
          <p>{{ item.product.description }}</p>
-         <p>Price: {{ item.product.price }}</p>
+         <p>Price: {{  getProductUpdatedPrice(item.product.id) }}</p>
          <p>Quantity: {{ item.quantity }}</p>
        </ion-label>
        <ion-icon name="create-outline" color="dark" class="edit-icon" [routerLink]="['/product-details',{productId: item.product.id}]"></ion-icon>
-       <ion-icon name="trash-outline" color="dark" (click)="removeProductFromCart(item.product)"></ion-icon>
+       <ion-icon name="trash-outline" color="dark" (click)="removeProductFromCart(item.product, undefined)"></ion-icon>
        <!-- <ion-button slot="end">Remove</ion-button> -->
      </ion-item>
+     <ion-item *ngFor="let sizeItem of item.selectedSizesItems;">
+      <ion-thumbnail slot="start">
+        <img [src]="getImgUrl(item.product.img)">
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ sizeItem.productSize.name }}</h2>
+        <p>{{ item.product.description }}</p>
+        <p>Price: {{ getProductSizeUpdatedPrice(item.product.id, sizeItem.productSize.id) }}</p>
+        <p>Quantity: {{ sizeItem.quantity }}</p>
+      </ion-label>
+      <ion-icon name="create-outline" color="dark" class="edit-icon" [routerLink]="['/product-details',{productId: item.product.id}]"></ion-icon>
+      <ion-icon name="trash-outline" color="dark" (click)="removeProductFromCart(item.product, sizeItem.productSizeId)"></ion-icon>
+      <!-- <ion-button slot="end">Remove</ion-button> -->
+    </ion-item>
+    </div>
   </ion-list>
 
   <ion-card *ngIf="cartOrder.orderItems.length !== 0  && mode !== 'guest'">

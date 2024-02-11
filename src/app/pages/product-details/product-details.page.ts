@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ProductSizesModel } from 'src/app/models/product-sizes.model';
 import { ProductModel } from 'src/app/models/product.model';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -27,6 +28,8 @@ export class ProductDetailsPage implements OnInit {
 
   whatsappLink!: string ;
 
+  selectedSize!: ProductSizesModel;
+
   constructor(public cartService: CartService, private productService: ProductService, private route: ActivatedRoute, private storage: SecureStorage) {
     this.swiper = new Swiper('.swiper-container', {
       // Optional parameters
@@ -49,6 +52,7 @@ export class ProductDetailsPage implements OnInit {
     this.productId = Number(this.route.snapshot.paramMap.get('productId') as string);
     this.productService.getProductById(this.productId).subscribe(data => {
       this.product = data;
+
       this.whatsappLink = "https://api.whatsapp.com/send?phone=0201090737501&text=I want to use the installment plan for product " + this.product.name;
     }, err => {
       console.log(err);
@@ -79,21 +83,21 @@ export class ProductDetailsPage implements OnInit {
     this.isAlertOpen = true;
     return;
   }
-  this.cartService.addProductToCart(this.product);
+  this.cartService.addProductToCart(this.product, this.selectedSize ? this.selectedSize : undefined);
   this.toastMessage = "Added to cart successfully!";
   this.isToastOpen = true;
  }
 
  removeProduct() {
   if(this.productCounter === 0) return;
-  this.cartService.decreaseProductQuantityInCart(this.product);
+  this.cartService.decreaseProductQuantityInCart(this.product,  this.selectedSize ? this.selectedSize.id : undefined);
   this.toastMessage = "Removed from cart successfully!";
   this.isToastOpen = true;
  }
 
 
  get productCounter(): number {
-  return this.cartService.getProductQuantityIncart(this.product);
+  return this.cartService.getProductQuantityIncart(this.product,  this.selectedSize ? this.selectedSize.id : undefined);
  }
 
  getImgUrl(url: string): string {

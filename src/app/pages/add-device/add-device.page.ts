@@ -32,7 +32,7 @@ export class AddDevicePage implements OnInit {
   ngOnInit() {
 
     this.productService.getAllProducts().subscribe(data => {
-      this.products = data;
+      this.products = data.filter(product => product.enable);
       console.log(this.products);
 
     },
