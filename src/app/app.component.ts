@@ -38,6 +38,14 @@ export class AppComponent {
       this.cartService.initializeCart();
       this.notificationService.getNotifications();
       if(this.platform.is('cordova')) {
+        this.firebase.hasPermission().then(hasPermission =>{
+            if(!hasPermission) {
+              this.firebase.grantPermission().then((hasPermission) =>{
+                console.log("Permission was " + (hasPermission ? "granted" : "denied"));
+            });
+            }
+        })
+
 
         this.firebase.getToken().then((token) => {
             console.log('getToken', token);
@@ -49,15 +57,17 @@ export class AppComponent {
 
           this.firebase.onMessageReceived().subscribe(data => {
             setTimeout(() => this.notificationService.getNotifications(), 1000);
-            if(this.notificationService.notInWelcome) {
-              this.router.navigate([data.url,{productId: data.urlItemId}]);
-            } else {
-              this.notificationService.notificationTapped = true;
-              this.notificationService.notificationData = data;
-            }
+
             console.log('inside onNotification', data);
-            if (data.wasTapped) {
+            if (data.tap === 'background') {
               console.log("Background");
+              if(this.notificationService.notInWelcome) {
+                if(data.urlItemId)
+                  this.router.navigate([data.url,{productId: data.urlItemId, course_id: data.urlItemId}]);
+              } else {
+                this.notificationService.notificationTapped = true;
+                this.notificationService.notificationData = data;
+              }
             } else {
               console.log("Foreground");
             };

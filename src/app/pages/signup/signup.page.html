@@ -79,7 +79,7 @@
           Password is required
         </span>
         <span *ngIf="password?.errors?.pattern">
-          Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.
+          Password must contain one digit from 1 to 9, one lowercase letter, one uppercase letter, one special character, no space, and it must be 8-16 characters long.
         </span>
       </div>
 

@@ -3,7 +3,7 @@
 <ion-content [fullscreen]="true">
   <ion-list *ngIf="notificationService.getUndeletedNotifications().length !== 0">
     <ion-item-sliding  *ngFor="let item of notificationService.getUndeletedNotifications()" >
-      <ion-item  [ngClass]="{'read': item.read , 'unread': !item.read}"  [routerLink]="[item.url,{productId: item.urlItemId, course_id: item.urlItemId}]" (click)="updateNotifications(item)">
+      <ion-item  [ngClass]="{'read': item.read , 'unread': !item.read}"   (click)="updateNotifications(item)">
         <ion-label>
           <h2 style="font-weight: bold;">{{ item.title }}</h2>
           <p>{{ item.body }}</p>

@@ -24,9 +24,9 @@ export class SignupPage implements OnInit {
  signupForm = new FormGroup({
   title: new FormControl('', Validators.required),
   name: new FormControl('', Validators.required),
-  email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]),
+  email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')]),
   phone: new FormControl('', [Validators.required, Validators.pattern('(01)[0-9]{9}')]),
-  password: new FormControl('', [Validators.required, Validators.minLength(8), 	 	Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')]),//this is for the letters (both uppercase and lowercase) and numbers validation
+  password: new FormControl('', [Validators.required, Validators.minLength(8), 	 	Validators.pattern(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/)]),//this is for the letters (both uppercase and lowercase) and numbers validation
   address: new FormControl(''),
   age: new FormControl(''),
   speciality: new FormControl(''),
@@ -63,7 +63,7 @@ export class SignupPage implements OnInit {
       const signUpRequest = new SignUpRequestModel();
       signUpRequest.title = this.title?.value as string;
       signUpRequest.name = this.name?.value as string;
-      signUpRequest.email = this.email?.value as string;
+      signUpRequest.email = this.email?.value?.toLowerCase() as string;
       signUpRequest.phone = this.phone?.value as string;
       signUpRequest.password = this.password?.value as string;
       signUpRequest.address = this.address?.value as string;

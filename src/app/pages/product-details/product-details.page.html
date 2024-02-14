@@ -8,12 +8,12 @@
         <div class="swiper-wrapper">
 
           <div class="swiper-slide" *ngFor="let galleryItem of product.gallery;let i=index;">
-            <img *ngIf="galleryItem.type === 'img'" [src]="getImgUrl(galleryItem.url)">
-            <video *ngIf="swiper.activeIndex === i && galleryItem.type === 'video'" width="100%" height="auto" controls autoplay>
+            <img *ngIf="galleryItem.type === 'img'" [src]="getImgUrl(galleryItem.url)" [id]="'img' + i" (click)="openFullscreen('img' + i)">
+            <video *ngIf="swiper.activeIndex === i && galleryItem.type === 'video'" width="100%" height="auto" controls autoplay >
               <source [src]="getImgUrl(galleryItem.url)" type="video/mp4">
               Your browser does not support the video tag.
             </video>
-            <video *ngIf="swiper.activeIndex !== i && galleryItem.type === 'video'" width="100%" height="auto" controls>
+            <video *ngIf="swiper.activeIndex !== i && galleryItem.type === 'video'" width="100%" height="auto" controls >
               <source [src]="getImgUrl(galleryItem.url)" type="video/mp4">
               Your browser does not support the video tag.
             </video>
@@ -27,13 +27,13 @@
 
     <ion-segment value="current" color="dark" mode="md" [(ngModel)]="segmentValue">
       <ion-segment-button value="description" *ngIf="product.sizes.length === 0">
-        <ion-label>Description</ion-label>
+        Description
       </ion-segment-button>
       <ion-segment-button value="warranty" *ngIf="product.warranty > 0">
-        <ion-label>Warranty</ion-label>
+        Warranty
       </ion-segment-button>
       <ion-segment-button value="maintenance" *ngIf="product.maintenance">
-        <ion-label>Maintenance</ion-label>
+        Maintenance
       </ion-segment-button>
     </ion-segment>
 
@@ -97,7 +97,7 @@
           </ion-toolbar>
           <div style="padding-left: 16px; line-height: 35px;" [innerHTML]="product.installmentPlan">
           </div>
-          <div style="padding: 16px;">To use any of these installment plans please contact us on:
+          <div style="padding: 16px;">To use installment plans please contact us on:
           <div class="whats-contact">
             <a [href]="whatsappLink"  target="_blank">
               <ion-icon name="logo-whatsapp" class="social-icon  whatsapp-icon"></ion-icon>

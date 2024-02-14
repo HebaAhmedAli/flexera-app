@@ -8,6 +8,8 @@ import { SecureStorage } from 'src/app/services/secure-storage.service';
 import { environment } from 'src/environments/environment';
 import Swiper from 'swiper';
 
+declare var window: any;
+
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.page.html',
@@ -29,6 +31,7 @@ export class ProductDetailsPage implements OnInit {
   whatsappLink!: string ;
 
   selectedSize!: ProductSizesModel;
+
 
   constructor(public cartService: CartService, private productService: ProductService, private route: ActivatedRoute, private storage: SecureStorage) {
     this.swiper = new Swiper('.swiper-container', {
@@ -56,7 +59,26 @@ export class ProductDetailsPage implements OnInit {
       this.whatsappLink = "https://api.whatsapp.com/send?phone=0201090737501&text=I want to use the installment plan for product " + this.product.name;
     }, err => {
       console.log(err);
-    })
+    });
+
+    // var landscape = window.matchMedia("(orientation: landscape)");
+    // landscape.addEventListener("change", (ev: any) => {
+    //   console.log(ev);
+    //   alert('land')
+    //   if( window.innerHeight == screen.height) {
+    //     // browser is fullscreen
+    //     alert(window.innerHeight == screen.height)
+    // }
+    // });
+
+
+    // window.addEventListener('orientationchange', (_: any) => {
+    //   alert('window' + screen.orientation.type + " " + screen.orientation.angle);
+    //   if( window.innerHeight == screen.height) {
+    //     // browser is fullscreen
+    //     alert(window.innerHeight == screen.height)
+    // }
+    //   }, false);
   }
 
   ionViewDidEnter() {
@@ -103,4 +125,22 @@ export class ProductDetailsPage implements OnInit {
  getImgUrl(url: string): string {
   return environment.baseUrl + '/' + url;
  }
+
+
+/* Function to open fullscreen mode */
+ openFullscreen(imgId: string) {
+  // var elem = document.getElementById(imgId);
+
+  // /* If fullscreen mode is available, show the element in fullscreen */
+  // if (
+  //   document.fullscreenEnabled
+  // ) {
+
+  //   /* Show the element in fullscreen */
+  //   if (elem && elem.requestFullscreen) {
+  //     elem.requestFullscreen(); /* Standard syntax */
+  //   }
+  // }
+}
+
 }
