@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Sanitizer, ViewEncapsulation } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductSizesModel } from 'src/app/models/product-sizes.model';
 import { ProductModel } from 'src/app/models/product.model';
@@ -33,7 +34,9 @@ export class ProductDetailsPage implements OnInit {
   selectedSize!: ProductSizesModel;
 
 
-  constructor(public cartService: CartService, private productService: ProductService, private route: ActivatedRoute, private storage: SecureStorage) {
+  constructor(public cartService: CartService, private productService: ProductService, private route: ActivatedRoute,
+    private storage: SecureStorage,
+    private sanitizer: DomSanitizer) {
     this.swiper = new Swiper('.swiper-container', {
       // Optional parameters
       direction: 'horizontal',
@@ -142,5 +145,8 @@ export class ProductDetailsPage implements OnInit {
   //   }
   // }
 }
+
+
+
 
 }

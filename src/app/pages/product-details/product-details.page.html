@@ -59,7 +59,7 @@
       </ion-row>
       <ion-row *ngIf="segmentValue === 'description'">
 
-        <div [innerHTML]="selectedSize ? selectedSize.longDescription : product.longDescription" class="button-container description"></div>
+        <div [innerHTML]="selectedSize ? (selectedSize.longDescription | safeHtml) : (product.longDescription | safeHtml)" class="button-container description"></div>
 
       </ion-row>
       <ion-row  *ngIf="segmentValue === 'maintenance'" >

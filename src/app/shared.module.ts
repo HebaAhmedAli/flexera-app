@@ -4,12 +4,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from './components/header/header.component';
 import { AccountImageModalComponent } from './components/account-image-modal/account-image-modal.component';
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    AccountImageModalComponent
+    AccountImageModalComponent,
+    SafeHtmlPipe
   ],
   imports: [
     CommonModule,
@@ -19,7 +21,8 @@ import { AccountImageModalComponent } from './components/account-image-modal/acc
   ],
   exports: [
     HeaderComponent,
-    AccountImageModalComponent
+    AccountImageModalComponent,
+    SafeHtmlPipe
   ]
 })
 export class SharedModule {}
