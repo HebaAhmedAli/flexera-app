@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" *ngIf="course">
 <ion-grid>
   <ion-row>
     <ion-col>
@@ -15,7 +15,7 @@
   </ion-row>
   <ion-row>
     <ion-col>
-      <div dir="rtl" [innerHTML]="course?.details">
+      <div dir="rtl" [innerHTML]="course.details | safeHtml">
       </div>
     </ion-col>
   </ion-row>

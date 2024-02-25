@@ -8,6 +8,7 @@ import { SignupPageRoutingModule } from './signup-routing.module';
 
 import { SignupPage } from './signup.page';
 import { TermsAndConditionsComponent } from 'src/app/components/terms-and-conditions/terms-and-conditions.component';
+import { SharedModule } from 'src/app/shared.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { TermsAndConditionsComponent } from 'src/app/components/terms-and-condit
     FormsModule,
     IonicModule,
     SignupPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   declarations: [SignupPage, TermsAndConditionsComponent]
 })

@@ -31,7 +31,7 @@ export class CourseDetailsPage implements OnInit, OnDestroy {
     .subscribe(course => {
       this.course = course;
        this.loading = false;
-       this.image = `${environment.baseUrl}/images/${course.image}`
+       this.image = `${environment.baseUrl}/${course.image}`
       }),
     () => {this.loading = false}
   }

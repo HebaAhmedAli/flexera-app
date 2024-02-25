@@ -64,7 +64,7 @@
       </ion-row>
       <ion-row  *ngIf="segmentValue === 'maintenance'" >
 
-        <div [innerHTML]="product.maintenance" class="button-container description">
+        <div [innerHTML]="product.maintenance | safeHtml" class="button-container description">
 
         </div>
       </ion-row>
@@ -95,7 +95,7 @@
               <ion-button color="light" (click)="modal.dismiss()">Close</ion-button>
             </ion-buttons>
           </ion-toolbar>
-          <div style="padding-left: 16px; line-height: 35px;" [innerHTML]="product.installmentPlan">
+          <div style="padding-left: 16px; line-height: 35px;" [innerHTML]="product.installmentPlan | safeHtml">
           </div>
           <div style="padding: 16px;">To use installment plans please contact us on:
           <div class="whats-contact">
