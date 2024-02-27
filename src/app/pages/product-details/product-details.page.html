@@ -3,20 +3,22 @@
 <ion-content *ngIf="product">
   <ion-title class="product-title ion-text-center">{{selectedSize ? selectedSize.name : product.name}}</ion-title>
 
-    <div class="category-slider ion-padding-start">
+    <div class="category-slider">
       <div class="swiper-container" >
         <div class="swiper-wrapper">
 
           <div class="swiper-slide" *ngFor="let galleryItem of product.gallery;let i=index;">
-            <img *ngIf="galleryItem.type === 'img'" [src]="getImgUrl(galleryItem.url)" [id]="'img' + i" (click)="openFullscreen('img' + i)">
-            <video *ngIf="swiper.activeIndex === i && galleryItem.type === 'video'" width="100%" height="auto" controls autoplay >
+            <img *ngIf="galleryItem.type === 'img'" [src]="getImgUrl(galleryItem.url)" [id]="'img' + i" (click)="openImageViewer(galleryItem)">
+            <video *ngIf="galleryItem.type === 'video'" width="100%" height="auto" (click)="openImageViewer(galleryItem)">
               <source [src]="getImgUrl(galleryItem.url)" type="video/mp4">
               Your browser does not support the video tag.
             </video>
-            <video *ngIf="swiper.activeIndex !== i && galleryItem.type === 'video'" width="100%" height="auto" controls >
+            <!-- <iframe *ngIf="galleryItem.type === 'video'" [src]="getImgUrl(galleryItem.url) | safe:'resourceUrl'" ></iframe> -->
+            <!-- <video *ngIf="swiper.activeIndex !== i && galleryItem.type === 'video'"   [muted]="'muted'" width="100%" height="auto" controls >
               <source [src]="getImgUrl(galleryItem.url)" type="video/mp4">
               Your browser does not support the video tag.
-            </video>
+            </video> -->
+            <ion-icon *ngIf="galleryItem.type === 'video'" name="play" class="play-icon"  (click)="openImageViewer(galleryItem)"></ion-icon>
           </div>
         </div>
         <!-- Add Pagination -->
@@ -55,7 +57,7 @@
             </div>
       </ion-row>
       <ion-row class="button-container description" *ngIf="segmentValue === 'warranty'">
-        <div >Product Warranty: {{product.warranty}}</div>
+        <div >Product Warranty: {{product.warranty}} Year</div>
       </ion-row>
       <ion-row *ngIf="segmentValue === 'description'">
 

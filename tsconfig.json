@@ -23,7 +23,8 @@
       "dom"
     ],
     "useDefineForClassFields": false,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -5,24 +5,32 @@ import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from './components/header/header.component';
 import { AccountImageModalComponent } from './components/account-image-modal/account-image-modal.component';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
+import { ProductFullGalleryModalComponent } from './components/product-full-gallery-modal/product-full-gallery-modal.component';
 
+import { PinchZoomModule } from 'ngx-pinch-zoom';
+import { SafePipe } from './pipes/safe.pipe';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     AccountImageModalComponent,
-    SafeHtmlPipe
+    ProductFullGalleryModalComponent,
+    SafeHtmlPipe,
+    SafePipe
   ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-  ],
+    PinchZoomModule
+    ],
   exports: [
     HeaderComponent,
     AccountImageModalComponent,
-    SafeHtmlPipe
+    ProductFullGalleryModalComponent,
+    SafeHtmlPipe,
+    SafePipe
   ]
 })
 export class SharedModule {}

@@ -1,10 +1,10 @@
 .category-slider{
   margin-bottom: -5px;
     .swiper-slide {
-    width: 85vw!important;
-    height: 30vh;
-    margin-right: 10px;
-    margin-left: 20px;
+      width: 86vw !important;
+      height: 30vh;
+      margin-right: 7vw;
+      margin-left: 7vw;
     margin-bottom: 30px;
     margin-top: 20px;
 
@@ -138,5 +138,13 @@ ion-row {
   text-decoration-line: line-through;
   text-decoration-color: red;
   font-weight: 100;
+}
+
+
+.play-icon {
+  color: white;
+    zoom: 4;
+    margin-left: 40%;
+    margin-top: 28%;
 }
 

@@ -1,6 +1,9 @@
 import { Component, OnInit, Sanitizer, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { ProductFullGalleryModalComponent } from 'src/app/components/product-full-gallery-modal/product-full-gallery-modal.component';
+import { GalleryItem } from 'src/app/models/gallery-item.model';
 import { ProductSizesModel } from 'src/app/models/product-sizes.model';
 import { ProductModel } from 'src/app/models/product.model';
 import { CartService } from 'src/app/services/cart.service';
@@ -8,8 +11,8 @@ import { ProductService } from 'src/app/services/product.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
 import { environment } from 'src/environments/environment';
 import Swiper from 'swiper';
+import { ScreenOrientation , OrientationLockType} from '@capacitor/screen-orientation';
 
-declare var window: any;
 
 @Component({
   selector: 'app-product-details',
@@ -18,7 +21,7 @@ declare var window: any;
   encapsulation: ViewEncapsulation.None,
 })
 export class ProductDetailsPage implements OnInit {
-  swiper: Swiper;
+  swiper!: Swiper;
   productId: number = 0;
 
   product!: ProductModel;
@@ -33,25 +36,17 @@ export class ProductDetailsPage implements OnInit {
 
   selectedSize!: ProductSizesModel;
 
+  currentScreenOrientation!:string;
 
   constructor(public cartService: CartService, private productService: ProductService, private route: ActivatedRoute,
     private storage: SecureStorage,
-    private sanitizer: DomSanitizer) {
-    this.swiper = new Swiper('.swiper-container', {
-      // Optional parameters
-      direction: 'horizontal',
-      slidesPerView: 1,
-      loop: false,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-    });
+    private sanitizer: DomSanitizer,
+    private modalController: ModalController) {
+
   }
+
+
+
 
   async ngOnInit() {
     this.mode = await this.storage.get('mode');
@@ -63,6 +58,17 @@ export class ProductDetailsPage implements OnInit {
     }, err => {
       console.log(err);
     });
+
+        // get current
+        // this.currentScreenOrientation = ScreenOrientation.type; // logs the current orientation, example: 'landscape'
+
+        // detect orientation changes
+        // ScreenOrientation.onchange().subscribe(
+        //   () => {
+        //     alert("Orientation Changed"+ScreenOrientation.type);
+        //     this.currentScreenOrientation = ScreenOrientation.type;
+        //   }
+        // );
 
     // var landscape = window.matchMedia("(orientation: landscape)");
     // landscape.addEventListener("change", (ev: any) => {
@@ -102,6 +108,37 @@ export class ProductDetailsPage implements OnInit {
     });
  }
 
+
+ setLandscape(){
+  // set to landscape
+  ScreenOrientation.lock({orientation: 'landscape'}).then(res => {
+    alert(res);
+  },
+  err=> {
+    alert(err);
+  }).catch(err => {
+    alert(err);
+  });
+}
+
+setPortrait(){
+  // set to portrait
+  ScreenOrientation.lock({orientation: 'portrait'}).then(res => {
+    alert(res);
+  },
+  err=> {
+    alert(err);
+  }).catch(err => {
+    alert(err);
+  });
+}
+
+unlockScreen(){
+  // allow user rotate
+  ScreenOrientation.unlock();
+}
+
+
  addProduct() {
 
   if(this.mode === 'guest') {
@@ -132,20 +169,54 @@ export class ProductDetailsPage implements OnInit {
 
 /* Function to open fullscreen mode */
  openFullscreen(imgId: string) {
-  // var elem = document.getElementById(imgId);
+  var elem = document.getElementById(imgId);
 
-  // /* If fullscreen mode is available, show the element in fullscreen */
-  // if (
-  //   document.fullscreenEnabled
-  // ) {
 
-  //   /* Show the element in fullscreen */
-  //   if (elem && elem.requestFullscreen) {
-  //     elem.requestFullscreen(); /* Standard syntax */
-  //   }
-  // }
+  /* If fullscreen mode is available, show the element in fullscreen */
+  if (
+    document.fullscreenEnabled
+  ) {
+
+    /* Show the element in fullscreen */
+    if (elem && elem.requestFullscreen) {
+      elem.requestFullscreen().then(res => {
+        this.setLandscape();
+
+      }); /* Standard syntax */
+      // elem.className = 'rotate';
+    }
+  }
 }
 
+
+
+async openImageViewer(galleryItem: GalleryItem) {
+  //this.setLandscape();
+  // this.unlockScreen();
+  // var myScreenOrientation = window.screen.orientation;
+  // console.log('myScreenOrientation', myScreenOrientation)
+  // // cordova.plugins.screenorientation.setOrientation('portrait-primary');
+  // myScreenOrientation.lock("portrait").then(res => {
+  //   alert('res' +res);
+  // },
+  // err=> {
+  //   alert('err' +err);
+  // }).catch(err => {
+  //   alert('err' +err);
+  // });
+  //myScreenOrientation.unlock();
+
+  const modalEl = await this.modalController.create({
+    component: ProductFullGalleryModalComponent,
+    cssClass: 'gallery-full-modal',
+    componentProps: {
+      url: galleryItem.url,
+      type: galleryItem.type
+    },
+    backdropDismiss: true
+  });
+  return await modalEl.present();
+}
 
 
 

@@ -1,0 +1,13 @@
+<!-- <ion-icon name="close-outline" (click)="modal.dismiss()"></ion-icon> -->
+<!-- <img  [src]="getImgUrl(url)" class="rotate"/> -->
+
+
+<pinch-zoom *ngIf="type === 'img'" style="background-color: black;
+width: 100%;
+height: 100%;" >
+  <img   [src]="getImgUrl(url)" />
+</pinch-zoom>
+<video *ngIf="type === 'video'" width="100%" height="auto" controls autoplay disablepictureinpicture  controlslist="nodownload noplaybackrate nofullscreen" class="rotate">
+  <source [src]="getImgUrl(url)" type="video/mp4">
+  Your browser does not support the video tag.
+</video>

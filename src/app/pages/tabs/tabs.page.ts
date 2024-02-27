@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonTabs, Platform } from '@ionic/angular';
+import { IonTabs, ModalController, Platform } from '@ionic/angular';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
 
 @Component({
@@ -13,8 +13,13 @@ export class TabsPage {
   @ViewChild('ionTabs', { static: true })
   ionTabs!: IonTabs;
 
-  constructor(private location: Location, private platform: Platform, private storage: SecureStorage, private router: Router) {
+  constructor(private location: Location, private platform: Platform, private storage: SecureStorage, private router: Router, private modalCtrl: ModalController) {
     this.platform.backButton.subscribeWithPriority(9999, async () => {
+      const modal = await this.modalCtrl.getTop();
+      if (modal) {
+          modal.dismiss();
+          return;
+      }
       const mode = await this.storage.get('mode');
       console.log(this.router.routerState.snapshot.url);
       if (this.router.routerState.snapshot.url === '/notifications') {

@@ -1,0 +1,10 @@
+.rotate {
+  transform: rotate(90deg) translateY(-100%);
+  transform-origin:top left;
+  // width: 78vh;
+  // height: 92vw;
+  width: 100vh;
+  height: 100vw;
+  max-width: 100vh !important;
+  background: black;
+}
