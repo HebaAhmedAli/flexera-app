@@ -11,7 +11,6 @@ import { ProductService } from 'src/app/services/product.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
 import { environment } from 'src/environments/environment';
 import Swiper from 'swiper';
-import { ScreenOrientation , OrientationLockType} from '@capacitor/screen-orientation';
 
 
 @Component({
@@ -38,6 +37,7 @@ export class ProductDetailsPage implements OnInit {
 
   currentScreenOrientation!:string;
 
+  videoFixed = false;
   constructor(public cartService: CartService, private productService: ProductService, private route: ActivatedRoute,
     private storage: SecureStorage,
     private sanitizer: DomSanitizer,
@@ -54,6 +54,7 @@ export class ProductDetailsPage implements OnInit {
     this.productService.getProductById(this.productId).subscribe(data => {
       this.product = data;
 
+      this.videoFix();
       this.whatsappLink = "https://api.whatsapp.com/send?phone=0201090737501&text=I want to use the installment plan for product " + this.product.name;
     }, err => {
       console.log(err);
@@ -106,37 +107,67 @@ export class ProductDetailsPage implements OnInit {
         prevEl: '.swiper-button-prev',
       },
     });
+    this.videoFix();
  }
 
 
- setLandscape(){
-  // set to landscape
-  ScreenOrientation.lock({orientation: 'landscape'}).then(res => {
-    alert(res);
-  },
-  err=> {
-    alert(err);
-  }).catch(err => {
-    alert(err);
-  });
-}
+ videoFix() {
+  if(this.videoFixed) return;
+  this.product?.gallery.forEach(gallery => {
+    if(gallery.type === 'video') {
+      var video = (document.getElementById(('video' + String(gallery.id))) as HTMLVideoElement);
+      if(!video) {
+        setTimeout(() => {
+          this.videoFix();
+        }, 100);
+        return;
+      }
+      this.videoFixed = true;
+      video.muted = true;
+      video.play().then(() => {
+        console.log('inside play');
+        video.pause();
+        video.muted = false;
+      },
+      err => {
+        console.log('err ', err);
+      }).catch(err => {
+        console.log('err ', err);
+      });
 
-setPortrait(){
-  // set to portrait
-  ScreenOrientation.lock({orientation: 'portrait'}).then(res => {
-    alert(res);
-  },
-  err=> {
-    alert(err);
-  }).catch(err => {
-    alert(err);
-  });
-}
+    }
+  })
+ }
 
-unlockScreen(){
-  // allow user rotate
-  ScreenOrientation.unlock();
-}
+
+//  setLandscape(){
+//   // set to landscape
+//   ScreenOrientation.lock({orientation: 'landscape'}).then(res => {
+//     alert(res);
+//   },
+//   err=> {
+//     alert(err);
+//   }).catch(err => {
+//     alert(err);
+//   });
+// }
+
+// setPortrait(){
+//   // set to portrait
+//   ScreenOrientation.lock({orientation: 'portrait'}).then(res => {
+//     alert(res);
+//   },
+//   err=> {
+//     alert(err);
+//   }).catch(err => {
+//     alert(err);
+//   });
+// }
+
+// unlockScreen(){
+//   // allow user rotate
+//   ScreenOrientation.unlock();
+// }
 
 
  addProduct() {
@@ -168,25 +199,25 @@ unlockScreen(){
 
 
 /* Function to open fullscreen mode */
- openFullscreen(imgId: string) {
-  var elem = document.getElementById(imgId);
+//  openFullscreen(imgId: string) {
+//   var elem = document.getElementById(imgId);
 
 
-  /* If fullscreen mode is available, show the element in fullscreen */
-  if (
-    document.fullscreenEnabled
-  ) {
+//   /* If fullscreen mode is available, show the element in fullscreen */
+//   if (
+//     document.fullscreenEnabled
+//   ) {
 
-    /* Show the element in fullscreen */
-    if (elem && elem.requestFullscreen) {
-      elem.requestFullscreen().then(res => {
-        this.setLandscape();
+//     /* Show the element in fullscreen */
+//     if (elem && elem.requestFullscreen) {
+//       elem.requestFullscreen().then(res => {
+//         this.setLandscape();
 
-      }); /* Standard syntax */
-      // elem.className = 'rotate';
-    }
-  }
-}
+//       }); /* Standard syntax */
+//       // elem.className = 'rotate';
+//     }
+//   }
+// }
 
 
 

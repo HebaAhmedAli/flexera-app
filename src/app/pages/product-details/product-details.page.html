@@ -1,15 +1,15 @@
 <app-header></app-header>
 
-<ion-content *ngIf="product">
-  <ion-title class="product-title ion-text-center">{{selectedSize ? selectedSize.name : product.name}}</ion-title>
+<ion-content >
+  <ion-title *ngIf="product" class="product-title ion-text-center">{{selectedSize ? selectedSize.name : product.name}}</ion-title>
 
     <div class="category-slider">
       <div class="swiper-container" >
         <div class="swiper-wrapper">
 
-          <div class="swiper-slide" *ngFor="let galleryItem of product.gallery;let i=index;">
+          <div class="swiper-slide" *ngFor="let galleryItem of product?.gallery;let i=index;">
             <img *ngIf="galleryItem.type === 'img'" [src]="getImgUrl(galleryItem.url)" [id]="'img' + i" (click)="openImageViewer(galleryItem)">
-            <video *ngIf="galleryItem.type === 'video'" width="100%" height="auto" (click)="openImageViewer(galleryItem)">
+            <video [id]="'video' + galleryItem.id" *ngIf="galleryItem.type === 'video'" width="100%" height="auto" (click)="openImageViewer(galleryItem)">
               <source [src]="getImgUrl(galleryItem.url)" type="video/mp4">
               Your browser does not support the video tag.
             </video>
@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <ion-segment value="current" color="dark" mode="md" [(ngModel)]="segmentValue">
+    <ion-segment *ngIf="product" value="current" color="dark" mode="md" [(ngModel)]="segmentValue">
       <ion-segment-button value="description" *ngIf="product.sizes.length === 0">
         Description
       </ion-segment-button>
@@ -39,7 +39,7 @@
       </ion-segment-button>
     </ion-segment>
 
-    <ion-grid>
+    <ion-grid *ngIf="product">
       <ion-list style="width: 100%;" *ngIf="product.sizes.length > 0">
         <ion-item style="--border-color: black;     margin-right: 3%;">
           <ion-select label="Select Product Size*" label-placement="floating" interface="popover" mode="md"  [(ngModel)]="selectedSize">
