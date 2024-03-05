@@ -115,8 +115,11 @@
 
 <input #myUploadInput type="file" id="img" name="img" accept="image/*" (change)="onFileChanged($event)" />
 
-<img *ngIf="allOrders.length === 0 && mode !== 'guest'" src="assets/no-order.jpg" style="width: 100%; margin-top: 20%;">
-
+<img *ngIf="allOrders.length === 0 && mode !== 'guest'" src="assets/no-order.svg" style="width: 100%; margin-top: 20%;">
+<div style="text-align: center;
+font-weight: bold;
+font-size: 20px;
+">You Have No Orders</div>
 <div *ngIf="mode === 'guest'" style="padding: 10px;">
 <ion-grid>
   <ion-row class="ion-padding">
