@@ -137,4 +137,27 @@ export class OrdersPage implements OnInit {
       console.log(err);
     })
   }
+
+  calculateTotalPriceWithoutDiscount(order: OrderModel): number {
+    var totalPrice = 0;
+    order.orderItems.forEach(orderItem => {
+      if ((orderItem.selectedSizesItems ? orderItem.selectedSizesItems  : [] ).length === 0) {
+        totalPrice +=  orderItem.price * orderItem.quantity;
+      } else {
+        orderItem.selectedSizesItems.forEach(sizeItem => {
+          totalPrice += sizeItem.price * sizeItem.quantity;
+        })
+      }
+    });
+    if(order.area && order.paymentMethod !== 'pickup') totalPrice += order.area.price;
+
+    return totalPrice;
+  }
+
+
+  getDiscount(order: OrderModel) {
+    return this.calculateTotalPriceWithoutDiscount(order) - ((order.paymentMethod === 'etisalat-cash' || order.paymentMethod === 'vodafone-cash') ? order.totalPrice * 100 / 101 : order.totalPrice);
+  }
+
+
 }

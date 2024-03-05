@@ -37,6 +37,8 @@ export class ProductDetailsPage implements OnInit {
 
   currentScreenOrientation!:string;
 
+  isModalOpen = false;
+
   videoFixed = false;
   constructor(public cartService: CartService, private productService: ProductService, private route: ActivatedRoute,
     private storage: SecureStorage,

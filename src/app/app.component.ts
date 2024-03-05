@@ -79,6 +79,9 @@ export class AppComponent {
           this.firebase.subscribe('courses').then(data => {
             console.log('inside topic', data);
           });
+          this.firebase.subscribe('general').then(data => {
+            console.log('inside topic', data);
+          });
       }
 
       this.navCtrl.navigateForward('/', { animated: false });

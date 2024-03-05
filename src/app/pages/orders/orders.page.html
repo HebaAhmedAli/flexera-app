@@ -57,6 +57,27 @@
                 </ion-row>
               </div>
 
+              <ion-row class="padding-top-bottom" *ngIf="order?.area?.price && order?.paymentMethod !== 'pickup'">
+                <ion-col size="5">
+                  <h2 class="name">Delivery Fees</h2>
+                </ion-col>
+                <ion-col>
+                </ion-col>
+                <ion-col class="price-col">
+                  {{order.area.price}} EGP
+                </ion-col>
+            </ion-row>
+            <ion-row class="padding-top-bottom" style="color: limegreen;" *ngIf="getDiscount(order) !== 0">
+              <ion-col size="5">
+                <h2 class="name">Discount</h2>
+              </ion-col>
+              <ion-col>
+              </ion-col>
+              <ion-col class="price-col">
+                {{getDiscount(order)}} EGP
+              </ion-col>
+          </ion-row>
+
               <ion-row>
                 <ion-col>
                   <div class="line"></div>

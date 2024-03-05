@@ -45,7 +45,7 @@
       </ion-row>
     </div>
 
-      <ion-row class="padding-top-bottom" *ngIf="area?.price">
+      <ion-row class="padding-top-bottom" *ngIf="area?.price && order?.paymentMethod !== 'pickup'">
           <ion-col size="5">
             <h2 class="name">Delivery Fees</h2>
           </ion-col>
@@ -55,6 +55,16 @@
             {{area.price}} EGP
           </ion-col>
       </ion-row>
+      <ion-row class="padding-top-bottom" style="color: limegreen;" *ngIf="getDiscount() !== 0">
+        <ion-col size="5">
+          <h2 class="name">Discount</h2>
+        </ion-col>
+        <ion-col>
+        </ion-col>
+        <ion-col class="price-col">
+          {{getDiscount()}} EGP
+        </ion-col>
+    </ion-row>
       <ion-row >
         <ion-col>
           <div class="line"></div>
@@ -131,6 +141,37 @@
       </ion-grid>
   </ion-card-content>
   </ion-card>
+
+
+<ion-card class="ion-padding">
+  <ion-card-content class="card-sub-title">
+  <ion-grid class="ion-no-padding ion-no-margin">
+
+
+    <ion-row class="padding-top-bottom">
+      <ion-col size="10">
+        <ion-item>
+          <ion-input [(ngModel)]="promoCode" placeholder="Enter PromoCode"></ion-input>
+        </ion-item>
+
+      </ion-col>
+      <!-- <ion-col size="4" class="ion-text-center ion-padding">
+        <div class="button-container">
+          <ion-button expand="block" class="main-button" (click)="calculateOrderTotalPrice()">Apply</ion-button>
+        </div>
+      </ion-col> -->
+        <ion-col size="2">
+        <ion-icon name="checkmark-done-circle-outline" style="zoom: 3;padding-top: 8px;" (click)="calculateOrderTotalPrice(false, true)"></ion-icon>
+      </ion-col>
+      </ion-row>
+
+
+      </ion-grid>
+  </ion-card-content>
+  </ion-card>
+
+
+
 <ion-grid>
   <ion-row>
     <ion-col class="sub-title">

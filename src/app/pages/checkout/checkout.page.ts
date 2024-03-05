@@ -38,6 +38,9 @@ export class CheckoutPage implements OnInit {
 
   products: ProductModel[] = [];
 
+  promoCode!: string;
+
+
   constructor(private cartService: CartService, private storage: SecureStorage, private modalController: ModalController, private orderService: OrderService
     , private router: Router, private cityService: CityService, private productService: ProductService) { }
 
@@ -62,22 +65,38 @@ export class CheckoutPage implements OnInit {
     })
   }
 
-  calculateOrderTotalPrice(openModal: boolean = false) {
+  calculateOrderTotalPrice(openModal: boolean = false, applyPromoRequest: boolean = false) {
     console.log('calculateOrderTotalPrice')
     this.order.paymentMethod = this.paymentMethod;
     this.order.areaId = this.area?.id;
+    this.order.applyPromoRequest = applyPromoRequest;
+    console.log(this.order.applyPromoRequest)
+    this.order.promoCode = this.promoCode;
     this.orderService.getOrderTotalPrice(this.order).subscribe(async (response: any) => {
       if(response.status === 200) {
         this.totalPrice = response.body.totalPrice;
         if(openModal && (this.paymentMethod === 'etisalat-cash' || this.paymentMethod === 'vodafone-cash' || this.paymentMethod === 'instapay')) {
           this.openPaymentInstructionsModal(this.paymentMethod);
         }
+        if(applyPromoRequest) {
+          this.message = "Promo code applied successfully!";
+           this.isAlertOpen = true;
+        }
+
       } else {
+        if(applyPromoRequest) {
+          this.promoCode = "";
+          this.calculateOrderTotalPrice();
+        }
         this.message = response.error.message;
         this.isAlertOpen = true;
       }
     }, error => {
       console.log(error)
+      if(applyPromoRequest) {
+        this.promoCode = "";
+        this.calculateOrderTotalPrice();
+      }
       this.message = error.error.message;
       this.isAlertOpen = true;
     }
@@ -99,6 +118,7 @@ export class CheckoutPage implements OnInit {
     this.order.areaId = this.area.id;
     this.order.locationLat = this.location.lat;
     this.order.locationLng = this.location.lng;
+    this.order.promoCode = this.promoCode;
     this.orderService.createOrder(this.order).subscribe(async (response: any) => {
       console.log(response);
       if(response.status === 200) {
@@ -162,10 +182,34 @@ export class CheckoutPage implements OnInit {
     return (product ? product.priceAfterDiscount : 0 );
   }
 
+
   getProductSizeUpdatedPrice(productId: number, productSizeId: number): number {
     const product = this.products.find(product => product.id === productId);
     const productSize = product?.sizes.find(size => size.id === productSizeId);
     return (productSize ? productSize.priceAfterDiscount : 0 );
   }
+
+
+  calculateTotalPriceWithoutDiscount(): number {
+    var totalPrice = 0;
+    this.order.orderItems.forEach(orderItem => {
+      if ((orderItem.selectedSizesItems ? orderItem.selectedSizesItems  : [] ).length === 0) {
+        totalPrice +=  this.getProductUpdatedPrice(orderItem.product.id) * orderItem.quantity;
+      } else {
+        orderItem.selectedSizesItems.forEach(sizeItem => {
+          totalPrice +=  this.getProductSizeUpdatedPrice(orderItem.product.id, sizeItem.productSize.id) * sizeItem.quantity;
+        })
+      }
+    });
+    if(this.area && this.order.paymentMethod !== 'pickup') totalPrice += this.area.price;
+
+    return totalPrice;
+  }
+
+
+  getDiscount() {
+    return this.calculateTotalPriceWithoutDiscount() - ((this.paymentMethod === 'etisalat-cash' || this.paymentMethod === 'vodafone-cash') ? this.totalPrice * 100 / 101 : this.totalPrice);
+  }
+
 
 }

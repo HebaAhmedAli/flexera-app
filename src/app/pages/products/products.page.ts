@@ -30,7 +30,7 @@ export class ProductsPage implements OnInit {
       console.log( this.allProducts)
       data = data.filter(product => product.enable);
 
-      this.allProducts = data.sort((p1, p2) => p1.price - p2.price);
+      this.allProducts = data.sort((p1, p2) => p1.name.localeCompare(p2.name));
       console.log( this.allProducts)
 
       this.devicesProducts = this.allProducts .filter(product => product.type === 'device');

@@ -29,7 +29,8 @@ export class OrderService {
     orderIgnoredJson.areaId = order.areaId;
     orderIgnoredJson.locationLat = order.locationLat;
     orderIgnoredJson.locationLng = order.locationLng;
-
+    orderIgnoredJson.promoCode = order.promoCode;
+    orderIgnoredJson.applyPromoRequest = true;
     orderIgnoredJson.orderItems = new Array<OrderItemModel>();
     order.orderItems.forEach(item => {
       const orderItem = new OrderItemModel();
@@ -46,6 +47,8 @@ export class OrderService {
     const orderIgnoredJson = new OrderModel();
     orderIgnoredJson.paymentMethod = order.paymentMethod;
     orderIgnoredJson.areaId = order.areaId;
+    orderIgnoredJson.promoCode = order.promoCode;
+    orderIgnoredJson.applyPromoRequest = order.applyPromoRequest;
     orderIgnoredJson.orderItems = new Array<OrderItemModel>();
     order.orderItems.forEach(item => {
         const orderItem = new OrderItemModel();

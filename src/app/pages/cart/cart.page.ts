@@ -39,6 +39,7 @@ export class CartPage implements OnInit {
 
   removeProductFromCart(product: ProductModel, productSizeId: number | undefined) {
     this.cartService.removeProductFromCart(product, productSizeId);
+    this.calculateOrderTotalPrice();
   }
 
 

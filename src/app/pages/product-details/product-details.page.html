@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <ion-segment *ngIf="product" value="current" color="dark" mode="md" [(ngModel)]="segmentValue">
+    <ion-segment *ngIf="product" value="current" color="dark" mode="md" [(ngModel)]="segmentValue" style="z-index: 90000;">
       <ion-segment-button value="description" *ngIf="product.sizes.length === 0">
         Description
       </ion-segment-button>
@@ -82,19 +82,19 @@
          [disabled]=" (product.sizes.length > 0 && !selectedSize) || (product.sizes.length > 0 && selectedSize && selectedSize.available.toString() === 'false') || (product.sizes.length === 0 && product.available.toString() === 'false')"
           (click)="addProduct()" *ngIf="productCounter === 0">{{ (product.sizes.length > 0 && selectedSize && selectedSize.available.toString() === 'false') || (product.sizes.length === 0 && product.available.toString() === 'false') ? 'Out of Stock' :
             (product.sizes.length > 0 && !selectedSize ? 'Select product size' : 'Add to cart')}} </ion-button>
-        <ion-button expand="block" class="main-button" id="open-modal">View Installment Plan</ion-button>
+        <ion-button expand="block" class="main-button" id="open-modal" *ngIf="product.installmentPlan" (click)="isModalOpen = true">View Installment Plan</ion-button>
         </div>
       </ion-row>
 
     </ion-grid>
 
-    <ion-modal id="plan-modal" #modal trigger="open-modal">
+    <ion-modal id="plan-modal" #modal [isOpen]="isModalOpen" [backdropDismiss]="false">
       <ng-template>
         <ion-content>
           <ion-toolbar>
             <ion-title>Installment Plan</ion-title>
             <ion-buttons slot="end">
-              <ion-button color="light" (click)="modal.dismiss()">Close</ion-button>
+              <ion-button color="light" (click)="isModalOpen = false">Close</ion-button>
             </ion-buttons>
           </ion-toolbar>
           <div style="padding-left: 16px; line-height: 35px;" [innerHTML]="product.installmentPlan | safeHtml">

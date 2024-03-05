@@ -1,4 +1,5 @@
 import { jsonIgnore } from "json-ignore";
+import { AreaModel } from "./area.model";
 import { OrderItemModel } from "./order-item.model";
 
 export class OrderModel {
@@ -17,4 +18,7 @@ export class OrderModel {
   date!: Date;
   orderItems!: OrderItemModel[];
   expanded: boolean = false;
+  promoCode!: string;
+  applyPromoRequest: boolean = false;
+  area!: AreaModel;
 }
