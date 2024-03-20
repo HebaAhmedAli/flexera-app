@@ -66,6 +66,11 @@ export class CheckoutPage implements OnInit {
   }
 
   calculateOrderTotalPrice(openModal: boolean = false, applyPromoRequest: boolean = false) {
+    if(applyPromoRequest && !this.promoCode) {
+      this.message = "Please enter a promocode first!";
+      this.isAlertOpen = true;
+      return;
+    }
     console.log('calculateOrderTotalPrice')
     this.order.paymentMethod = this.paymentMethod;
     this.order.areaId = this.area?.id;
@@ -211,5 +216,8 @@ export class CheckoutPage implements OnInit {
     return this.calculateTotalPriceWithoutDiscount() - ((this.paymentMethod === 'etisalat-cash' || this.paymentMethod === 'vodafone-cash') ? this.totalPrice * 100 / 101 : this.totalPrice);
   }
 
+  notNan(discount: number): boolean {
+    return !Number.isNaN(discount);
+  }
 
 }

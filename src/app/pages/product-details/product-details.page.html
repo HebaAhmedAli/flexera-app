@@ -27,8 +27,8 @@
       </div>
     </div>
 
-    <ion-segment *ngIf="product" value="current" color="dark" mode="md" [(ngModel)]="segmentValue" style="z-index: 90000;">
-      <ion-segment-button value="description" *ngIf="product.sizes.length === 0">
+    <ion-segment *ngIf="product" value="current" color="dark" mode="md" [(ngModel)]="segmentValue" style="z-index: 90000;" (ionChange)="segmentClicked()">
+      <ion-segment-button value="description" *ngIf="product.sizes.length === 0" >
         Description
       </ion-segment-button>
       <ion-segment-button value="warranty" *ngIf="product.warranty > 0">
