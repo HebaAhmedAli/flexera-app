@@ -58,7 +58,8 @@ const routes: Routes = [
   {
     path: 'forget-password',
     loadChildren: () => import('./pages/forget-password/forget-password.module').then( m => m.ForgetPasswordPageModule)
-  },  {
+  },
+  {
     path: 'select-location',
     loadChildren: () => import('./pages/select-location/select-location.module').then( m => m.SelectLocationPageModule)
   },
@@ -73,6 +74,10 @@ const routes: Routes = [
   {
     path: 'add-device',
     loadChildren: () => import('./pages/add-device/add-device.module').then( m => m.AddDevicePageModule)
+  },
+  {
+    path: 'submit-complaint',
+    loadChildren: () => import('./pages/submit-complaint/submit-complaint.module').then( m => m.SubmitComplaintPageModule)
   }
 
 

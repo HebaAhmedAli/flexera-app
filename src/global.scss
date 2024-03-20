@@ -307,3 +307,26 @@ ion-select:not(.select-wrapper) {
 // element.style {
 //   bottom: calc(20px + var(--ion-safe-area-bottom, 0px));
 // }
+
+
+.form-container {
+  margin-top: 20px;
+}
+
+.form-container ion-item {
+  --padding-start: 0;
+  --border-color: #DADADA;
+}
+
+.form-container ion-item ion-label {
+  color: #A6A6A6;
+}
+
+.form-container ion-item ion-icon {
+  margin-top: auto;
+  color: #c6cbd4;
+}
+
+.form-container ion-button {
+  margin-top: 48px;
+}
