@@ -40,6 +40,9 @@ export class ProductDetailsPage implements OnInit {
   isModalOpen = false;
 
   videoFixed = false;
+
+  justClickSegment = false;
+
   constructor(public cartService: CartService, private productService: ProductService, private route: ActivatedRoute,
     private storage: SecureStorage,
     private sanitizer: DomSanitizer,
@@ -238,6 +241,7 @@ async openImageViewer(galleryItem: GalleryItem) {
   //   alert('err' +err);
   // });
   //myScreenOrientation.unlock();
+  if(this.justClickSegment) return;
 
   const modalEl = await this.modalController.create({
     component: ProductFullGalleryModalComponent,
@@ -251,6 +255,11 @@ async openImageViewer(galleryItem: GalleryItem) {
   return await modalEl.present();
 }
 
+
+segmentClicked() {
+  this.justClickSegment = true;
+  setTimeout(() => this.justClickSegment = false, 100);
+}
 
 
 }

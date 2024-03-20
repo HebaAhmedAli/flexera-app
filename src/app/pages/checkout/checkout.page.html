@@ -55,7 +55,7 @@
             {{area.price}} EGP
           </ion-col>
       </ion-row>
-      <ion-row class="padding-top-bottom" style="color: limegreen;" *ngIf="getDiscount() !== 0">
+      <ion-row class="padding-top-bottom" style="color: limegreen;" *ngIf="notNan(getDiscount()) && getDiscount() !== 0">
         <ion-col size="5">
           <h2 class="name">Discount</h2>
         </ion-col>
@@ -161,7 +161,7 @@
         </div>
       </ion-col> -->
         <ion-col size="2">
-        <ion-icon name="checkmark-done-circle-outline" style="zoom: 3;padding-top: 8px;" (click)="calculateOrderTotalPrice(false, true)"></ion-icon>
+        <ion-icon  name="checkmark-done-circle-outline" style="zoom: 3;padding-top: 8px;" (click)="calculateOrderTotalPrice(false, true)"></ion-icon>
       </ion-col>
       </ion-row>
 
@@ -221,7 +221,7 @@
           <ion-radio value="cash" labelPlacement="end">Cash on Delivery</ion-radio>
         </ion-row>
         <ion-row class="ion-padding padding-top-bottom">
-          <ion-radio value="pickup" labelPlacement="end">Pickup from company</ion-radio>
+          <ion-radio value="pickup" labelPlacement="end">Pickup from TDS</ion-radio>
         </ion-row>
       </ion-radio-group>
   </ion-row>
