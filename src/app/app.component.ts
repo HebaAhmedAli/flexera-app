@@ -9,6 +9,8 @@ import { CartService } from './services/cart.service';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { NotificationService } from './services/notification.service';
 import { GlobalService } from './services/global.service';
+import { SystemParametersService } from './services/system-parameters.service';
+import { LookupItemsService } from './services/lookup-item.service';
 
 register();
 
@@ -20,7 +22,9 @@ register();
 export class AppComponent {
 
   constructor(private platform: Platform, private cartService: CartService, private navCtrl: NavController, private splash: SplashScreen, private firebase: FirebaseX
-    , private notificationService: NotificationService, private router: Router, private globalService: GlobalService) {
+    , private notificationService: NotificationService, private router: Router, private globalService: GlobalService,
+     private systemParametersService: SystemParametersService,
+    private lookupItemsService: LookupItemsService) {
 
       // this.router.events.subscribe(event => {
       //   if (event instanceof NavigationEnd && event.url !== '/') {
@@ -37,6 +41,8 @@ export class AppComponent {
       this.splash.hide();
       this.cartService.initializeCart();
       this.notificationService.getNotifications();
+      this.systemParametersService.getSystemParameters();
+      this.lookupItemsService.getlookupItems();
       if(this.platform.is('cordova')) {
         this.firebase.hasPermission().then(hasPermission =>{
             if(!hasPermission) {
@@ -89,6 +95,7 @@ export class AppComponent {
 
     this.platform.resume.subscribe(async () => {
       this.notificationService.getNotifications();
+
     });
   }
 }

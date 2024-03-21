@@ -27,4 +27,6 @@ export class SignUpRequestModel {
   university!: string;
 
   role!: string;
+
+  referral!: string;
 }

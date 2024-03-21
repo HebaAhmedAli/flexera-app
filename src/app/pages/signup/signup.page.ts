@@ -3,9 +3,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { TermsAndConditionsComponent } from 'src/app/components/terms-and-conditions/terms-and-conditions.component';
+import { LookupItem } from 'src/app/models/lookup-item.model';
 import { SignUpRequestModel } from 'src/app/models/signup-request.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { LookupItemsService } from 'src/app/services/lookup-item.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
+import { SystemParametersService } from 'src/app/services/system-parameters.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -21,6 +24,10 @@ export class SignupPage implements OnInit {
   message: string = '';
   status: number = 0;
 
+  referralList: LookupItem[] = [];
+
+  showReferralList!: string;
+
  signupForm = new FormGroup({
   title: new FormControl('', Validators.required),
   name: new FormControl('', Validators.required),
@@ -32,17 +39,26 @@ export class SignupPage implements OnInit {
   speciality: new FormControl(''),
   uniStaff: new FormControl(''),
   university: new FormControl(''),
-  termsAndConditions: new FormControl(false, Validators.requiredTrue)
+  termsAndConditions: new FormControl(false, Validators.requiredTrue),
+  referral: new FormControl(''),
+
 });
 
   constructor(
     private router: Router,
     private storage: SecureStorage,
     private authService: AuthService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private systemParametersService: SystemParametersService,
+    private lookupItemsService: LookupItemsService
   ) { }
 
   ngOnInit() {
+    this.showReferralList = this.systemParametersService.getValue('SHOW_REGISTER_REFERRAL') as string;
+    this.referralList = this.lookupItemsService.getLookupByGroup('REGISTER_REFERRAL') as LookupItem[];
+    if(this.showReferralList === 'Y') {
+      this.referral?.addValidators([Validators.required]);
+    }
   }
 
   togglePasswordVisibility() {
@@ -72,6 +88,7 @@ export class SignupPage implements OnInit {
       signUpRequest.uniStaff = this.uniStaff?.value as string;
       signUpRequest.university = this.university?.value as string;
       signUpRequest.role = environment.role;
+      signUpRequest.referral = this.referral?.value as string;
       this.authService.signUp(signUpRequest).subscribe(async (response: any) => {
         if(response.status === 200) {
           this.message = 'You are registered successfully. Navigate to login';
@@ -144,5 +161,9 @@ export class SignupPage implements OnInit {
 
   get university() {
     return this.signupForm.get('university');
+  }
+
+  get referral() {
+    return this.signupForm.get('referral');
   }
 }

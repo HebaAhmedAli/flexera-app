@@ -85,6 +85,20 @@
 
       <br>
 
+      <ion-list *ngIf="showReferralList === 'Y'">
+        <ion-item [ngClass]="{'invalid': referral?.invalid && (referral?.dirty || referral?.touched)}">
+          <ion-select label="Referral *" label-placement="floating" interface="popover" mode="md" formControlName="referral">
+            <div *ngFor="let referral of referralList;" >
+              <ion-select-option [value]="referral.name">{{referral.name}}</ion-select-option>
+            </div>
+
+          </ion-select>
+
+        </ion-item>
+      </ion-list>
+
+      <br>
+
       <ion-item lines="none" (click)="showAdditional = !showAdditional">
         <h3>Optional Info</h3>
         <ion-icon  name="{{ showAdditional ? 'caret-down-outline' : 'caret-forward-outline' }}" slot="end" ></ion-icon>
