@@ -1,0 +1,47 @@
+<app-header></app-header>
+
+
+<ion-content class="ion-padding">
+  <div class="ion-padding container" *ngIf="complaintForm">
+    <h1>Submit a complaint</h1>
+    <form [formGroup]="complaintForm" (ngSubmit)="submit()">
+
+    <div class="form-container">
+      <ion-item>
+        <ion-label position="floating">Name</ion-label>
+        <ion-input formControlName="name"></ion-input>
+      </ion-item>
+
+     
+      <ion-item>
+        <ion-label position="floating">Phone</ion-label>
+        <ion-input  formControlName="phone"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Address</ion-label>
+        <ion-input formControlName="address"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Complaint Subject</ion-label>
+        <ion-input formControlName="subject"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-textarea label="Complaint Description" labelPlacement="floating" formControlName="description" [autoGrow]="true"></ion-textarea>
+      </ion-item>
+
+      <ion-button expand="block" class="main-button" type="submit" [disabled]="complaintForm.invalid || complaintForm.pristine">Submit</ion-button>
+
+</div>
+</form>
+</div>
+</ion-content>
+
+<ion-alert
+[isOpen]="isAlertOpen"
+[message]="message"
+[buttons]="['OK']"
+(didDismiss)="alertDismiss()"
+></ion-alert>
