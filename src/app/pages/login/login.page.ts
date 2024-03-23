@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FingerprintAIO } from '@awesome-cordova-plugins/fingerprint-aio/ngx';
 import { NavController } from '@ionic/angular';
 import { LoginRequestModel } from 'src/app/models/login-request.model';
 import { LoginResponseModel } from 'src/app/models/login-response.model';
