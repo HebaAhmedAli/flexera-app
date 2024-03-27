@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Terms and Conditions
+     {{type === 'terms' ? 'Terms and Conditions' : 'Privacy Policy'}}
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()">

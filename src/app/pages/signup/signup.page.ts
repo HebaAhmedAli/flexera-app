@@ -65,10 +65,13 @@ export class SignupPage implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
-  async openTermsAndConditions() {
+  async openTermsAndConditions(type: string) {
     const modal = await this.modalController.create({
       component: TermsAndConditionsComponent,
-      cssClass: 'image-modal'
+      cssClass: 'image-modal',
+      componentProps: {
+        type: type
+      }
     });
     return await modal.present();
   }

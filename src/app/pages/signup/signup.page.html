@@ -150,7 +150,8 @@
 
         <ion-item>
           <ion-checkbox formControlName="termsAndConditions"></ion-checkbox>
-          <ion-label>Accept <a (click)="openTermsAndConditions()">Terms and Conditions</a></ion-label>
+          <ion-label style="white-space: normal;">Accept <a (click)="openTermsAndConditions('terms')">Terms and Conditions</a> and <a (click)="openTermsAndConditions('privacy')">Privacy Policy</a></ion-label>
+
         </ion-item>
 
 

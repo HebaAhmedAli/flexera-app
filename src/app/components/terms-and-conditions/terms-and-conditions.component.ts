@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -9,11 +9,13 @@ import { ModalController } from '@ionic/angular';
 })
 export class TermsAndConditionsComponent  implements OnInit {
 
+  @Input() type!:string;
+
   constructor(private modalController: ModalController, private http: HttpClient) { }
 
   termsAndConditions='';
   ngOnInit() {
-    this.http.get('assets/html/terms-and-conditions.html', {responseType: 'text'}).subscribe(data => {
+    this.http.get(this.type === 'terms' ? 'assets/html/terms-and-conditions.html' : 'assets/html/privacy-policy.html', {responseType: 'text'}).subscribe(data => {
       this.termsAndConditions = data;
      });
   }
