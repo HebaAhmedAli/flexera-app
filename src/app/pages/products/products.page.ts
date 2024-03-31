@@ -13,7 +13,7 @@ export class ProductsPage implements OnInit {
 
 
   segmentValue: string = 'devices';
-  selectedSortBy: string = 'lowest-price';
+  selectedSortBy: string = 'name';
   categoryImg: string = '';
   categoryId: number = 0;
   allProducts : Array<ProductModel> = [];

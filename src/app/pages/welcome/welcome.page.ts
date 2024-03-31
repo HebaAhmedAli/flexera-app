@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { ProductFullGalleryModalComponent } from 'src/app/components/product-full-gallery-modal/product-full-gallery-modal.component';
 import { NotificationService } from 'src/app/services/notification.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
+import { SystemParametersService } from 'src/app/services/system-parameters.service';
 
 @Component({
   selector: 'app-welcome',
@@ -10,7 +13,8 @@ import { SecureStorage } from 'src/app/services/secure-storage.service';
 })
 export class WelcomePage implements OnInit {
   splashMode : boolean = false;
-  constructor(private router: Router, private storage: SecureStorage, private notificationService: NotificationService) { }
+  constructor(private router: Router, private storage: SecureStorage, private notificationService: NotificationService, private sysParamServ: SystemParametersService,
+    private modalController: ModalController) { }
 
   async ngOnInit() {
   }
@@ -21,6 +25,23 @@ export class WelcomePage implements OnInit {
       this.splashMode = true;
     } else {
       this.splashMode = false;
+      const showEventPopup = this.sysParamServ.getValue('SHOW_EVENT_SPLASH') as string;
+      if(showEventPopup === 'Y') {
+          setTimeout(async () => {
+            const modalEl = await this.modalController.create({
+              component: ProductFullGalleryModalComponent,
+              cssClass: 'gallery-full-modal',
+              componentProps: {
+                url: 'images/event.png',
+                type: 'img'
+              },
+              backdropDismiss: true
+            });
+            return await modalEl.present();
+          }, 3100)
+
+
+      }
     }
     if(this.splashMode) {
       setTimeout(async () => {

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SplashScreen } from '@awesome-cordova-plugins/splash-screen/ngx';
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -10,15 +9,21 @@ import { NavController } from '@ionic/angular';
 })
 export class SplashPage implements OnInit {
 
-  constructor(private navCtrl: NavController, private splash: SplashScreen) {
-    // setTimeout(() => {
-    //   this.navCtrl.navigateForward('welcome');
-    // }, 2000);
+  constructor(private router: Router) {
+
 
   }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.router.navigateByUrl('welcome');
+    }, 3000);
 
   }
+
+  // ionViewWillEnter() {
+  //   this.router.navigateByUrl('welcome');
+
+  // }
 
 }
