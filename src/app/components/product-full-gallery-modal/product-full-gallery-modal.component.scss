@@ -8,3 +8,46 @@
   max-width: 100vh !important;
   background: black;
 }
+
+
+.icon-left {
+  position: absolute;
+    color: grey;
+    top: 50%;
+    left: 0;
+    /* background: white; */
+    z-index: 10000;
+    zoom: 2.5;
+}
+
+.icon-right {
+  position: absolute;
+    color: grey;
+    top: 50%;
+    right: 0;
+    /* background: white; */
+    z-index: 10000;
+    zoom: 2.5;
+}
+
+
+.icon-up {
+  position: absolute;
+    color: grey;
+    top: 0;
+    right: 50%;
+    /* background: white; */
+    z-index: 10000;
+    zoom: 2.5;
+}
+
+.icon-down {
+  position: absolute;
+    color: grey;
+    bottom: 0;
+    right: 50%;
+    /* background: white; */
+    z-index: 10000;
+    zoom: 2.5;
+}
+

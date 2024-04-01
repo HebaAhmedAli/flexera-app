@@ -226,7 +226,7 @@ export class ProductDetailsPage implements OnInit {
 
 
 
-async openImageViewer(galleryItem: GalleryItem) {
+async openImageViewer(galleryItem: GalleryItem, i: number) {
   //this.setLandscape();
   // this.unlockScreen();
   // var myScreenOrientation = window.screen.orientation;
@@ -247,8 +247,8 @@ async openImageViewer(galleryItem: GalleryItem) {
     component: ProductFullGalleryModalComponent,
     cssClass: 'gallery-full-modal',
     componentProps: {
-      url: galleryItem.url,
-      type: galleryItem.type
+      gallery: this.product?.gallery,
+      index: i
     },
     backdropDismiss: true
   });

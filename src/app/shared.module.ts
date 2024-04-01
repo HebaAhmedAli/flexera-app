@@ -9,6 +9,7 @@ import { ProductFullGalleryModalComponent } from './components/product-full-gall
 
 import { PinchZoomModule } from 'ngx-pinch-zoom';
 import { SafePipe } from './pipes/safe.pipe';
+import { FullScreenModalComponent } from './components/full-screen-modal/full-screen-modal.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SafePipe } from './pipes/safe.pipe';
     AccountImageModalComponent,
     ProductFullGalleryModalComponent,
     SafeHtmlPipe,
-    SafePipe
+    SafePipe,
+    FullScreenModalComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { SafePipe } from './pipes/safe.pipe';
     AccountImageModalComponent,
     ProductFullGalleryModalComponent,
     SafeHtmlPipe,
-    SafePipe
+    SafePipe,
+    FullScreenModalComponent
   ]
 })
 export class SharedModule {}

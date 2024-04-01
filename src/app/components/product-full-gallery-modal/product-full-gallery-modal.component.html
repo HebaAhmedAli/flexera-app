@@ -1,13 +1,13 @@
 <!-- <ion-icon name="close-outline" (click)="modal.dismiss()"></ion-icon> -->
 <!-- <img  [src]="getImgUrl(url)" class="rotate"/> -->
 
+<ion-icon *ngIf="type === 'video'"  class="icon-up"  name="chevron-up-outline" (click)="decreaseIndex()"></ion-icon>
 
-<pinch-zoom *ngIf="type === 'img'" style="background-color: black;
-width: 100%;
-height: 100%;" >
-  <img   [src]="getImgUrl(url)" />
-</pinch-zoom>
-<video *ngIf="type === 'video'" width="100%" height="auto" controls autoplay disablepictureinpicture  controlslist="nodownload noplaybackrate nofullscreen" class="rotate">
-  <source [src]="getImgUrl(url)" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+<ion-icon  *ngIf="type === 'img'" class="icon-left" name="chevron-back-outline"  (click)="decreaseIndex()"></ion-icon>
+
+<app-full-screen-modal [url]="url" [type]="type" style="height: 100%;
+padding: 0%;"></app-full-screen-modal>
+
+<ion-icon  *ngIf="type === 'img'" class="icon-right" name="chevron-forward-outline"  (click)="increaseIndex()"></ion-icon>
+
+<ion-icon *ngIf="type === 'video'"  class="icon-down"  name="chevron-down-outline"  (click)="increaseIndex()"></ion-icon>

@@ -8,8 +8,8 @@
         <div class="swiper-wrapper">
 
           <div class="swiper-slide" *ngFor="let galleryItem of product?.gallery;let i=index;">
-            <img *ngIf="galleryItem.type === 'img'" [src]="getImgUrl(galleryItem.url)" [id]="'img' + i" (click)="openImageViewer(galleryItem)">
-            <video [id]="'video' + galleryItem.id" *ngIf="galleryItem.type === 'video'" width="100%" height="auto" (click)="openImageViewer(galleryItem)">
+            <img *ngIf="galleryItem.type === 'img'" [src]="getImgUrl(galleryItem.url)" [id]="'img' + i" (click)="openImageViewer(galleryItem, i)">
+            <video [id]="'video' + galleryItem.id" *ngIf="galleryItem.type === 'video'" width="100%" height="auto" (click)="openImageViewer(galleryItem, i)">
               <source [src]="getImgUrl(galleryItem.url)" type="video/mp4">
               Your browser does not support the video tag.
             </video>
@@ -18,7 +18,7 @@
               <source [src]="getImgUrl(galleryItem.url)" type="video/mp4">
               Your browser does not support the video tag.
             </video> -->
-            <ion-icon *ngIf="galleryItem.type === 'video'" name="play" class="play-icon"  (click)="openImageViewer(galleryItem)"></ion-icon>
+            <ion-icon *ngIf="galleryItem.type === 'video'" name="play" class="play-icon"  (click)="openImageViewer(galleryItem, i)"></ion-icon>
           </div>
         </div>
         <!-- Add Pagination -->

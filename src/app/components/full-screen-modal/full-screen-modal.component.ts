@@ -1,26 +1,20 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Subscription, fromEvent } from 'rxjs';
-import { GalleryItem } from 'src/app/models/gallery-item.model';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-product-full-gallery-modal',
-  templateUrl: './product-full-gallery-modal.component.html',
-  styleUrls: ['./product-full-gallery-modal.component.scss'],
+  selector: 'app-full-screen-modal',
+  templateUrl: './full-screen-modal.component.html',
+  styleUrls: ['./full-screen-modal.component.scss'],
 })
-export class ProductFullGalleryModalComponent  implements OnInit {
-
-
-  @Input()
-  gallery!: GalleryItem[];
+export class FullScreenModalComponent  implements OnInit {
 
   @Input()
-  i!: number;
+  url!: string;
 
-
-  index = this.i ;
-
+  @Input()
+  type!: string;
   private backbuttonSubscription!: Subscription;
 
 constructor(private modalCtrl: ModalController) {}
@@ -39,21 +33,9 @@ ngOnDestroy() {
     this.backbuttonSubscription.unsubscribe();
 }
 
-get url(): string {
- return this.gallery[this.index]?.url;
-}
-
-get type(): string {
-  return this.gallery[this.index]?.type;
- }
-
- decreaseIndex() {
-  if(this.index - 1 < 0) return;
-  this.index -= 1;
- }
-
- increaseIndex() {
-  if(this.index + 1 === this.gallery.length) return;
-  this.index += 1;
+getImgUrl(url: string): string {
+  return environment.baseUrl + '/' + url;
  }
 }
+
+

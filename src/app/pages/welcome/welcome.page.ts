@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { FullScreenModalComponent } from 'src/app/components/full-screen-modal/full-screen-modal.component';
 import { ProductFullGalleryModalComponent } from 'src/app/components/product-full-gallery-modal/product-full-gallery-modal.component';
 import { NotificationService } from 'src/app/services/notification.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
@@ -29,7 +30,7 @@ export class WelcomePage implements OnInit {
       if(showEventPopup === 'Y') {
           setTimeout(async () => {
             const modalEl = await this.modalController.create({
-              component: ProductFullGalleryModalComponent,
+              component: FullScreenModalComponent,
               cssClass: 'gallery-full-modal',
               componentProps: {
                 url: 'images/event.png',
