@@ -9,5 +9,6 @@ export class GlobalService {
   lastUrl = '/tabs/home';
   lastMainUrlBeforeNotifications = '/tabs/home';
 
+  eventScreenShowed = false;
   constructor() { }
 }

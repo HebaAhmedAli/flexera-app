@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { FullScreenModalComponent } from 'src/app/components/full-screen-modal/full-screen-modal.component';
 import { ProductFullGalleryModalComponent } from 'src/app/components/product-full-gallery-modal/product-full-gallery-modal.component';
+import { GlobalService } from 'src/app/services/global.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
 import { SystemParametersService } from 'src/app/services/system-parameters.service';
@@ -15,7 +16,7 @@ import { SystemParametersService } from 'src/app/services/system-parameters.serv
 export class WelcomePage implements OnInit {
   splashMode : boolean = false;
   constructor(private router: Router, private storage: SecureStorage, private notificationService: NotificationService, private sysParamServ: SystemParametersService,
-    private modalController: ModalController) { }
+    private modalController: ModalController, private globalService: GlobalService) { }
 
   async ngOnInit() {
   }
@@ -28,6 +29,7 @@ export class WelcomePage implements OnInit {
       this.splashMode = false;
       const showEventPopup = this.sysParamServ.getValue('SHOW_EVENT_SPLASH') as string;
       if(showEventPopup === 'Y') {
+          this.globalService.eventScreenShowed = true;
           setTimeout(async () => {
             const modalEl = await this.modalController.create({
               component: FullScreenModalComponent,
