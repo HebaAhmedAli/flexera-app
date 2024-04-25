@@ -97,7 +97,7 @@ width: 100%;">
     <a href="https://instagram.com/tds_thedentalstore?igshid=MXZhNzVtZHhta2YzMQ==" target="_blank">
       <ion-icon name="logo-instagram" class="social-icon instgram-icon"></ion-icon>
     </a>
-    <a routerLink="/submit-complaint" routerDirection="forward">
+    <a (click)="sumbitComplaint()">
       <!-- <ion-icon name="help-circle" class="social-icon help-icon"></ion-icon> -->
       <img src="assets/complaint-2.png" class="help-icon">
       <!-- <ion-icon name="chatbox-ellipses" class="social-icon help-icon"></ion-icon> -->
@@ -113,3 +113,11 @@ width: 100%;">
   </p>
 </div>
 </div>
+
+
+<ion-alert
+[isOpen]="isAlertOpen"
+[message]="message"
+[buttons]="['OK']"
+(didDismiss)="isAlertOpen = false"
+></ion-alert>

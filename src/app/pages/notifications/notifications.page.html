@@ -16,4 +16,9 @@
       </ion-item-options>
     </ion-item-sliding>
  </ion-list>
+ <div class="icon-div" *ngIf="notificationService.getUndeletedNotifications().length === 0">
+  <ion-icon style="zoom: 12;" name="notifications-off-outline" ></ion-icon>
+  <h1 style="font-weight: bold; margin-top: 10%; font-size: 25px;">You have no notifications yet!</h1>
+
+ </div>
 </ion-content>
