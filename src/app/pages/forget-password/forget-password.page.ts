@@ -26,7 +26,7 @@ export class ForgetPasswordPage implements OnInit {
   });
 
   passwordForm = new FormGroup({
-    password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')]),
+    password: new FormControl('', [Validators.required, Validators.minLength(8), 	 	Validators.pattern(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/)]),
     confirmPassword: new FormControl('', Validators.required)
   });
 
