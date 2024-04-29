@@ -89,15 +89,11 @@
           <ion-row>
             <ion-item>
               <h2 class="total-price"> Total Price: {{order.totalPrice}} EGP</h2>
-              <ion-icon id="hover-trigger" name="attach-outline" slot="end" style="margin-right: -5px; z-index: 100000; zoom: 1.1;" *ngIf="order.status === 'Incomplete'" (click)="actionButtonClick(order)"></ion-icon>
+              <ion-icon  name="attach-outline" slot="end" style="margin-right: -5px; z-index: 100000; zoom: 1.1;" *ngIf="order.status === 'Incomplete'" (click)="actionButtonClick(order)"></ion-icon>
               <ion-icon  name="trash-outline" slot="end" style="margin-right: 5px; z-index: 100000;" *ngIf="order.status === 'Incomplete' || order.status === 'Pending'" (click)="openActionSheet(order)"></ion-icon>
 
               <!-- <ion-button id="hover-trigger">click</ion-button> -->
-              <ion-popover trigger="hover-trigger" triggerAction="hover">
-                <ng-template>
-                  <ion-content class="ion-padding">Click to upload receipt</ion-content>
-                </ng-template>
-              </ion-popover>
+
             </ion-item>
 
           </ion-row>
@@ -112,6 +108,7 @@
 
 </ion-grid>
 </div>
+
 
 <input #myUploadInput type="file" id="img" name="img" accept="image/*" (change)="onFileChanged($event)" />
 
@@ -149,3 +146,4 @@ font-size: 20px;
 [buttons]="actionSheetButtons"
 (didDismiss)="onActionSheetDismiss($event)"
 ></ion-action-sheet>
+
