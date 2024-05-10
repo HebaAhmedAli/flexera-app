@@ -1,7 +1,7 @@
 import { Component, OnInit, Sanitizer, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { ProductFullGalleryModalComponent } from 'src/app/components/product-full-gallery-modal/product-full-gallery-modal.component';
 import { GalleryItem } from 'src/app/models/gallery-item.model';
 import { ProductSizesModel } from 'src/app/models/product-sizes.model';
@@ -46,7 +46,8 @@ export class ProductDetailsPage implements OnInit {
   constructor(public cartService: CartService, private productService: ProductService, private route: ActivatedRoute,
     private storage: SecureStorage,
     private sanitizer: DomSanitizer,
-    private modalController: ModalController) {
+    private modalController: ModalController,
+   private platform: Platform) {
 
   }
 
@@ -117,6 +118,7 @@ export class ProductDetailsPage implements OnInit {
 
 
  videoFix() {
+  if(this.platform.is("ios")) return;
   if(this.videoFixed) return;
   this.product?.gallery.forEach(gallery => {
     if(gallery.type === 'video') {
