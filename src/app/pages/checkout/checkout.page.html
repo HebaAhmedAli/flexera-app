@@ -45,7 +45,7 @@
       </ion-row>
     </div>
 
-      <ion-row class="padding-top-bottom" *ngIf="area?.price && order?.paymentMethod !== 'pickup'">
+      <ion-row class="padding-top-bottom" *ngIf="(area?.price === 0 || area?.price) && order?.paymentMethod !== 'pickup'">
           <ion-col size="5">
             <h2 class="name">Delivery Fees</h2>
           </ion-col>
