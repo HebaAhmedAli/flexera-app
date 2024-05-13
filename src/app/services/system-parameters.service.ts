@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { KeyValue } from '@angular/common';
 import { CategoryModel } from '../models/category.model';
@@ -10,6 +10,8 @@ import { SystemParameter } from '../models/system-parameter.model';
   providedIn: 'root'
 })
 export class SystemParametersService {
+
+  sysFectched = new Subject();
 
   systemParameters: SystemParameter[] = [];
 
@@ -21,6 +23,7 @@ export class SystemParametersService {
       `${environment.baseUrl}/api/v1/systemParameters`
     ).subscribe(data => {
       this.systemParameters = data;
+      this.sysFectched.next(true);
     }, err => {
       console.log(err);
     });

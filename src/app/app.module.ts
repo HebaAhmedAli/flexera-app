@@ -14,6 +14,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { Network } from '@awesome-cordova-plugins/network/ngx';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
+import { AppVersion } from '@ionic-native/app-version/ngx';
+import { Market } from '@ionic-native/market/ngx';
 // import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
 // import { ScreenOrientation } from '@capacitor/screen-orientation';
 
@@ -25,6 +27,8 @@ import { FirebaseX } from '@ionic-native/firebase-x/ngx';
      SplashScreen,
      Network,
      Geolocation,
+     AppVersion,
+     Market,
     // FCM,
     FirebaseX,
     // Biometric Auth

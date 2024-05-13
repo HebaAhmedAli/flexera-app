@@ -31,9 +31,10 @@
 
     <ion-row class="ion-text-center fade-in" style="justify-content: center;" [ngClass]="{hidden: splashMode}">
       <div class="button-container" style="background: black;">
-        <ion-button expand="block" class="main-button" (click)="navigateToTabs()">Continue as Guest</ion-button>
-        <ion-button expand="block" class="main-button" routerLink="/login" routerDirection="forward">Log in</ion-button>
-        <ion-button expand="block" color="light" fill="clear" routerLink="/signup" routerDirection="forward">Don't have acccount? Signup</ion-button>
+        <ion-button *ngIf="!forceUpdate" expand="block" class="main-button" (click)="navigateToTabs()">Continue as Guest</ion-button>
+        <ion-button *ngIf="!forceUpdate" expand="block" class="main-button" routerLink="/login" routerDirection="forward">Log in</ion-button>
+        <ion-button *ngIf="!forceUpdate" expand="block" color="light" fill="clear" routerLink="/signup" routerDirection="forward">Don't have acccount? Signup</ion-button>
+        <ion-button *ngIf="forceUpdate" expand="block" class="main-button" (click)="forceUpdateLogic()">Update the App To continue</ion-button>
       </div>
     </ion-row>
   </ion-grid>
