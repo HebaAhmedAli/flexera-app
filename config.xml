@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-packageName="com.tds.appFlexpay" id="com.tds.appFlexpay" version="0.0.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-packageName="com.tds.appFlexpay" id="com.tds.appFlexpay" version="0.0.8" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>TDS</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
@@ -20,7 +20,7 @@
     <preference name="SplashScreenDelay" value="0" />
     <preference name="AutoHideSplashScreen" value="true" />
     <plugin name="cordova-plugin-geolocation" spec="5.0.0">`
-                                                                                                                                                                                                                                                                                            <preference name="android-minSdkVersion" value="22" />
+                                                                                                                                                                                                                                                                                                    <preference name="android-minSdkVersion" value="22" />
         <preference name="android-targetSdkVersion" value="32" />
         <preference name="android-compileSdkVersion" value="32" />
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="App uses geolocation to determine where you are." />
@@ -68,12 +68,9 @@
         <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
             <string>TDS app needs access to your location to get your address location to deliver your order.</string>
         </edit-config>
-        <edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge" overwrite="true" >
-              <string>Used to allow user choose image from his gallery to set his account picture</string>
+        <edit-config file="*-Info.plist" mode="merge" overwrite="true" target="NSPhotoLibraryUsageDescription">
+            <string>Used to allow user choose image from his gallery to set his account picture</string>
         </edit-config>
-        <!-- <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge" overwrite="true">
-              <string>Used to allow user choose image from his gallery to set his account picture</string>
-        </edit-config> -->
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />

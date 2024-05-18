@@ -29,9 +29,7 @@ export class WelcomePage implements OnInit {
     private modalController: ModalController, private globalService: GlobalService, private appVersion: AppVersion, private platform: Platform, private market: Market) { }
 
   async ngOnInit() {
-    this.platform.ready().then(() => {
-      this.checkForceUpateLogic();
-    });
+    await this.checkForceUpateLogic();
     this.platform.resume.subscribe(() => {
       this.checkForceUpateLogic();
     })
@@ -69,7 +67,7 @@ export class WelcomePage implements OnInit {
 
   async ionViewWillEnter() {
     const token = await this.storage.get('token');
-    if(token) {
+    if(token && !this.forceUpdate) {
       this.splashMode = true;
     } else {
       this.splashMode = false;
