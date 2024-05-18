@@ -29,13 +29,21 @@ export class WelcomePage implements OnInit {
     private modalController: ModalController, private globalService: GlobalService, private appVersion: AppVersion, private platform: Platform, private market: Market) { }
 
   async ngOnInit() {
+
+  }
+
+
+
+  async ionViewWillEnter() {
     await this.checkForceUpateLogic();
     this.platform.resume.subscribe(() => {
       this.checkForceUpateLogic();
-    })
+    });
   }
 
- async checkForceUpateLogic() {
+
+
+  async checkForceUpateLogic() {
     this.iosServerVersion = this.sysParamServ.getValue('IOS_VERSION') as string;
     this.androidServerVersion = this.sysParamServ.getValue('ANDROID_VERSION') as string;
     if(!this.androidServerVersion) {
@@ -63,9 +71,13 @@ export class WelcomePage implements OnInit {
         this.forceUpdate = false;
       }
     }
+
+    this.initializeApp();
+
   }
 
-  async ionViewWillEnter() {
+
+  async initializeApp() {
     const token = await this.storage.get('token');
     if(token && !this.forceUpdate) {
       this.splashMode = true;
