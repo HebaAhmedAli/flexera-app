@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
+import { SystemParametersService } from 'src/app/services/system-parameters.service';
 
 @Component({
   selector: 'app-support',
@@ -11,10 +12,14 @@ export class SupportPage implements OnInit {
   isAlertOpen = false;
   mode!: string;
   message!: string;
+  phoneNumber!: string;
+  whatsappNumber!: string;
 
-  constructor(private storage: SecureStorage, private router: Router) { }
+  constructor(private storage: SecureStorage, private router: Router, private sysParamServ: SystemParametersService) { }
 
   async ngOnInit() {
+    this.phoneNumber = this.sysParamServ.getValue('PHONE_NUMBER') as string;
+    this.whatsappNumber = this.sysParamServ.getValue('WHATSAPP_NUMBER') as string;
 
   }
 
