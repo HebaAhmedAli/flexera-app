@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { ProductModel } from '../models/product.model';
 import { NotificationModel } from '../models/notification.model';
 import { SecureStorage } from './secure-storage.service';
+import { UserModel } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,9 +28,11 @@ export class NotificationService {
    }
 
 
-  public getNotifications(): void {
+  public async getNotifications(): Promise<void> {
+    const user = await this.storage.get('user') as UserModel;
+    const email = user && user.email ? user.email : 'noUser';
     this.httpClient.get<Array<NotificationModel>>(
-      `${environment.baseUrl}/api/v1/notifications`
+      `${environment.baseUrl}/api/v1/notifications/${email}`
     ).subscribe(async data => {
       const savedNotifications: NotificationModel[] = await this.storage.get('notifications');
       if(savedNotifications) {
@@ -59,6 +62,12 @@ export class NotificationService {
 
   getUndeletedNotifications(): NotificationModel[] {
     return this.notifications.filter(not => !not.deleted)
+  }
+
+  public setNotificationToken(notifToken: string | null): Observable<any> {
+    return this.httpClient.patch<any>(
+      `${environment.baseUrl}/api/v1/set-notification-token`, {notificationToken: notifToken}
+    );
   }
 
 }

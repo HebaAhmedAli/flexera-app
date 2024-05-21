@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { OrderModel } from 'src/app/models/order.model';
 import { OrderService } from 'src/app/services/order.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
@@ -28,6 +29,8 @@ export class OrdersPage implements OnInit {
 
   orderToDelete!: OrderModel;
 
+  orderId!: number;
+
   public actionSheetButtons = [
     {
       text: 'Confirm Delete The Order',
@@ -44,10 +47,11 @@ export class OrdersPage implements OnInit {
     },
   ];
 
-  constructor(private storage: SecureStorage, private orderService: OrderService, private httpClient: HttpClient) { }
+  constructor(private storage: SecureStorage, private orderService: OrderService, private httpClient: HttpClient, private route: ActivatedRoute) { }
 
   async ngOnInit() {
     this.mode = await this.storage.get('mode');
+    this.orderId = Number(this.route.snapshot.paramMap.get('productId') as string);
 
   }
 
@@ -65,6 +69,10 @@ export class OrdersPage implements OnInit {
   getOrders() {
     this.orderService.getOrders().subscribe(data => {
       this.allOrders = data;
+      if(this.orderId) {
+        const index = this.allOrders.findIndex(order => order.id === this.orderId);
+        if(index !== -1) this.allOrders[index].expanded = true;
+      }
       this.oldOrders = this.allOrders.filter(order => order.status === 'Done');
       this.currentOrders = this.allOrders.filter(order => order.status !== 'Done');
 

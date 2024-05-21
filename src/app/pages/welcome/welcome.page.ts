@@ -37,7 +37,8 @@ export class WelcomePage implements OnInit {
   async ionViewWillEnter() {
     await this.checkForceUpateLogic();
     this.platform.resume.subscribe(() => {
-      this.checkForceUpateLogic();
+      if(!this.notificationService.notInWelcome)
+        this.checkForceUpateLogic();
     });
   }
 
@@ -52,9 +53,10 @@ export class WelcomePage implements OnInit {
       });
       return;
     }
-    const currentVersion =  await this.appVersion.getVersionNumber();
 
     if(this.platform.is('android')) {
+      const currentVersion =  await this.appVersion.getVersionNumber();
+
       this.appId = await this.appVersion.getPackageName();
       if(this.androidServerVersion !== currentVersion) {
         this.forceUpdate = true;
@@ -64,6 +66,8 @@ export class WelcomePage implements OnInit {
       console.log(this.appId, currentVersion, this.androidServerVersion , this.forceUpdate);
 
     } else if (this.platform.is('ios')) {
+      const currentVersion =  await this.appVersion.getVersionNumber();
+
       this.appId = 'itms-apps://https://apps.apple.com/us/app/tds-app/id6499496237';
       if(this.iosServerVersion !== currentVersion) {
         this.forceUpdate = true;
@@ -79,6 +83,7 @@ export class WelcomePage implements OnInit {
 
   async initializeApp() {
     const token = await this.storage.get('token');
+    console.log('tokenn', token);
     if(token && !this.forceUpdate) {
       this.splashMode = true;
     } else {
@@ -102,24 +107,30 @@ export class WelcomePage implements OnInit {
 
       }
     }
+    console.log('splashMode', this.splashMode, this.notificationService.notificationTapped)
     if(this.splashMode) {
       setTimeout(async () => {
         await this.storage.set('mode', 'user');
+        console.log("inside time out splash", this.notificationService.notificationTapped)
         if(this.notificationService.notificationTapped) {
           this.notificationService.notificationTapped = false;
           this.notificationService.notInWelcome = true;
-          this.router.navigate([this.notificationService.notificationData.url,{productId: this.notificationService.notificationData.urlItemId}]);
+          this.router.navigate([this.notificationService.notificationData.url,
+            {productId: this.notificationService.notificationData.urlItemId, course_id: this.notificationService.notificationData.urlItemId, orderId: this.notificationService.notificationData.urlItemId}]);
         } else {
+          console.log("will navigate to tabs")
           this.notificationService.notInWelcome = true;
           this.router.navigateByUrl('tabs');
         }
       }, 3100);
     } else if(this.notificationService.notificationTapped) {
       setTimeout(async () => {
+        console.log("inside time out else splash", this.notificationService.notificationTapped)
         this.notificationService.notificationTapped = false;
         this.notificationService.notInWelcome = true;
-        this.router.navigate([this.notificationService.notificationData.url,{productId: this.notificationService.notificationData.urlItemId}]);
-      }, 3100);
+        this.router.navigate([this.notificationService.notificationData.url,
+          {productId: this.notificationService.notificationData.urlItemId, course_id: this.notificationService.notificationData.urlItemId, orderId: this.notificationService.notificationData.urlItemId}]);},
+           3100);
     }
   }
 

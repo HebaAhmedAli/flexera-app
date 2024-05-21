@@ -5,6 +5,7 @@ import { NavController } from '@ionic/angular';
 import { LoginRequestModel } from 'src/app/models/login-request.model';
 import { LoginResponseModel } from 'src/app/models/login-response.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
 
 @Component({
@@ -26,7 +27,8 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router,
     private storage: SecureStorage,
-    private authService: AuthService
+    private authService: AuthService,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit() {
@@ -70,6 +72,8 @@ export class LoginPage implements OnInit {
         await this.storage.set('mode', 'user');
         await this.storage.set('token', this.loginResponse.tokenType + ' ' + this.loginResponse.accessToken);
         await this.storage.set('user', this.loginResponse.user);
+        const notifToken = await this.storage.get('notifToken');
+        this.notificationService.setNotificationToken(notifToken).subscribe();
         this.router.navigateByUrl('tabs');
       } else {
         this.isAlertOpen = true;

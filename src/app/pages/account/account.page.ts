@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { AccountImageModalComponent } from 'src/app/components/account-image-modal/account-image-modal.component';
 import { UserModel } from 'src/app/models/user.model';
+import { NotificationService } from 'src/app/services/notification.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
 
@@ -48,7 +49,8 @@ export class AccountPage implements OnInit {
   constructor(private camera: Camera, private storage: SecureStorage,
     private modalController: ModalController,
     private profileService: ProfileService,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
   ) {}
 
   async ngOnInit() {
@@ -120,6 +122,8 @@ export class AccountPage implements OnInit {
   }
 
   async logout() {
+    await this.storage.set('notifToken', undefined);
+    this.notificationService.setNotificationToken(null).subscribe();
     await this.storage.set('user', undefined);
     await this.storage.set('mode', 'guest')
     await this.storage.set('token', undefined);

@@ -11,6 +11,7 @@ import { NotificationService } from './services/notification.service';
 import { GlobalService } from './services/global.service';
 import { SystemParametersService } from './services/system-parameters.service';
 import { LookupItemsService } from './services/lookup-item.service';
+import { SecureStorage } from './services/secure-storage.service';
 
 register();
 
@@ -23,7 +24,7 @@ export class AppComponent {
 
   constructor(private platform: Platform, private cartService: CartService, private navCtrl: NavController, private splash: SplashScreen, private firebase: FirebaseX
     , private notificationService: NotificationService, private router: Router, private globalService: GlobalService,
-     private systemParametersService: SystemParametersService,
+     private systemParametersService: SystemParametersService, private storage: SecureStorage,
     private lookupItemsService: LookupItemsService) {
 
       // this.router.events.subscribe(event => {
@@ -55,10 +56,14 @@ export class AppComponent {
 
         this.firebase.getToken().then((token) => {
             console.log('getToken', token);
+            this.storage.set('notifToken', null);
+            this.notificationService.setNotificationToken(token).subscribe();
           });
 
           this.firebase.onTokenRefresh().subscribe((token) => {
             console.log('onTokenRefresh', token);
+            this.storage.set('notifToken', token);
+            this.notificationService.setNotificationToken(token).subscribe();
           });
 
           this.firebase.onMessageReceived().subscribe(data => {
@@ -66,10 +71,10 @@ export class AppComponent {
 
             console.log('inside onNotification', data);
             if (data.tap === 'background') {
-              console.log("Background");
+              console.log("Background", this.notificationService.notInWelcome);
               if(this.notificationService.notInWelcome) {
                 if(data.urlItemId)
-                  this.router.navigate([data.url,{productId: data.urlItemId, course_id: data.urlItemId}]);
+                  this.router.navigate([data.url,{productId: data.urlItemId, course_id: data.urlItemId, orderId: data.urlItemId}]);
               } else {
                 this.notificationService.notificationTapped = true;
                 this.notificationService.notificationData = data;
@@ -90,7 +95,7 @@ export class AppComponent {
           });
       }
 
-      this.navCtrl.navigateForward('/', { animated: false });
+      // this.navCtrl.navigateForward('/', { animated: false });
     });
 
     this.platform.resume.subscribe(async () => {
