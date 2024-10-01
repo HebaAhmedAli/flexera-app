@@ -78,7 +78,23 @@ const routes: Routes = [
   {
     path: 'submit-complaint',
     loadChildren: () => import('./pages/submit-complaint/submit-complaint.module').then( m => m.SubmitComplaintPageModule)
+  },
+  {
+    path: 'support',
+    loadChildren: () => import('./pages/support/support.module').then(m => m.SupportPageModule)
+  },  {
+    path: 'after-sale',
+    loadChildren: () => import('./pages/after-sale/after-sale.module').then( m => m.AfterSalePageModule)
+  },
+  {
+    path: 'maintenence-request',
+    loadChildren: () => import('./pages/maintenence-request/maintenence-request.module').then( m => m.MaintenenceRequestPageModule)
+  },
+  {
+    path: 'request-status',
+    loadChildren: () => import('./pages/request-status/request-status.module').then( m => m.RequestStatusPageModule)
   }
+
 
 
 

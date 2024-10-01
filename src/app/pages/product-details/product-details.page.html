@@ -35,12 +35,12 @@
         Warranty
       </ion-segment-button>
       <ion-segment-button value="maintenance" *ngIf="product.maintenance">
-        Maintenance
+        How To Use ?
       </ion-segment-button>
     </ion-segment>
 
     <ion-grid *ngIf="product">
-      <ion-list style="width: 100%;" *ngIf="product.sizes.length > 0">
+      <ion-list style="width: 100%; background: none;" *ngIf="product.sizes.length > 0">
         <ion-item style="--border-color: black;     margin-right: 3%;">
           <ion-select label="Select Product Size*" label-placement="floating" interface="popover" mode="md"  [(ngModel)]="selectedSize">
             <ion-select-option *ngFor="let size of product.sizes;" [value]="size">{{ size.name }} </ion-select-option>

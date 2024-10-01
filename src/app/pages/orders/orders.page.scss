@@ -9,19 +9,19 @@
 }
 
 ion-card {
-  background: black;
-  padding: 0px;
-  color: white;
+  background: white;
+    padding: 0px;
+    border-radius: 10px;
 }
 
 ion-item {
-  --background: black !important;
-  --color: white !important;
+  --background: white !important;
+  --color: black !important;
   width: 100%;
 }
 
 ion-icon {
-  color: white !important;
+  color: black !important;
 }
 
 ion-card-content {
@@ -31,16 +31,21 @@ ion-card-content {
 .total-price {
   padding-left: 7px;
   padding-bottom: 5px;
+  font-weight: bold;
 }
 
 .name{
   padding-left: 18px;
   padding-bottom: 5px;
+  font-weight: bold;
+  color: black;
 }
 
 .price-col {
   text-align: end;
   padding-right: 30px;
+  font-weight: bold;
+  color: black;
 }
 
 .line {

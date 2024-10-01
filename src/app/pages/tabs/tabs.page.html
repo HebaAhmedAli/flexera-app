@@ -11,19 +11,26 @@
       <ion-label>Orders</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="account" href="/tabs/account">
-      <ion-icon aria-hidden="true" name="person"></ion-icon>
-      <ion-label>Account</ion-label>
+    <ion-tab-button tab="profile" href="/tabs/account">
     </ion-tab-button>
+
+
+
     <ion-tab-button tab="academy" href="/tabs/academy">
       <ion-icon aria-hidden="true" name="school"></ion-icon>
       <ion-label>Academy</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="support" href="/tabs/support">
-      <ion-icon aria-hidden="true" name="call"></ion-icon>
-      <ion-label>Support</ion-label>
+    <ion-tab-button tab="after-sale" href="/tabs/after-sale">
+      <ion-icon aria-hidden="true" name="construct"></ion-icon>
+      <ion-label>After Sale</ion-label>
     </ion-tab-button>
 
   </ion-tab-bar>
 
 </ion-tabs>
+
+<div class="profile-div" (click)="navigateToAccount()">
+  <ion-icon aria-hidden="true" name="person" class="profile-icon"></ion-icon>
+  <ion-label style="font-size: 15px;">Profile</ion-label>
+</div>
+

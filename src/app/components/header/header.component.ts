@@ -37,5 +37,8 @@ export class HeaderComponent  implements OnInit {
 
   }
 
+  navigateToSupport() {
+    this.router.navigate(['/support']);
+  }
 
 }

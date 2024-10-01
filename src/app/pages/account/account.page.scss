@@ -28,9 +28,11 @@ ion-card-content {
 }
 
 ion-card {
-  --background: black;
- --color: lightgrey;
+  --background: white;
+  --color: black;
   margin-top: 20px;
+  font-weight: bold;
+  border-radius: 10px;
 }
 
 

@@ -2,11 +2,128 @@
 
 <ion-content>
 
- <ion-grid>
-  <ion-row  *ngFor="let category of categories" [routerLink]="['/products',{categoryImg: category.img, categoryId: category.id}]">
-    <ion-col>
-      <img [src]="category.img"/>
-    </ion-col>
-  </ion-row>
- </ion-grid>
+  <div class="adds-slider">
+    <div class="swiper-container" >
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide" *ngFor="let add of adds;let i=index;"  [ngClass]="{'swiper-slide-not-active' : (i !== addsActiveIndex && (i + 1)  !== addsActiveIndex && (i-1) !== addsActiveIndex), 'swiper-slide-active' : i === addsActiveIndex, 'swiper-slide-around-active' : (i !== addsActiveIndex && ((i + 1)  === addsActiveIndex || (i-1) === addsActiveIndex))}" >
+          <img *ngIf="add.type === 'img'" [src]="getImgUrl(add.url)" [id]="'adds_img' + i" (click)="openImageViewer(i)">
+          <video [id]="'adds_video' + add.id" *ngIf="add.type === 'video'" width="100%" height="auto" (click)="openImageViewer( i)">
+            <source [src]="getImgUrl(add.url)" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+
+          <ion-icon *ngIf="add.type === 'video'" name="play" class="play-icon" (click)="openImageViewer( i)"></ion-icon>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="custom-searchbar-container" *ngIf="products.length > 0 && categories.length > 0">
+    <ion-searchbar
+    [(ngModel)]="searchTerm"
+    (ionInput)="filterItems()"
+    (ionClear)="clearFilter()"
+      placeholder="What are you looking for"
+      class="custom-searchbar"
+      show-cancel-button="never"
+      search-icon="search-outline"
+      mode="md"
+    ></ion-searchbar>
+  </div>
+
+  <ion-list *ngIf="filteredProducts.length > 0">
+    <ion-item *ngFor="let item of filteredProducts" (click)="filterProductClicked(item.id)">
+      {{ item.name }}
+    </ion-item>
+  </ion-list>
+
+
+  <div class="category-slider">
+    <div class="category-swiper-container" >
+      <div class="swiper-wrapper" >
+
+        <div class="swiper-slide"  *ngFor="let category of categories;let i=index;"  >
+          <img [src]="category.img" [routerLink]="['/products',{categoryImg: category.img, categoryId: category.id}]"/>
+          <div class="ion-text-center" style="font-weight: bold;">{{ getCategoryNmaeFormatted(category.name)}}</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <ion-item  *ngIf="products.length > 0 && categories.length > 0" lines="none" (click)="showOrderNow = !showOrderNow" style="margin-top: 10px;  margin-bottom: -10px; --background: #EEEEEE !important;">
+    <h3 style="margin: 0px;
+    margin-left: 15px;
+    font-size: 15px;
+    font-weight: bold;">Order Now</h3>
+    <ion-icon  name="{{ showOrderNow ? 'caret-down-outline' : 'caret-forward-outline' }}" style="color: black;
+    font-size: 20px;
+    margin-left: 5px;" ></ion-icon>
+  </ion-item>
+
+
+  <div class="order-now-slider">
+    <div class="order-now-swiper-container" >
+      <div class="swiper-wrapper" *ngIf="showOrderNow">
+
+        <div class="swiper-slide"  *ngFor="let product of products;let i=index;"  >
+          <ion-card >
+            <img [src]="getImgUrl(product.img)" [routerLink]="['/product-details',{productId: product.id}]"/>
+            <ion-card-header [routerLink]="['/product-details',{productId: product.id}]">
+              <ion-card-title>{{ product.name }}</ion-card-title>
+              <ion-card-subtitle>{{ product.description }}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+             <div [ngClass]="{'old-price' : product.price !== product.priceAfterDiscount}">{{ product.price }} EGP </div>
+             <div *ngIf="product.price !== product.priceAfterDiscount">
+               {{ product.priceAfterDiscount }} EGP
+             </div>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+  <ion-item *ngIf="products.length > 0 && categories.length > 0" lines="none" (click)="showBestSeller = !showBestSeller" style="margin-top: 0px;  margin-bottom: -10px; --background: #EEEEEE !important;">
+    <h3 style="margin: 0px;
+    margin-left: 15px;
+    font-size: 15px;
+    font-weight: bold;">Best Seller</h3>
+    <ion-icon  name="{{ showBestSeller ? 'caret-down-outline' : 'caret-forward-outline' }}" style="color: black;
+    font-size: 20px;
+    margin-left: 5px;" ></ion-icon>
+  </ion-item>
+
+
+  <div class="best-seller-slider" style="margin-bottom: 20px;">
+    <div class="best-seller-swiper-container" >
+      <div class="swiper-wrapper" *ngIf="showBestSeller">
+
+        <div class="swiper-slide"  *ngFor="let product of products;let i=index;"  >
+          <ion-card >
+            <img [src]="getImgUrl(product.img)" [routerLink]="['/product-details',{productId: product.id}]"/>
+            <ion-card-header [routerLink]="['/product-details',{productId: product.id}]">
+              <ion-card-title>{{ product.name }}</ion-card-title>
+              <ion-card-subtitle>{{ product.description }}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+             <div [ngClass]="{'old-price' : product.price !== product.priceAfterDiscount}">{{ product.price }} EGP </div>
+             <div *ngIf="product.price !== product.priceAfterDiscount">
+               {{ product.priceAfterDiscount }} EGP
+             </div>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </ion-content>

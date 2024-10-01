@@ -22,7 +22,7 @@
           <ion-grid (click)="order.expanded = !order.expanded">
             <ion-row>
               <ion-item>
-                <h1 style="font-size: 20px;">  Order No: #{{order.no}} <label [ngClass]="{'pending': order.status === 'Pending', 'inprocess': order.status === 'Inprogress', 'done': order.status === 'Done','incomplete': order.status === 'Incomplete'}">
+                <h1 style="font-size: 20px; font-weight: bold;">  Order No: #{{order.no}} <label [ngClass]="{'pending': order.status === 'Pending', 'inprocess': order.status === 'Inprogress', 'done': order.status === 'Done','incomplete': order.status === 'Incomplete'}">
                   ({{order.status }})
                 </label></h1>
                 <ion-icon  name="{{ order.expanded ? 'caret-down-outline' : 'caret-forward-outline' }}"  slot="end" ></ion-icon>

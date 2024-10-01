@@ -11,6 +11,7 @@ import { SecureStorage } from 'src/app/services/secure-storage.service';
   styleUrls: ['tabs.page.scss']
 })
 export class TabsPage {
+
   @ViewChild('ionTabs', { static: true })
   ionTabs!: IonTabs;
 
@@ -46,4 +47,7 @@ export class TabsPage {
     });
   }
 
+  navigateToAccount() {
+    this.router.navigate(['/tabs/account']);
+    }
 }

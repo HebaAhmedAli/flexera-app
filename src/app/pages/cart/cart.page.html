@@ -1,7 +1,7 @@
 <app-header></app-header>
 
  <ion-content  *ngIf="cartOrder">
-  <ion-list *ngIf="cartOrder.orderItems.length !== 0 && mode !== 'guest'">
+  <ion-list *ngIf="cartOrder.orderItems.length !== 0 && mode !== 'guest'" style="background: none;">
     <div  *ngFor="let item of cartOrder.orderItems">
      <ion-item *ngIf="(item.selectedSizesItems ? item.selectedSizesItems  : [] ).length === 0">
        <ion-thumbnail slot="start">

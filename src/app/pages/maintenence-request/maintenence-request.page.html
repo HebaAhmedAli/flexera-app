@@ -1,0 +1,48 @@
+<app-header></app-header>
+
+<ion-content class="ion-padding">
+  <div class="ion-padding container" *ngIf="form">
+    <h1 class="ion-text-center">After Sale And Maintenence Service</h1>
+
+    <h2>Please fill the below information</h2>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <div class="form-container">
+      <ion-item>
+        <ion-label position="floating">Name</ion-label>
+        <ion-input formControlName="name"></ion-input>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label position="floating">Phone Number</ion-label>
+        <ion-input  formControlName="phone"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Device</ion-label>
+        <ion-input formControlName="device"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Serial Number</ion-label>
+        <ion-input formControlName="serialNo"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-textarea label="Complaint" labelPlacement="floating" formControlName="complaint" [autoGrow]="true"></ion-textarea>
+      </ion-item>
+
+      <ion-button expand="block" class="main-button" type="submit" [disabled]="form.invalid || form.pristine">Submit</ion-button>
+
+</div>
+</form>
+</div>
+</ion-content>
+
+<ion-alert
+[isOpen]="isAlertOpen"
+[message]="message"
+[buttons]="['OK']"
+(didDismiss)="alertDismiss()"
+></ion-alert>

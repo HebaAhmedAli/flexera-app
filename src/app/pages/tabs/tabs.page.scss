@@ -1,1 +1,42 @@
 
+.profile-icon {
+  // scale: 1.8;
+  // position: absolute;
+  // bottom: 35px;
+  // z-index: 100000000 !important;
+  // background: lightgrey;
+  // border-radius: 50%;
+  // padding: 5px;
+  // left: 47vw;
+  scale: 1.8;
+  position: fixed;
+  bottom: 35px;
+  z-index: 100000000 !important;
+  background: lightgrey;
+  border-radius: 50%;
+  padding: 1.2vw;
+  width: 5vw;
+  height: 5vw;
+  left: calc(50vw - (7.4vw / 2));
+}
+
+
+.profile-div {
+  position: fixed;
+  bottom: 6px;
+  z-index: 100000000 !important;
+  width: 12vw;
+  left: calc(50vw - (12vw / 2));
+  text-align: center;
+
+}
+
+ion-label {
+  font-weight: bold;
+}
+// .profile-label {
+//   position: fixed;
+//   bottom: 6px;
+//   width: 13vw;
+//   left: calc(50vw - (13vw / 2));
+// }

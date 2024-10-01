@@ -130,22 +130,26 @@ ion-toolbar {
 
 
 .tab-selected {
-  color: #808080 !important;
+ // color: #808080 !important;
 }
 
 ion-tab-button {
-  color: #D3D3D3;
-  background: black;
+  color: black;
+  //background: #EEEEEE;
 }
 
 ion-tab-bar {
-  background: black;
+  //background: #EEEEEE;
 }
 
 
 ion-toolbar {
-  --background: black !important;
-  color: #ededed;
+ --background: #EEEEEE !important;
+  color: black;
+}
+
+ion-content {
+  --background: #EEEEEE !important;
 }
 
 .swiper-pagination {
@@ -329,4 +333,20 @@ ion-select:not(.select-wrapper) {
 
 .form-container ion-button {
   margin-top: 48px;
+}
+
+
+ion-searchbar ion-icon {
+  // right: 16px !important;
+  // left: auto !important;
+}
+
+
+ion-searchbar .searchbar-input {
+ // padding-left: 20px !important;
+}
+
+ion-item {
+  --background: #EEEEEE !important;
+  --border-color: darkgrey !important;
 }
