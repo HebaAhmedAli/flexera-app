@@ -35,7 +35,7 @@ export class SignupPage implements OnInit {
   phone: new FormControl('', [Validators.required, Validators.pattern('(01)[0-9]{9}')]),
   password: new FormControl('', [Validators.required, Validators.minLength(8), 	 	Validators.pattern(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/)]),//this is for the letters (both uppercase and lowercase) and numbers validation
   address: new FormControl(''),
-  age: new FormControl(''),
+  dateOfBirth: new FormControl('', Validators.required),
   speciality: new FormControl(''),
   uniStaff: new FormControl(''),
   university: new FormControl(''),
@@ -86,7 +86,7 @@ export class SignupPage implements OnInit {
       signUpRequest.phone = this.phone?.value as string;
       signUpRequest.password = this.password?.value as string;
       signUpRequest.address = this.address?.value as string;
-      signUpRequest.age = Number(this.age?.value);
+      signUpRequest.dateOfBirth = new Date(this.dateOfBirth?.value as string);
       signUpRequest.speciality = this.speciality?.value as string;
       signUpRequest.uniStaff = this.uniStaff?.value as string;
       signUpRequest.university = this.university?.value as string;
@@ -148,8 +148,8 @@ export class SignupPage implements OnInit {
     return this.signupForm.get('address');
   }
 
-  get age() {
-    return this.signupForm.get('age');
+  get dateOfBirth() {
+    return this.signupForm.get('dateOfBirth');
   }
 
 

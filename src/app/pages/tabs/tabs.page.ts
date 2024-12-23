@@ -3,6 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonTabs, ModalController, Platform, PopoverController } from '@ionic/angular';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 
 @Component({
@@ -14,11 +15,22 @@ export class TabsPage {
 
   @ViewChild('ionTabs', { static: true })
   ionTabs!: IonTabs;
+  isKeyboardOpen: boolean = false;
+  isAlertOpen = false;
 
 
-  constructor(private location: Location, private platform: Platform, private storage: SecureStorage, private router: Router, private modalCtrl: ModalController, private popoverCtrl: PopoverController) {
+  constructor(private location: Location, private platform: Platform, private storage: SecureStorage, private router: Router, private modalCtrl: ModalController, private popoverCtrl: PopoverController, private keyboard: Keyboard
+) {
+
+  this.keyboard.onKeyboardShow().subscribe(() => {
+    this.isKeyboardOpen = true;
+  });
+
+  this.keyboard.onKeyboardHide().subscribe(() => {
+    this.isKeyboardOpen = false;
+  });
+
     this.platform.backButton.subscribeWithPriority(9999, async () => {
-
       const modal = await this.modalCtrl.getTop();
       if (modal) {
           modal.dismiss();
@@ -49,5 +61,15 @@ export class TabsPage {
 
   navigateToAccount() {
     this.router.navigate(['/tabs/account']);
+    }
+
+    async navigateToAfterSale() {
+      const mode = await this.storage.get('mode');
+    //  if(mode == 'guest') {
+      //   this.isAlertOpen = true;
+      // } else {
+        this.router.navigate(['/tabs/after-sale']);
+      //}
+
     }
 }

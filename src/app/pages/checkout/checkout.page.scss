@@ -8,16 +8,18 @@
 }
 
 ion-card {
-  background: black;
+  background: white;
   padding: 0px;
-  color: white;
+  color: black;
   padding-top: 10px;
   padding-bottom: 10px;
+  font-weight: bold;
+  border-radius: 10px;
 }
 
 ion-item {
-  --background: black !important;
-  --color: white !important;
+  --background: white !important;
+  --color: black !important;
   width: 100%;
   --border-color: white;
     padding-right: 20px;
@@ -25,7 +27,7 @@ ion-item {
 }
 
 ion-icon {
-  color: white !important;
+  //color: white !important;
 }
 
 ion-card-content {
@@ -35,11 +37,13 @@ ion-card-content {
 .total-price {
   padding-left: 20px;
   padding-bottom: 5px;
+  font-weight: bold;
 }
 
 .name{
   padding-left: 18px;
   padding-bottom: 5px;
+  font-weight: bold;
 }
 
 .price-col {
@@ -87,12 +91,12 @@ ion-radio {
 .address-list {
   width: 100%;
   padding: 0px;
-  background: black !important;
+  background: white !important;
 
 }
 
 .address-item {
-  background: black !important;
+  background: white !important;
 }
 
 .buttons-bottom {

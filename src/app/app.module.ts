@@ -16,8 +16,8 @@ import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Market } from '@ionic-native/market/ngx';
-// import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
-// import { ScreenOrientation } from '@capacitor/screen-orientation';
+
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +31,7 @@ import { Market } from '@ionic-native/market/ngx';
      Market,
     // FCM,
     FirebaseX,
+    Keyboard,
     // Biometric Auth
     {
       provide: RouteReuseStrategy,

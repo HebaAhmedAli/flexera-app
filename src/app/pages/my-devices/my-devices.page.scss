@@ -14,8 +14,11 @@ ion-card-content {
 }
 
 ion-card {
-  background: black;
-  color: lightgrey;
+  background: white;
+    color: black;
+    font-weight: bold;
+    border-radius: 10px;
+
 }
 
 .add-fab {
@@ -24,4 +27,8 @@ ion-card {
 
 ion-fab-button {
   --background: black;
+}
+
+.device-details {
+  font-weight: normal;
 }

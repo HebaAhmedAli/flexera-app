@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductModel } from 'src/app/models/product.model';
+import { CartService } from 'src/app/services/cart.service';
 import { CategoryService } from 'src/app/services/category.service';
+import { SecureStorage } from 'src/app/services/secure-storage.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -15,16 +17,24 @@ export class ProductsPage implements OnInit {
   segmentValue: string = 'devices';
   selectedSortBy: string = 'name';
   categoryImg: string = '';
+  categoryName: string = '';
   categoryId: number = 0;
   allProducts : Array<ProductModel> = [];
   devicesProducts : Array<ProductModel> = [];
   materialsProducts :  Array<ProductModel> = [];
-  constructor(private router: ActivatedRoute, private categoryService: CategoryService) {
+  isToastOpen = false;
+  mode!: string;
+  isAlertOpen = false;
+  toastMessage!: string;
+
+
+  constructor(private router: ActivatedRoute,private cartService: CartService, private categoryService: CategoryService, private routerr: Router, private storage:SecureStorage) {
 
   }
 
   ngOnInit() {
     this.categoryImg = this.router.snapshot.paramMap.get('categoryImg') as string;
+    this.categoryName = this.router.snapshot.paramMap.get('categoryName') as string;
     this.categoryId = Number(this.router.snapshot.paramMap.get('categoryId') as string);
     this.categoryService.getProductsOfCategory(this.categoryId).subscribe(data => {
       console.log( this.allProducts)
@@ -62,5 +72,23 @@ export class ProductsPage implements OnInit {
 
   getImgUrl(url: string): string {
     return environment.baseUrl + '/' + url;
+   }
+
+   async addProduct(product: ProductModel) {
+    this.mode = await this.storage.get('mode');
+
+    if(this.mode === 'guest') {
+      this.isAlertOpen = true;
+      return;
+    }
+
+    if(product.sizes.length > 0) {
+      this.routerr.navigate(['/product-details',{productId: product.id}]);
+      return;
+    }
+
+    this.cartService.addProductToCart(product, undefined);
+    this.toastMessage = "Added to cart successfully!";
+    this.isToastOpen = true;
    }
 }

@@ -1,15 +1,18 @@
 
 .card-title {
   padding-bottom: 5px;
-  --color: white !important;
+  --color: black !important;
+  font-weight: bold;
 }
 
 .card-sub-title {
-  --color: lightgrey !important;
+  --color: black !important;
 }
 
 ion-card {
-  background: black;
+  background: white;
+  border-radius: 10px;
+
 }
 
 

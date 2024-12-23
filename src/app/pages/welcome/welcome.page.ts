@@ -9,6 +9,7 @@ import { SecureStorage } from 'src/app/services/secure-storage.service';
 import { SystemParametersService } from 'src/app/services/system-parameters.service';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Market } from '@ionic-native/market/ngx';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-welcome',
@@ -25,7 +26,7 @@ export class WelcomePage implements OnInit {
 
   appId!: string;
 
-  constructor(private router: Router, private storage: SecureStorage, private notificationService: NotificationService, private sysParamServ: SystemParametersService,
+  constructor(private router: Router, private authService: AuthService, private storage: SecureStorage, private notificationService: NotificationService, private sysParamServ: SystemParametersService,
     private modalController: ModalController, private globalService: GlobalService, private appVersion: AppVersion, private platform: Platform, private market: Market) { }
 
   async ngOnInit() {
@@ -102,7 +103,7 @@ export class WelcomePage implements OnInit {
               backdropDismiss: true
             });
             return await modalEl.present();
-          }, 3100)
+         }, 1000)
 
 
       }
@@ -111,6 +112,9 @@ export class WelcomePage implements OnInit {
     if(this.splashMode) {
       setTimeout(async () => {
         await this.storage.set('mode', 'user');
+
+        this.authService.fetchUserDetails();
+
         console.log("inside time out splash", this.notificationService.notificationTapped)
         if(this.notificationService.notificationTapped) {
           this.notificationService.notificationTapped = false;
@@ -122,16 +126,16 @@ export class WelcomePage implements OnInit {
           this.notificationService.notInWelcome = true;
           this.router.navigateByUrl('tabs');
         }
-      }, 3100);
+      }, 1000);
     } else if(this.notificationService.notificationTapped) {
       setTimeout(async () => {
         console.log("inside time out else splash", this.notificationService.notificationTapped)
         this.notificationService.notificationTapped = false;
         this.notificationService.notInWelcome = true;
         this.router.navigate([this.notificationService.notificationData.url,
-          {productId: this.notificationService.notificationData.urlItemId, course_id: this.notificationService.notificationData.urlItemId, orderId: this.notificationService.notificationData.urlItemId}]);},
-           3100);
-    }
+          {productId: this.notificationService.notificationData.urlItemId, course_id: this.notificationService.notificationData.urlItemId, orderId: this.notificationService.notificationData.urlItemId}]);
+        }, 1000);
+       }
   }
 
   async navigateToTabs() {

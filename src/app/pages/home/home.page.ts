@@ -8,9 +8,11 @@ import { CategoryModel } from 'src/app/models/category.model';
 import { GalleryItem } from 'src/app/models/gallery-item.model';
 import { ProductModel } from 'src/app/models/product.model';
 import { AddsService } from 'src/app/services/adds.service';
+import { CartService } from 'src/app/services/cart.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { GlobalService } from 'src/app/services/global.service';
 import { ProductService } from 'src/app/services/product.service';
+import { SecureStorage } from 'src/app/services/secure-storage.service';
 import { SystemParametersService } from 'src/app/services/system-parameters.service';
 import { environment } from 'src/environments/environment';
 import Swiper from 'swiper';
@@ -30,6 +32,8 @@ export class HomePage implements OnInit {
 
   categories: Array<CategoryModel>  = [];
   products: Array<ProductModel> = [] ;
+  orderNowProducts: Array<ProductModel> = [] ;
+  bestSellerProducts: Array<ProductModel> = [] ;
   adds: Array<Adds>  = [];
   videoFixed = false;
 
@@ -43,6 +47,13 @@ export class HomePage implements OnInit {
   searchTerm: string = '';
   filteredProducts: ProductModel[] = [];
 
+  isToastOpen = false;
+  mode!: string;
+  isAlertOpen = false;
+
+  toastMessage!: string;
+
+  addsActiveIndex = 0;
 
 
   constructor(private categoryService: CategoryService,
@@ -52,7 +63,9 @@ export class HomePage implements OnInit {
     private productService: ProductService,
     private addsService: AddsService,
     private platform: Platform,
-    private router: Router
+    private router: Router,
+    private storage: SecureStorage,
+    private cartService: CartService
   ) { }
 
   async ngOnInit() {
@@ -74,6 +87,8 @@ export class HomePage implements OnInit {
 
     this.productService.getAllProducts().subscribe(data => {
       this.products = data;
+      this.bestSellerProducts = this.products.filter(pr => pr.sellingRate === 100);
+      this.orderNowProducts = this.products.filter(pr => pr.sellingRate === 99);
     },
     err => {
       console.log(err);
@@ -98,39 +113,52 @@ export class HomePage implements OnInit {
 
   ionViewDidEnter() {
 
-    this.addsSwiper = new Swiper('.swiper-container', {
-      // Optional parameters
-      direction: 'horizontal',
-      loop: false,
-      slidesPerView: 1,
-    });
+    if(!this.addsSwiper) {
+      this.addsSwiper = new Swiper('.swiper-container', {
+        // Optional parameters
+        direction: 'horizontal',
+        loop: false,
+        slidesPerView: 1,
+        on: {
+          slideChange: () => {
+            // Arrow function keeps the outer `this`
+            this.addsActiveIndex = this.addsSwiper.activeIndex;
+            console.log('Active Slide Index:', this.addsSwiper.activeIndex);
+          },
+        },
+      });
 
-    this.categorySwiper = new Swiper('.category-swiper-container', {
-      // Optional parameters
-      direction: 'horizontal',
-      loop: false,
-      slidesPerView: 4
-    });
-    this.orderNowSwiper = new Swiper('.order-now-swiper-container', {
-      // Optional parameters
-      direction: 'horizontal',
-      loop: false,
-      slidesPerView: 3
-    });
+      this.categorySwiper = new Swiper('.category-swiper-container', {
+        // Optional parameters
+        direction: 'horizontal',
+        loop: false,
+        slidesPerView: 4
+      });
+      this.orderNowSwiper = new Swiper('.order-now-swiper-container', {
+        // Optional parameters
+        direction: 'horizontal',
+        loop: false,
+        slidesPerView: 2
+      });
 
-    this.bestSellerSwiper = new Swiper('.best-seller-swiper-container', {
-      // Optional parameters
-      direction: 'horizontal',
-      loop: false,
-      slidesPerView: 3
-    });
+      this.bestSellerSwiper = new Swiper('.best-seller-swiper-container', {
+        // Optional parameters
+        direction: 'horizontal',
+        loop: false,
+        slidesPerView: 2
+      });
+    }
+
    this.videoFix();
+
+
+
  }
 
 
- get addsActiveIndex() {
-  return this.addsSwiper?.activeIndex;
- }
+//  get addsActiveIndex() {
+//   return this.addsSwiper?.activeIndex;
+//  }
 
 
  videoFix() {
@@ -222,5 +250,23 @@ filterProductClicked(id: number) {
   this.searchTerm = '';
   this.clearFilter();
 }
+
+  async addProduct(product: ProductModel) {
+  this.mode = await this.storage.get('mode');
+
+  if(this.mode === 'guest') {
+    this.isAlertOpen = true;
+    return;
+  }
+
+  if(product.sizes.length > 0) {
+    this.router.navigate(['/product-details',{productId: product.id}]);
+    return;
+  }
+
+  this.cartService.addProductToCart(product, undefined);
+  this.toastMessage = "Added to cart successfully!";
+  this.isToastOpen = true;
+ }
 
 }

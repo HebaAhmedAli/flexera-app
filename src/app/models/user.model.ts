@@ -17,7 +17,7 @@ export class UserModel {
   address!: string;
 
 
-  age!: number;
+  dateOfBirth!: Date;
 
 
   speciality!: string;
@@ -25,4 +25,7 @@ export class UserModel {
   uniStaff!: string;
 
   university!: string;
+
+  isVip!: string;
+
 }

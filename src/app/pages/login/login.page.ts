@@ -77,10 +77,10 @@ export class LoginPage implements OnInit {
         this.router.navigateByUrl('tabs');
       } else {
         this.isAlertOpen = true;
-        this.message = response.error.message;
+        this.message = 'Wrong Email or Password!';
       }
     }, error => {
-      this.message = error.error.message;
+      this.message = 'Wrong Email or Password!';
       this.isAlertOpen = true;
     }
     );

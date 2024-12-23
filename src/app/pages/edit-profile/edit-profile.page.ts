@@ -22,6 +22,7 @@ export class EditProfilePage implements OnInit {
 
   async ngOnInit() {
     this.user = await this.storage.get('user') as UserModel;
+    console.log(this.user);
     this.initForm();
   }
 
@@ -32,12 +33,20 @@ export class EditProfilePage implements OnInit {
       email: new FormControl({value: this.user?.email, disabled: true}, [Validators.required, Validators.email, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]),
       phone: new FormControl({value: this.user?.phone, disabled: true}, [Validators.required, Validators.pattern('(01)[0-9]{9}')]),
       address: new FormControl(this.user?.address),
-      age: new FormControl(this.user?.age),
+      dateOfBirth: new FormControl(
+        this.user?.dateOfBirth ? this.parseDate(String(this.user.dateOfBirth)) : null,
+        Validators.required
+      ),
       speciality: new FormControl(this.user?.speciality),
       uniStaff: new FormControl(this.user?.uniStaff),
       university: new FormControl(this.user?.university)
     });
-    
+
+  }
+
+  private parseDate(dateString: string): string {
+    const [day, month, year] = dateString.split('/'); // Split DD/MM/YYYY
+    return `${year}-${month}-${day}`; // Convert to YYYY-MM-DD
   }
 
   get uniStaff() {
@@ -50,7 +59,7 @@ export class EditProfilePage implements OnInit {
       title: this.profileForm.controls['title'].value,
       name: this.profileForm.controls['name'].value,
       address: this.profileForm.controls['address'].value,
-      age: this.profileForm.controls['age'].value,
+      dateOfBirth:  new Date(this.profileForm.controls['dateOfBirth'].value),
       speciality: this.profileForm.controls['speciality'].value,
       uniStaff: this.profileForm.controls['uniStaff'].value,
       university: this.profileForm.controls['university'].value

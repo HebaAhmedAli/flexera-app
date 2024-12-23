@@ -93,6 +93,10 @@ const routes: Routes = [
   {
     path: 'request-status',
     loadChildren: () => import('./pages/request-status/request-status.module').then( m => m.RequestStatusPageModule)
+  },
+  {
+    path: 'maintenence-report',
+    loadChildren: () => import('./pages/maintenence-report/maintenence-report.module').then( m => m.MaintenenceReportPageModule)
   }
 
 

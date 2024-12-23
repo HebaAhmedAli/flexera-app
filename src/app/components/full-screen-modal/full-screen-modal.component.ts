@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Subscription, fromEvent } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -17,6 +17,12 @@ export class FullScreenModalComponent  implements OnInit {
   type!: string;
   private backbuttonSubscription!: Subscription;
 
+  @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
+
+  @Input()
+  palyVideo: boolean = false;
+
+
 constructor(private modalCtrl: ModalController) {}
 
 ngOnInit() {
@@ -27,7 +33,21 @@ ngOnInit() {
             modal.dismiss();
         }
     });
+
+
 }
+
+ngOnChanges(changes: SimpleChanges) {
+  if (changes['palyVideo'] && this.videoPlayer) {
+    if (this.palyVideo) {
+      this.videoPlayer.nativeElement.play();
+    } else {
+      this.videoPlayer.nativeElement.pause();
+      this.videoPlayer.nativeElement.currentTime = 0; // Reset playback to the start
+    }
+  }
+}
+
 
 ngOnDestroy() {
     this.backbuttonSubscription.unsubscribe();
@@ -36,6 +56,9 @@ ngOnDestroy() {
 getImgUrl(url: string): string {
   return environment.baseUrl + '/' + url;
  }
+
+
+
 }
 
 

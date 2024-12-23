@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { AccountImageModalComponent } from 'src/app/components/account-image-modal/account-image-modal.component';
 import { UserModel } from 'src/app/models/user.model';
+import { CartService } from 'src/app/services/cart.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
@@ -50,7 +51,8 @@ export class AccountPage implements OnInit {
     private modalController: ModalController,
     private profileService: ProfileService,
     private router: Router,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private cartService: CartService
   ) {}
 
   async ngOnInit() {
@@ -127,6 +129,7 @@ export class AccountPage implements OnInit {
     await this.storage.set('user', undefined);
     await this.storage.set('mode', 'guest')
     await this.storage.set('token', undefined);
+    this.cartService.emptyTheCart();
     this.router.navigateByUrl('/welcome');
   }
 

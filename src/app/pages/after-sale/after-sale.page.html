@@ -3,7 +3,7 @@
 
 <ion-content [fullscreen]="true">
   <h1 class="ion-text-center">After Sale And Maintenence Service</h1>
-  <ion-card routerLink="/maintenence-request">
+  <ion-card (click)="navigateToMaintainenceRequest()">
     <ion-card-content>
         <ion-icon name="newspaper-outline"></ion-icon>
         <ion-label style="margin-top: 20px;">Maintenence Request</ion-label>
@@ -19,3 +19,10 @@
 
   <h3 class="ion-text-center">To contact After Sale And Maintenence Department please call 01115191868</h3>
 </ion-content>
+
+<ion-alert
+[isOpen]="isAlertOpen"
+message="You need to login first to be able to use after sale services."
+[buttons]="['OK']"
+(didDismiss)="isAlertOpen = false"
+></ion-alert>

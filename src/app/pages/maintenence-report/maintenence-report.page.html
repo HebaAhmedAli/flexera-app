@@ -1,0 +1,142 @@
+<app-header></app-header>
+
+
+<ion-content [fullscreen]="true">
+  <div *ngIf="maintenence"  class="button-container" style="font-size: 25px; font-weight: bold;text-align: center;
+  margin-top: 25px;
+  margin-bottom: 10px;
+    margin-left: 30px;
+    margin-right: 30px;">
+    After Sale and Maintenance service
+  </div>
+
+
+
+
+  <ion-grid class="ion-text-center" *ngIf="maintenence">
+
+
+    <!-- <ion-row class="ion-margin">
+      <ion-col style="border: none;">
+
+
+      </ion-col>
+    </ion-row> -->
+    <ion-row class="ion-text-center ion-margin">
+      <ion-col class="ion-text-center">
+        <ion-label style="    font-size: 20px;
+    font-weight: bold;">Status: <span [ngClass]="{'green': maintenence.status === 'Pending', 'blue': maintenence.status=== 'Done'}">{{maintenence.status}}</span> </ion-label>
+      </ion-col>
+    </ion-row>
+
+    <ion-grid style="margin-top: -20px;">
+      <ion-row>
+        <ion-col>
+            <ion-card>
+              <ion-card-content>
+              <ion-grid>
+                <ion-row>
+                  <ion-label>Request Number: <span style="font-weight: 100;">{{maintenence.id}}</span></ion-label>
+                </ion-row>
+                  <ion-row>
+                    <ion-label>Name: <span style="font-weight: 100;">{{maintenence.name}}</span></ion-label>
+                  </ion-row>
+                  <ion-row>
+                    <ion-label>Phone: <span style="font-weight: 100;">{{maintenence.phone}}</span></ion-label>
+                  </ion-row>
+                  <ion-row>
+                    <ion-label>Device: <span style="font-weight: 100;">{{maintenence.device}}</span></ion-label>
+                  </ion-row>
+                  <ion-row>
+                    <ion-label>Serial no: <span style="font-weight: 100;">{{maintenence.serialNo}}</span></ion-label>
+                  </ion-row>
+                  <ion-row>
+                    <ion-label>Entry Date: <span style="font-weight: 100;">{{maintenence.creationDate}}</span></ion-label>
+                  </ion-row>
+                  <ion-row>
+                    <ion-label>Complaint: <span style="font-weight: 100;">{{maintenence.complaint}}</span></ion-label>
+                  </ion-row>
+                  <!-- <ion-row>
+                    <ion-label>Feedback: <span style="font-weight: 100;">{{maintenence.feedBack}}</ion-label>
+                  </ion-row> -->
+
+
+             </ion-grid>
+              </ion-card-content>
+            </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid style="margin-top: -20px;">
+      <ion-row>
+        <ion-col>
+            <ion-card>
+              <ion-card-content>
+              <ion-grid>
+                <ion-row>
+                  <ion-label>Photos:
+                  </ion-label>
+                </ion-row>
+                  <ion-row>
+                    <ion-col size="4" *ngFor="let galleryItem of maintenence?.gallery;let i=index;">
+                      <img *ngIf="galleryItem.type === 'img'" [src]="getImgUrl(galleryItem.url)" [id]="'main_img' + i" (click)="openImageViewer( i)">
+                      <video [id]="'main_video' + galleryItem.id" *ngIf="galleryItem.type === 'video'" width="100%" height="auto" (click)="openImageViewer(i)">
+                        <source [src]="getImgUrl(galleryItem.url)" type="video/mp4">
+                        Your browser does not support the video tag.
+                      </video>
+                      <ion-icon *ngIf="galleryItem.type === 'video'" name="play" class="play-icon"  (click)="openImageViewer( i)"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+
+
+             </ion-grid>
+              </ion-card-content>
+            </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid style="margin-top: -20px;">
+      <ion-row>
+        <ion-col>
+            <ion-card>
+              <ion-card-content>
+              <ion-grid>
+
+                  <ion-row>
+                    <ion-label>Report:
+                    </ion-label>
+                  </ion-row>
+                  <ion-row>
+                    <div style="text-align: right; width: 100%; font-weight: 100;" dir="rtl" [innerHTML]="maintenence.feedBack | safeHtml"></div>
+
+                  </ion-row>
+
+
+             </ion-grid>
+              </ion-card-content>
+            </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-grid>
+
+  <!-- <div class="maint-slider">
+    <div class="maint-swiper-container" >
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide" *ngFor="let galleryItem of maintenence?.gallery;let i=index;">
+          <img *ngIf="galleryItem.type === 'img'" [src]="getImgUrl(galleryItem.url)" [id]="'main_img' + i" (click)="openImageViewer( i)">
+          <video [id]="'main_video' + galleryItem.id" *ngIf="galleryItem.type === 'video'" width="100%" height="auto" (click)="openImageViewer(i)">
+            <source [src]="getImgUrl(galleryItem.url)" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <ion-icon *ngIf="galleryItem.type === 'video'" name="play" class="play-icon"  (click)="openImageViewer( i)"></ion-icon>
+        </div>
+      </div>
+
+    </div>
+  </div> -->
+</ion-content>

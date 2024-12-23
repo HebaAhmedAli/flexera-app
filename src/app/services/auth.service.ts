@@ -6,6 +6,7 @@ import { SignUpRequestModel } from '../models/signup-request.model';
 import { LoginRequestModel } from '../models/login-request.model';
 import { LoginResponseModel } from '../models/login-response.model';
 import { SecureStorage } from './secure-storage.service';
+import { UserModel } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,13 @@ export class AuthService {
 
   public getToken(): Observable<string> {
     return from(this.storage.get('token'));
+  }
+
+  public fetchUserDetails(): void {
+    this.httpClient.get<UserModel>(
+      `${environment.baseUrl}/api/v1/user-details`
+    ).subscribe(user => {
+      this.storage.set('user', user);
+    });
   }
 }

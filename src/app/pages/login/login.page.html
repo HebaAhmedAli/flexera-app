@@ -1,4 +1,4 @@
-<ion-header class="ion-no-border">
+<!-- <ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button class="backbtn" routerLink="/welcome" routerDirection="back">
@@ -6,21 +6,31 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content class="ion-padding">
+<ion-content style="--background: none !important; z-index: 100000;">
+
+  <div class="half-part">
+
+    <ion-buttons slot="start" style="margin-left: -20px;">
+      <ion-button class="backbtn" routerLink="/welcome" routerDirection="back">
+        <img src="assets/back-dark.svg" />
+      </ion-button>
+    </ion-buttons>
+
   <form [formGroup]="loginForm" (ngSubmit)="login()">
 
   <div class="ion-padding container">
-    <h1>Login</h1>
+    <h1 class="title">Login</h1>
+    <h3 class="ion-text-center sub-title">Sign in to continue</h3>
 
     <div class="form-container">
+      <ion-label class="item-label" position="floating">EMAIL</ion-label>
       <ion-item>
-        <ion-label position="floating">Email</ion-label>
         <ion-input formControlName="email"></ion-input>
       </ion-item>
+      <ion-label class="item-label" position="floating">PASSWORD</ion-label>
       <ion-item>
-        <ion-label position="floating">Password</ion-label>
         <ion-input formControlName="password" type="{{ showPassword ? 'text' : 'password' }}"></ion-input>
         <ion-icon name="{{ showPassword ? 'eye-off' : 'eye' }}" slot="end" (click)="togglePasswordVisibility()"></ion-icon>
       </ion-item>
@@ -28,11 +38,10 @@
         <ion-button expand="block" class="main-button" type="submit">Log in</ion-button>
 
       <div class="sign-up">
-        Don't have an account? <ion-button color="dark" fill="clear" routerLink="/signup" routerDirection="forward">Sign up</ion-button>
+        <ion-button color="dark" fill="clear" routerLink="/signup" routerDirection="forward">Sign up</ion-button>
       </div>
       <div class="sign-up">
-        Forgot password?
-        <ion-button color="dark" fill="clear" routerLink="/forget-password" routerDirection="forward">Reset Password</ion-button>
+        <ion-button color="dark" fill="clear" routerLink="/forget-password" routerDirection="forward">Forgot password?</ion-button>
       </div>
 
       <!-- <ion-button expand="block" class="main-button" *ngIf="enableBiometric" (click)="onClickBiometricLogin()">
@@ -47,6 +56,7 @@
     </div>
   </div>
   </form>
+</div>
 
   <ion-alert
   [isOpen]="isAlertOpen"
@@ -56,3 +66,5 @@
 ></ion-alert>
 
 </ion-content>
+
+<div class="background"><img src="assets/background.png"/></div>

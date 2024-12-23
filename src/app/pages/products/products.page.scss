@@ -1,6 +1,4 @@
-.add-fab {
-  zoom: 0.7;
-}
+
 
 ion-fab-button {
   --background: black;
@@ -12,8 +10,8 @@ ion-col {
 
 
 img {
-  height: 150px;
-  width: 100%;
+  // height: 150px;
+  // width: 100%;
 }
 
 ion-card {
@@ -59,12 +57,11 @@ ion-title {
 
 
 .category-img {
-  width: 100%;
-    height: 10vh;
-    //border-radius: 5%;
-    //background: white;
-    padding: 5px;
-    //border: 3px solid black;
+  width: 90px;
+    height: 90px;
+    /* padding: 5px; */
+    margin-left: 12px;
+    border-radius: 10px;
 }
 
 .filter-button {
@@ -103,3 +100,115 @@ ion-modal#sort-modal .wrapper {
   font-weight: 100;
 }
 
+
+
+
+ion-card {
+  width: 100%;
+  border-radius: 8px;
+}
+
+
+ion-card-header {
+  height: 45px;
+  padding: 2px;
+}
+
+ion-card-title {
+  overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+    /* font-weight: bold; */
+    color: grey;
+    font-size: small;
+    padding-left: 8px;
+}
+
+ion-card-subtitle {
+  text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 1px;
+    padding-left: 8px;
+    color: black;
+    font-weight: bold;
+    font-size: medium;
+}
+
+ion-card-content {
+  text-align: right;
+    color: black;
+    font-weight: bold;
+   // height: 30px;
+    margin: 0px;
+    padding: 0px;
+    padding-right: 8px;
+
+}
+ion-title {
+  padding: 5px;
+  text-align: center;
+  background: black;
+  color: white;
+  border: 1px solid white;
+}
+
+
+ion-fab-button {
+  --background: black;
+    --color: white;
+}
+
+a {
+  color: white;
+    font-size: 40px;
+    font-weight: bold;
+    text-decoration: none;
+    padding-bottom: 3px;
+}
+
+.add-fab {
+  zoom: 0.6;
+  margin-bottom: 70px;
+    z-index: 10000;
+
+}
+
+.product-img{
+  // position: relative;
+            height: 120px;
+            width: 80%;
+            margin-left: 10%;
+            object-fit: fill;
+            z-index: 1000;
+            margin-bottom: -3px;
+}
+
+.cat-name {
+  font-size: 35px;
+    color: black;// #00004B;
+    font-weight: bold;
+}
+
+.fanta-color {
+  color: #117a82;
+}
+
+.eighteeth-color {
+  color: #10427c;
+}
+
+
+.exam-depp-color {
+  color: darkred;
+}
+
+.beyond-color {
+  color: #0d0a4f;
+}
+
+.water-color {
+  color: #1b247e;
+}

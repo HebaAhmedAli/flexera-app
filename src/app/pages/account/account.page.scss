@@ -45,6 +45,7 @@ ion-card {
   background: lightgrey;
   border-radius: 50%;
   padding: 3px;
+  z-index: 1000;
 }
 
 
@@ -56,3 +57,22 @@ ion-card {
 
 
 
+
+
+
+.crown {
+  position: absolute;
+  top: 2%;
+  left: 0%;
+  scale: 0.8;
+
+}
+
+
+.vip {
+    scale: 0.4;
+    /* top: 82%; */
+    /* left: 9%; */
+    margin-bottom: -13%;
+    margin-top: -2%;
+}

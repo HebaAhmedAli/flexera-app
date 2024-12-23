@@ -1,28 +1,29 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-buttons slot="start">
+
+
+<ion-content style="--background: none !important; z-index: 100000;">
+
+  <div class="half-part">
+
+    <ion-buttons slot="start" style="margin-left: -20px;">
       <ion-button class="backbtn" routerLink="/welcome" routerDirection="back">
         <img src="assets/back-dark.svg" />
       </ion-button>
     </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content class="ion-padding">
 
   <div class="ion-padding container">
-    <h1>Signup</h1>
+    <h1 class="title">Create New Account</h1>
+
     <form [formGroup]="signupForm" (ngSubmit)="signup()">
 
     <div class="form-container">
 
       <ion-list>
+        <ion-label class="item-label" position="floating">Title *</ion-label>
+
         <ion-item [ngClass]="{'invalid': title?.invalid && (title?.dirty || title?.touched)}">
-          <ion-select label="Title *" label-placement="floating" interface="popover" mode="md" formControlName="title">
+          <ion-select interface="popover" mode="md" formControlName="title">
             <ion-select-option value="Mr.">Mr.</ion-select-option>
-            <ion-select-option value="Dr.">Dr.</ion-select-option>
-            <ion-select-option value="TA.">TA.</ion-select-option>
-            <ion-select-option value="Prof.">Prof.</ion-select-option>
+            <ion-select-option value="Miss.">Miss.</ion-select-option>
           </ion-select>
 
         </ion-item>
@@ -32,9 +33,9 @@
           Title is required
         </span>
       </div>
+      <ion-label class="item-label" position="floating">Full Name *</ion-label>
 
       <ion-item>
-        <ion-label position="floating">Full Name *</ion-label>
         <ion-input formControlName="name"></ion-input>
       </ion-item>
       <div class="error-container" *ngIf="name?.invalid && (name?.dirty || name?.touched)">
@@ -42,9 +43,9 @@
           Full Name is required
         </span>
       </div>
+      <ion-label class="item-label" position="floating">Email *</ion-label>
 
       <ion-item>
-        <ion-label position="floating">Email *</ion-label>
         <ion-input formControlName="email"></ion-input>
       </ion-item>
       <div class="error-container" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
@@ -56,8 +57,8 @@
         </span>
       </div>
 
+      <ion-label class="item-label" position="floating">Phone *</ion-label>
       <ion-item>
-        <ion-label position="floating">Phone *</ion-label>
         <ion-input formControlName="phone" type="tel"></ion-input>
       </ion-item>
       <div class="error-container" *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)">
@@ -69,8 +70,20 @@
         </span>
       </div>
 
+      <ion-label class="item-label" position="floating">Date of Birth *</ion-label>
+      <ion-item >
+        <ion-input type="date" formControlName="dateOfBirth"></ion-input>
+      </ion-item>
+
+      <div class="error-container" *ngIf="dateOfBirth?.invalid && (dateOfBirth?.dirty || dateOfBirth?.touched)">
+        <span *ngIf="dateOfBirth?.errors?.required">
+          Date Of Birth is required
+        </span>
+      </div>
+
+
+      <ion-label class="item-label" position="floating">Password *</ion-label>
       <ion-item>
-        <ion-label position="floating">Password *</ion-label>
         <ion-input formControlName="password" type="{{ showPassword ? 'text' : 'password' }}"></ion-input>
         <ion-icon name="{{ showPassword ? 'eye-off' : 'eye' }}" slot="end" (click)="togglePasswordVisibility()"></ion-icon>
       </ion-item>
@@ -82,12 +95,12 @@
           Password must contain one digit from 1 to 9, one lowercase letter, one uppercase letter, one special character, no space, and it must be 8-16 characters long.
         </span>
       </div>
-
       <br>
 
+      <ion-label class="item-label" position="floating" *ngIf="showReferralList === 'Y'">Referral *</ion-label>
       <ion-list *ngIf="showReferralList === 'Y'">
         <ion-item [ngClass]="{'invalid': referral?.invalid && (referral?.dirty || referral?.touched)}">
-          <ion-select label="Referral *" label-placement="floating" interface="popover" mode="md" formControlName="referral">
+          <ion-select interface="popover" mode="md" formControlName="referral">
             <div *ngFor="let referral of referralList;" >
               <ion-select-option [value]="referral.name">{{referral.name}}</ion-select-option>
             </div>
@@ -99,7 +112,8 @@
 
       <br>
 
-      <ion-item lines="none" (click)="showAdditional = !showAdditional">
+      <ion-item style="--background: white !important;
+  --border-color: darkgrey !important;" lines="none" (click)="showAdditional = !showAdditional">
         <h3>Optional Info</h3>
         <ion-icon  name="{{ showAdditional ? 'caret-down-outline' : 'caret-forward-outline' }}" slot="end" ></ion-icon>
       </ion-item>
@@ -108,19 +122,16 @@
 
       <br>
 
+      <ion-label class="item-label" position="floating" *ngIf="showAdditional">Address</ion-label>
         <ion-item *ngIf="showAdditional">
-          <ion-label position="floating">Address</ion-label>
           <ion-input formControlName="address"></ion-input>
         </ion-item>
 
-        <ion-item *ngIf="showAdditional">
-          <ion-label position="floating">Age</ion-label>
-          <ion-input type="number" formControlName="age"></ion-input>
-        </ion-item>
 
+        <ion-label class="item-label" position="floating" *ngIf="showAdditional">Speciality</ion-label>
         <ion-list *ngIf="showAdditional">
           <ion-item>
-            <ion-select formControlName="speciality" label="Speciality" label-placement="floating" interface="popover" mode="md">
+            <ion-select formControlName="speciality"  interface="popover" mode="md">
               <ion-select-option value="GP">GP</ion-select-option>
               <ion-select-option value="Restorative">Restorative</ion-select-option>
               <ion-select-option value="Endodontics">Endodontics</ion-select-option>
@@ -134,21 +145,23 @@
           </ion-item>
         </ion-list>
 
+        <ion-label class="item-label" position="floating" *ngIf="showAdditional">University Staff</ion-label>
         <ion-list *ngIf="showAdditional">
           <ion-item>
-            <ion-select formControlName="uniStaff" label="University Staff" label-placement="floating" interface="popover" mode="md" >
+            <ion-select formControlName="uniStaff"  interface="popover" mode="md" >
               <ion-select-option value="Yes">Yes</ion-select-option>
               <ion-select-option value="No">No</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-list>
 
+        <ion-label class="item-label" position="floating" *ngIf="showAdditional">University</ion-label>
         <ion-item *ngIf="showAdditional && uniStaff?.value === 'Yes'">
-          <ion-label position="floating">University</ion-label>
           <ion-input formControlName="university"></ion-input>
         </ion-item>
 
-        <ion-item>
+        <ion-item style="--background: white !important;
+  --border-color: darkgrey !important;">
           <ion-checkbox formControlName="termsAndConditions"></ion-checkbox>
           <ion-label style="white-space: normal;">Accept <a (click)="openTermsAndConditions('terms')">Terms and Conditions</a> and <a (click)="openTermsAndConditions('privacy')">Privacy Policy</a></ion-label>
 
@@ -163,6 +176,7 @@
     </div>
     </form>
   </div>
+  </div>
 
   <ion-alert
   [isOpen]="isAlertOpen"
@@ -172,3 +186,6 @@
 ></ion-alert>
 
 </ion-content>
+
+
+<div class="background"><img src="assets/background.png"/></div>

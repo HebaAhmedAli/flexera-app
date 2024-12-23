@@ -35,7 +35,7 @@ ion-toolbar {
 }
 
 .form-container ion-button {
-  margin-top: 48px;
+  margin-top: 40px;
 }
 
 .sign-up {
@@ -50,4 +50,46 @@ ion-toolbar {
 
 ion-toolbar {
   --background: #EEEEEE !important;
+}
+
+
+ion-item {
+  --background: #DADADA !important;
+    --border-color: darkgrey !important;
+    --border-radius: 25px;
+    margin-top: 5px;
+    --padding-start: 10px !important;
+    margin-bottom: 20px;
+}
+
+.item-label {
+  padding-left: 5px;
+  color: darkgrey;
+}
+
+.half-part {
+  background: white;
+  // height: 60vh;
+  margin-top: 80%;
+  border-top-right-radius: 50px;
+  padding: 30px;
+}
+
+.title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.sub-title {
+  font-size: 15px;
+  color: darkgrey !important;
+
+}
+
+.background {
+  position: fixed;
+    top: 0;
+    background: black;
+    margin-top: -30px;
 }

@@ -60,6 +60,7 @@ export class OrdersPage implements OnInit {
 
   async ionViewWillEnter() {
     this.mode = await this.storage.get('mode');
+    this.orderId = Number(this.route.snapshot.paramMap.get('productId') as string);
     if(this.mode === 'user') {
       this.getOrders();
     }
@@ -71,7 +72,12 @@ export class OrdersPage implements OnInit {
       this.allOrders = data;
       if(this.orderId) {
         const index = this.allOrders.findIndex(order => order.id === this.orderId);
-        if(index !== -1) this.allOrders[index].expanded = true;
+        if(index !== -1) {
+          this.allOrders[index].expanded = true;
+          if(this.allOrders[index].status === 'Done') {
+            this.segmentValue = 'old';
+          }
+        }
       }
       this.oldOrders = this.allOrders.filter(order => order.status === 'Done');
       this.currentOrders = this.allOrders.filter(order => order.status !== 'Done');

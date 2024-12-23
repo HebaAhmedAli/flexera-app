@@ -1,0 +1,137 @@
+.header-row {
+  background: black;
+  color: #fff;
+  font-size: 18px;
+}
+
+ion-col {
+  // border: 1px solid lightgrey;
+}
+
+ion-card-content {
+  padding: 10px;
+  font-size: 17px;
+}
+
+ion-card {
+  background: white;
+  color: black;
+  font-weight: bold;
+  border-radius: 10px;
+
+}
+
+.add-fab {
+  // zoom: 0.7;
+}
+
+
+ion-label {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+
+.play-icon {
+  color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    zoom: 1.5;
+    margin-left: 40%;
+    margin-top: 30%;
+
+}
+
+.maint-slider{
+  margin-bottom: -5px;
+    .swiper-slide {
+      height: 22vh;
+      margin-bottom: 30px;
+      margin-top: 10px;
+
+
+          h4 {
+              color: #ffffff;
+              margin: 0;
+          }
+
+          img {
+              position: relative;
+              width: 100% !important;
+              height: 100% !important;
+              object-fit: fill;
+              border-radius: 8px;
+              // top: 0;
+              // left: 0;
+              z-index: 1000;
+              box-shadow: 0px 15px 20px 0px rgba(0, 0, 0, 0.16);
+          }
+
+         video {
+            position: relative;
+            width: 100% !important;
+              height: 100% !important;
+            object-fit: fill;
+            border-radius: 8px;
+            // top: 0;
+            // left: 0;
+            z-index: 1000;
+            box-shadow: 0px 15px 20px 0px rgba(0, 0, 0, 0.16);
+      }
+  }
+
+
+}
+
+
+.swiper-slide-active {
+  width: 86vw !important;
+  margin-right: 3vw !important;
+  margin-left: 3vw !important;
+
+}
+
+.swiper-slide-around-active {
+  width: 104vw !important;
+  margin-right: 0vw !important;
+  margin-left: 0vw !important;
+
+}
+
+.swiper-slide-not-active {
+  width: 100vw !important;
+  margin-right: 0vw !important;
+  margin-left: 0vw !important;
+
+}
+
+
+.swiper-wrapper {
+
+  margin-left: 4% !important;
+}
+
+
+img {
+  width: 20vw;
+    height: 20vw;
+    border-radius: 5px;
+}
+
+video {
+  width: 20vw;
+    height: 20vw;
+    border-radius: 5px;
+    background: black;
+}
+
+.green {
+  color: green;
+}
+
+.blue {
+  color: darkblue;
+}

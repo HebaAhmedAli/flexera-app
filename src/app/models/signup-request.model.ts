@@ -17,7 +17,7 @@ export class SignUpRequestModel {
   address!: string;
 
 
-  age!: number;
+  dateOfBirth!: Date;
 
 
   speciality!: string;

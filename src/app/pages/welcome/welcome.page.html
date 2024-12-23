@@ -1,7 +1,7 @@
 <ion-header>
 
 </ion-header>
-
+<!--
 <ion-content class="ion-text-center">
   <div class="full-container">
   <ion-grid style="    background: black;" >
@@ -10,10 +10,6 @@
         <h1>Welcome to TDS</h1>
       </div>
     </ion-row>
-    <!-- <ion-row class="ion-text-center" style="justify-content: center;">
-      <img src="assets/logo-4.png"/>
-      <img src="assets/tds.png" class="tds-word-img"/>
-    </ion-row> -->
 
     <ion-grid>
       <ion-row class="ion-text-center animated-row">
@@ -43,3 +39,27 @@
 </ion-content>
 
 
+-->
+
+
+
+<ion-content style="--background: none !important; z-index: 100000;">
+
+  <div class="half-part" [ngClass]="{hidden: splashMode}" >
+    <ion-grid>
+      <ion-row class="ion-text-center" style="justify-content: center; padding-top: 15%;" [ngClass]="{'extra-margin': forceUpdate }">
+        <div class="button-container">
+          <ion-button *ngIf="!forceUpdate" expand="block" class="main-button" (click)="navigateToTabs()">Continue as Guest</ion-button>
+          <ion-button *ngIf="!forceUpdate" expand="block" class="main-button" routerLink="/login" routerDirection="forward">Log in</ion-button>
+          <ion-button *ngIf="!forceUpdate" expand="block" color="dark" fill="clear" routerLink="/signup" routerDirection="forward">Don't have acccount ? Signup</ion-button>
+          <ion-button *ngIf="forceUpdate" expand="block" class="main-button" (click)="forceUpdateLogic()">Update the App To continue</ion-button>
+        </div>
+      </ion-row>
+    </ion-grid>
+
+
+  </div>
+
+</ion-content>
+
+<div class="background"><img src="assets/welcome-back.jpg"/></div>

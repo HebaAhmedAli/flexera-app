@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { MainteneceService } from 'src/app/services/maintenece.service';
 
 @Component({
   selector: 'app-request-status',
@@ -13,7 +15,7 @@ export class RequestStatusPage implements OnInit {
   isAlertOpen = false;
   message!: string;
 
-  constructor( private navCtrl: NavController) { }
+  constructor( private navCtrl: NavController, private maintenenceService: MainteneceService, private router:Router) { }
 
   ngOnInit() {
     this.initForm();
@@ -28,28 +30,24 @@ export class RequestStatusPage implements OnInit {
   }
 
   submit() {
-    // const complaint: Complaint = {
-    //   complainant: this.form.controls['name'].value,
-    //   phone: this.form.controls['phone'].value,
-    //   address: this.form.controls['address'].value,
-    //   subject: this.form.controls['subject'].value,
-    //   description: this.form.controls['description'].value
+    this.maintenenceService.getMaintenece(this.form.controls['requestNo'].value, this.form.controls['phone'].value).subscribe(main => {
+      //if( main.feedBack) {
+        this.router.navigate(['/maintenence-report', {requestNo: this.form.controls['requestNo'].value, phone: this.form.controls['phone'].value}]);
+      // } else {
+      //   this.message = 'Your maintenence request still under process, please wait.';
+      //   this.isAlertOpen = true;
+      // }
 
-    // }
+    }, err => {
+      this.isAlertOpen = true;
+      this.message = 'You must enter correct request number and the phone number registered with this request.';
+    });
 
-    // this.complaintService.createComplaint(complaint).subscribe(() => {
-    //   this.message = 'Complaint is successfully submited. We will contact you soon.'
-    //   this.isAlertOpen = true;
-    // },
-    // () => {
-    //   this.isAlertOpen = true;
-    //   this.message = 'Error while submitting your complaint. Please try again later.'
-    // });
   }
 
   alertDismiss() {
     this.isAlertOpen = false;
-    this.navCtrl.back()
+    //this.navCtrl.back()
   }
 
 

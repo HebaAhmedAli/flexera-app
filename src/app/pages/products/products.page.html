@@ -4,8 +4,11 @@
   <!-- <ion-title>Fanta</ion-title> -->
   <ion-grid style="padding-bottom: 0px; margin-bottom: -5px;">
     <ion-row>
-      <ion-col>
+      <ion-col size="3.5">
         <img [src]="categoryImg" class="category-img"/>
+      </ion-col>
+      <ion-col>
+        <ion-label class="cat-name" [ngClass]="{'fanta-color': categoryName === 'Fanta', 'eighteeth-color': categoryName === 'Eighteeth', 'exam-depp-color': categoryName === 'Examvision' || categoryName === 'Deppeler', 'beyond-color': categoryName === 'Beyond', 'water-color':  categoryName === 'Waterpulse'}">{{categoryName}} <br>Products</ion-label>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -21,8 +24,9 @@
   <ion-grid>
      <ion-row>
        <ion-col size="6" *ngFor="let product of (segmentValue === 'devices' ? devicesProducts : materialsProducts)" >
+
          <ion-card >
-           <img [src]="getImgUrl(product.img)" [routerLink]="['/product-details',{productId: product.id}]"/>
+           <img class="product-img" [src]="getImgUrl(product.img)" [routerLink]="['/product-details',{productId: product.id}]"/>
            <ion-card-header [routerLink]="['/product-details',{productId: product.id}]">
              <ion-card-title>{{ product.name }}</ion-card-title>
              <ion-card-subtitle>{{ product.description }}</ion-card-subtitle>
@@ -33,11 +37,11 @@
               {{ product.priceAfterDiscount }} EGP
             </div>
            </ion-card-content>
-           <!-- <ion-fab vertical="bottom" horizontal="end" class="add-fab">
-             <ion-fab-button>
-               <ion-icon name="add"></ion-icon>
-             </ion-fab-button>
-           </ion-fab> -->
+           <ion-fab vertical="bottom" horizontal="end" class="add-fab" >
+            <ion-fab-button  (click)="addProduct(product)">
+              <a>+</a>
+            </ion-fab-button>
+          </ion-fab>
          </ion-card>
        </ion-col>
      </ion-row>
@@ -77,4 +81,19 @@
       </div>
     </ng-template>
   </ion-modal>
+  <ion-toast
+  [isOpen]="isToastOpen"
+  [message]="toastMessage"
+  [duration]="2000"
+  (didDismiss)="isToastOpen = false"
+  position="middle"
+></ion-toast>
+
+<ion-alert
+[isOpen]="isAlertOpen"
+message="You need to login first to be able to add products to cart."
+[buttons]="['OK']"
+(didDismiss)="isAlertOpen = false"
+></ion-alert>
+
  </ion-content>

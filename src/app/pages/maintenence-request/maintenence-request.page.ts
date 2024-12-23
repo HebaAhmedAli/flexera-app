@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
-import { Complaint } from 'src/app/models/complaint.model';
+import { Maintenece } from 'src/app/models/maintenence.model';
+import { UserModel } from 'src/app/models/user.model';
+import { MainteneceService } from 'src/app/services/maintenece.service';
+import { SecureStorage } from 'src/app/services/secure-storage.service';
 
 @Component({
   selector: 'app-maintenence-request',
@@ -13,8 +16,9 @@ export class MaintenenceRequestPage implements OnInit {
   form!: FormGroup;
   isAlertOpen = false;
   message!: string;
+  goBack = true;
 
-  constructor( private navCtrl: NavController) { }
+  constructor( private navCtrl: NavController, private maintenenceService: MainteneceService, private storage: SecureStorage) { }
 
   ngOnInit() {
     this.initForm();
@@ -31,29 +35,38 @@ export class MaintenenceRequestPage implements OnInit {
 
   }
 
-  submit() {
-    // const complaint: Complaint = {
-    //   complainant: this.form.controls['name'].value,
-    //   phone: this.form.controls['phone'].value,
-    //   address: this.form.controls['address'].value,
-    //   subject: this.form.controls['subject'].value,
-    //   description: this.form.controls['description'].value
+  async submit() {
+    const user: UserModel = await this.storage.get('user');
+    if(user.phone !== this.form.controls['phone'].value) {
+      this.message = 'The phone must be same as your registered phone number.';
+      this.goBack = false;
+      this.isAlertOpen = true;
+      return;
+    }
+    const maintainence: Maintenece = new Maintenece();
+    maintainence.name = this.form.controls['name'].value;
+    maintainence.phone =  this.form.controls['phone'].value;
+    maintainence.device = this.form.controls['device'].value;
+    maintainence.serialNo = this.form.controls['serialNo'].value;
+    maintainence.complaint = this.form.controls['complaint'].value;
 
-    // }
-
-    // this.complaintService.createComplaint(complaint).subscribe(() => {
-    //   this.message = 'Complaint is successfully submited. We will contact you soon.'
-    //   this.isAlertOpen = true;
-    // },
-    // () => {
-    //   this.isAlertOpen = true;
-    //   this.message = 'Error while submitting your complaint. Please try again later.'
-    // });
+    this.maintenenceService.createMaintenece(maintainence).subscribe((maintainenceCr) => {
+      this.message = 'Your request is successfully submited with request number ' + (maintainenceCr as Maintenece).id + '. You will need this number to track the request. ';
+      this.goBack = true;
+      this.isAlertOpen = true;
+    },
+    () => {
+      this.isAlertOpen = true;
+      this.goBack = true;
+      this.message = 'Error while submitting your Maintenece. Please try again later.'
+    });
   }
 
   alertDismiss() {
     this.isAlertOpen = false;
-    this.navCtrl.back()
+    if(this.goBack) {
+      this.navCtrl.back()
+    }
   }
 
 

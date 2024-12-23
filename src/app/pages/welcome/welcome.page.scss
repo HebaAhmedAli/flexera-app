@@ -48,10 +48,13 @@ h1 {
 
 
 .main-button {
-  --background: linear-gradient(90deg, rgba(130, 130, 130, 1) 0%, rgba(206, 206, 206, 1) 100%) !important;
+ // --background: linear-gradient(90deg, rgba(130, 130, 130, 1) 0%, rgba(206, 206, 206, 1) 100%) !important;
+ --background: black !important;
 }
 
-
+.extra-margin {
+  padding-top: 25% !important;
+}
 
 
 // --------------------
@@ -373,4 +376,32 @@ ion-row {
 
 .hidden {
   visibility: hidden;
+}
+
+
+
+.half-part {
+  background: white;
+  margin-top: 130%;
+  border-top-right-radius: 50px;
+  height: 35vh;
+}
+
+.title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.sub-title {
+  font-size: 15px;
+  color: darkgrey !important;
+
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  background: black;
+  margin-top: -10px;
 }
