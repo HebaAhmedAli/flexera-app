@@ -359,11 +359,10 @@ ion-list {
 }
 
 .product-img{
-  // position: relative;
-            height: 120px !important;
-            width: 80% !important;
-            margin-left: 10% !important;
-            object-fit: fill !important;
+  height: 160px !important;
+  width: 100% !important;
+          margin-left: 0px!important;
+            object-fit: fill;
             z-index: 1000;
-            margin-bottom: -3px !important;
+            margin-bottom: 0px !important;
 }

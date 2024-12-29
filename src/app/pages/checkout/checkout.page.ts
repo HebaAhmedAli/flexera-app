@@ -13,6 +13,7 @@ import { OrderService } from 'src/app/services/order.service';
 import { ProductService } from 'src/app/services/product.service';
 import { SecureStorage } from 'src/app/services/secure-storage.service';
 import { SelectLocationPage } from '../select-location/select-location.page';
+import { SystemParametersService } from 'src/app/services/system-parameters.service';
 
 @Component({
   selector: 'app-checkout',
@@ -40,9 +41,10 @@ export class CheckoutPage implements OnInit {
 
   promoCode!: string;
 
+  showCashOnDelivery = false;
 
   constructor(private cartService: CartService, private storage: SecureStorage, private modalController: ModalController, private orderService: OrderService
-    , private router: Router, private cityService: CityService, private productService: ProductService) { }
+    , private router: Router, private cityService: CityService, private productService: ProductService, private sysParamServ: SystemParametersService) { }
 
   async ngOnInit() {
     // this.address =  (await this.storage.get('user') as UserModel).address;
@@ -62,7 +64,8 @@ export class CheckoutPage implements OnInit {
     },
     err => {
       console.log(err);
-    })
+    });
+    this.showCashOnDelivery = this.sysParamServ.getValue('SHOW_CASH_ON_DELIVERY') === 'Y';
   }
 
   calculateOrderTotalPrice(openModal: boolean = false, applyPromoRequest: boolean = false) {

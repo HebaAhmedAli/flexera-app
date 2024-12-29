@@ -17,36 +17,70 @@
 
   <ion-segment value="current" color="dark" mode="md" [(ngModel)]="segmentValue">
     <ion-segment-button value="current">
-      <ion-label>Upcoming Courses</ion-label>
+      <ion-label>Upcoming</ion-label>
     </ion-segment-button>
     <ion-segment-button value="old">
       <ion-label>Our Courses</ion-label>
     </ion-segment-button>
+    <!-- <ion-segment-button value="my-courses" (click)="getCourses()">
+      <ion-label>My Courses</ion-label>
+    </ion-segment-button> -->
   </ion-segment>
 
 
+<div  *ngIf="segmentValue !== 'my-courses'">
+  <ion-grid *ngIf="(segmentValue === 'current' ? currentCourses.length : oldCourses.length); else noCourses">
+    <ion-row *ngFor="let course of (segmentValue === 'current' ? currentCourses : oldCourses)">
+      <ion-col>
+        <ion-card class="ion-padding" [routerLink]="['/course-details',{course_id: course.id}]">
+          <ion-card-title class="card-title">
+            {{course.title}}
+          </ion-card-title>
+          <ion-card-subtitle class="card-sub-title">
+            <div *ngIf="course?.price" style="font-weight: bold;">{{course.price}} EGP</div>
+          <div> {{course.startDate}} -  {{course.endDate}} <span style="position: absolute;
+            right: 0px;
+            color: green;
+            font-weight: bold;" *ngIf="checkBooked(course)">Booked</span></div>
+          </ion-card-subtitle>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-<ion-grid *ngIf="(segmentValue === 'current' ? currentCourses.length : oldCourses.length); else noCourses">
-  <ion-row *ngFor="let course of (segmentValue === 'current' ? currentCourses : oldCourses)">
-    <ion-col>
-      <ion-card class="ion-padding" [routerLink]="['/course-details',{course_id: course.id}]">
-        <ion-card-title class="card-title">
-          {{course.title}}
-        </ion-card-title>
-        <ion-card-subtitle class="card-sub-title">
-          {{course.startDate}} -  {{course.endDate}}
-        </ion-card-subtitle>
-      </ion-card>
-    </ion-col>
-  </ion-row>
-</ion-grid>
+  <ng-template #noCourses>
+    <div class="flex flex-column align-items-center" style="margin-top: 20px">
+      <ion-spinner *ngIf="loading" color="medium"></ion-spinner>
+      <p *ngIf="!loading" class="no-courses">No available course</p>
+    </div>
+  </ng-template>
+</div>
 
-<ng-template #noCourses>
-  <div class="flex flex-column align-items-center" style="margin-top: 20px">
-    <ion-spinner *ngIf="loading" color="medium"></ion-spinner>
-    <p *ngIf="!loading" class="no-courses">No available course</p>
-  </div>
-</ng-template>
+<div  *ngIf="segmentValue === 'my-courses'">
+  <ion-grid *ngIf="(myCourses.length); else noMyCourses">
+    <ion-row *ngFor="let courseBooking of myCourses">
+      <ion-col>
+        <ion-card class="ion-padding" [routerLink]="['/course-details',{course_id: courseBooking.course.id}]">
+          <ion-card-title class="card-title">
+            {{courseBooking.course.title}}
+          </ion-card-title>
+          <ion-card-subtitle class="card-sub-title">
+            <div *ngIf="courseBooking.price" style="font-weight: bold;">{{courseBooking.price}} EGP</div>
+            {{courseBooking.course.startDate}} -  {{courseBooking.course.endDate}}
+          </ion-card-subtitle>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ng-template #noMyCourses>
+    <div class="flex flex-column align-items-center" style="margin-top: 20px">
+      <ion-spinner *ngIf="loading" color="medium"></ion-spinner>
+      <p *ngIf="!loading" class="no-courses">You have no course</p>
+    </div>
+  </ng-template>
+</div>
+
 
 <ion-fab vertical="bottom" horizontal="end" class="add-fab" slot="fixed">
   <ion-fab-button>

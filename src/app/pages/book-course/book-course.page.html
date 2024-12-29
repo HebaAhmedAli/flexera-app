@@ -1,0 +1,134 @@
+<app-header></app-header>
+
+<ion-content [fullscreen]="true" *ngIf="course">
+  <ion-grid>
+    <ion-row>
+      <ion-col class="summary-title ion-text-center">
+        Course summary
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-card class="ion-padding">
+
+    <ion-card-content class="card-sub-title">
+
+
+    <ion-grid class="ion-no-padding ion-no-margin">
+      <ion-row>
+        <ion-col class="ion-padding">
+          <h1 style="font-weight: bold;">  Course Details:</h1>
+
+        </ion-col>
+    </ion-row>
+    <div  >
+      <ion-row class="padding-top-bottom">
+          <h2 class="name">{{course.title}}</h2>
+      </ion-row>
+      <ion-row class="padding-top-bottom">
+        <h2 class="name">{{course.price}} EGP</h2>
+    </ion-row>
+    </div>
+    </ion-grid>
+
+</ion-card-content>
+</ion-card>
+
+
+
+<ion-grid>
+  <ion-row>
+    <ion-col class="sub-title">
+      Payment Methods Instructions:
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class="ion-text-center payments" (click)="openPaymentInstructionsModal('instapay')">
+
+      <img src="assets/instapay.png">
+
+    </ion-col>
+    <ion-col class="ion-text-center payments" (click)="openPaymentInstructionsModal('vodafone-cash')">
+
+      <img src="assets/vodafone-cash.jpeg" style="margin-top: 5px;">
+
+    </ion-col>
+    <ion-col class="ion-text-center payments" (click)="openPaymentInstructionsModal('etisalat-cash')">
+
+      <img src="assets/etisalat-cash.jpg" style="zoom: 0.113;">
+
+    </ion-col>
+    <!-- <ion-col class="ion-text-center payments">
+
+      <img src="assets/cash.png" style="width: 80%; height: 80%;">
+
+    </ion-col> -->
+  </ion-row>
+
+  <ion-row>
+    <ion-col class="sub-title">
+      Select your preferred method:
+    </ion-col>
+  </ion-row>
+  <ion-row>
+      <ion-radio-group value="cash" [(ngModel)]="paymentMethod" (ngModelChange)="openPaymentInstructionsModal(paymentMethod)">
+        <ion-row class="ion-padding padding-top-bottom">
+          <ion-radio value="instapay" labelPlacement="end" >Pay via Instapay</ion-radio>
+        </ion-row>
+        <ion-row class="ion-padding padding-top-bottom">
+          <ion-radio value="vodafone-cash" labelPlacement="end" >Pay via Vodafone Cash</ion-radio>
+        </ion-row>
+        <ion-row class="ion-padding padding-top-bottom">
+          <ion-radio value="etisalat-cash" labelPlacement="end">Pay via Etisalat Cash</ion-radio>
+        </ion-row>
+
+        <!-- <ion-row class="ion-padding padding-top-bottom">
+          <ion-radio value="pickup" labelPlacement="end">Pickup from TDS</ion-radio>
+        </ion-row> -->
+      </ion-radio-group>
+  </ion-row>
+
+  <ion-row>
+    <ion-col class="note">
+      Note: You will need to upload a screenshot from the payment receipt after submitting your order to complete it.
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-padding" style="      margin-top: -30px;
+
+">
+    <ion-col class="ion-text-center ion-padding">
+          <ion-item style="--background: none !important;" lines="none">
+            <ion-label class="main-button main-label" (click)="actionButtonClick('receipt')" [ngClass]="{'green': receiptDone}" >
+              {{ receiptDone ? 'Selected' : 'Upload receipt screenshot'}}</ion-label>
+          </ion-item>
+          <input #uploadRInput type="file" id="imgR" name="imgR" accept="image/*" (change)="onFileChanged($event, 'receipt')" />
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-padding" style="      margin-top: -60px;
+  margin-bottom: -20px;
+">
+    <ion-col class="ion-text-center ion-padding">
+          <ion-item style="--background: none !important;" lines="none">
+            <ion-label class="main-button main-label" (click)="actionButtonClick('id')" [ngClass]="{'green': idDone}"  >
+              {{ idDone ? 'Selected' : 'Upload Id'}}</ion-label>
+          </ion-item>
+          <input #uploadIdInput type="file" id="imgId" name="imgId" accept="image/*" (change)="onFileChanged($event, 'id')" />
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-text-center buttons-bottom " style="justify-content: center;">
+    <div class="button-container" style="width: 85%;">
+    <ion-button expand="block" [disabled]="!idDone || !receiptDone" class="main-button" (click)="bookCourse()">Book</ion-button>
+    </div>
+  </ion-row>
+</ion-grid>
+
+<ion-alert
+[isOpen]="isAlertOpen"
+[message]="message"
+[buttons]="['OK']"
+(didDismiss)="alertDismiss()"
+></ion-alert>
+
+</ion-content>

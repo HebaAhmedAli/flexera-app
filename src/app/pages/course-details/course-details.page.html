@@ -2,22 +2,58 @@
 
 
 <ion-content [fullscreen]="true" *ngIf="course">
+  <div class="course-slider">
+    <div class="course-swiper-container" >
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide" *ngFor="let galleryItem of course?.gallery;let i=index;">
+          <img *ngIf="galleryItem.type === 'img'" [src]="getImgUrl(galleryItem.url)" [id]="'course-img' + i" (click)="openImageViewer(galleryItem, i)">
+          <video [id]="'course-video' + galleryItem.id" *ngIf="galleryItem.type === 'video'" width="100%" height="auto" (click)="openImageViewer(galleryItem, i)">
+            <source [src]="getImgUrl(galleryItem.url)" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <!-- <iframe *ngIf="galleryItem.type === 'video'" [src]="getImgUrl(galleryItem.url) | safe:'resourceUrl'" ></iframe> -->
+          <!-- <video *ngIf="swiper.activeIndex !== i && galleryItem.type === 'video'"   [muted]="'muted'" width="100%" height="auto" controls >
+            <source [src]="getImgUrl(galleryItem.url)" type="video/mp4">
+            Your browser does not support the video tag.
+          </video> -->
+          <ion-icon *ngIf="galleryItem.type === 'video'" name="play" class="play-icon"  (click)="openImageViewer(galleryItem, i)"></ion-icon>
+        </div>
+      </div>
+      <!-- Add Pagination -->
+      <div class="swiper-pagination"></div>
+
+    </div>
+  </div>
 <ion-grid>
-  <ion-row>
+  <!-- <ion-row>
     <ion-col>
       <img [src]="image"/>
     </ion-col>
-  </ion-row>
+  </ion-row> -->
   <ion-row>
     <ion-col>
       <h1>{{course?.title}}</h1>
+      <h3 *ngIf="course?.price">{{course?.price}} EGP</h3>
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col>
-      <div dir="rtl" [innerHTML]="course.details | safeHtml">
+      <div style=" font-size: 20px;
+      padding-left: 10px;
+      padding-right: 5px;" [innerHTML]="course.details | safeHtml">
       </div>
     </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-text-center buttons-bottom " style="justify-content: center;">
+    <div class="button-container">
+
+    <ion-button expand="block" class="main-button"
+     *ngIf="course?.canBeBooked"
+     [disabled]="mode === 'guest' || alreadyBooked"
+     [routerLink]="['/book-course',{course_id: course.id}]">{{ alreadyBooked ? 'Booked' : 'Book The Course' }}</ion-button>
+    </div>
   </ion-row>
 </ion-grid>
 </ion-content>

@@ -205,44 +205,9 @@ export class ProductDetailsPage implements OnInit {
  }
 
 
-/* Function to open fullscreen mode */
-//  openFullscreen(imgId: string) {
-//   var elem = document.getElementById(imgId);
-
-
-//   /* If fullscreen mode is available, show the element in fullscreen */
-//   if (
-//     document.fullscreenEnabled
-//   ) {
-
-//     /* Show the element in fullscreen */
-//     if (elem && elem.requestFullscreen) {
-//       elem.requestFullscreen().then(res => {
-//         this.setLandscape();
-
-//       }); /* Standard syntax */
-//       // elem.className = 'rotate';
-//     }
-//   }
-// }
-
-
 
 async openImageViewer(galleryItem: GalleryItem, i: number) {
-  //this.setLandscape();
-  // this.unlockScreen();
-  // var myScreenOrientation = window.screen.orientation;
-  // console.log('myScreenOrientation', myScreenOrientation)
-  // // cordova.plugins.screenorientation.setOrientation('portrait-primary');
-  // myScreenOrientation.lock("portrait").then(res => {
-  //   alert('res' +res);
-  // },
-  // err=> {
-  //   alert('err' +err);
-  // }).catch(err => {
-  //   alert('err' +err);
-  // });
-  //myScreenOrientation.unlock();
+
   if(this.justClickSegment) return;
 
   const modalEl = await this.modalController.create({

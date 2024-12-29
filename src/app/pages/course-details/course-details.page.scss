@@ -4,9 +4,65 @@ img {
 }
 
 
-div {
-  font-size: 20px;
-  padding-left: 5px;
-  padding-right: 5px;
+h1 {
+  font-weight: bold;
+  padding-left: 10px;
 }
 
+h3{
+  font-weight: bold;
+  padding-left: 10px;
+}
+.course-slider{
+  margin-bottom: -5px;
+    .swiper-slide {
+      width: 86vw !important;
+      height: 30vh;
+      margin-right: 7vw;
+      margin-left: 7vw;
+    margin-bottom: 30px;
+    margin-top: 20px;
+
+
+          h4 {
+              color: #ffffff;
+              margin: 0;
+          }
+
+          img {
+              position: relative;
+              width: 100% !important;
+              height: 100% !important;
+              object-fit: fill;
+              border-radius: 8px;
+              // top: 0;
+              // left: 0;
+              z-index: 1000;
+              box-shadow: 0px 15px 20px 0px rgba(0, 0, 0, 0.16);
+          }
+
+         video {
+            position: relative;
+            width: 100% !important;
+              height: 100% !important;
+            object-fit: fill;
+            border-radius: 8px;
+            // top: 0;
+            // left: 0;
+            z-index: 1000;
+            box-shadow: 0px 15px 20px 0px rgba(0, 0, 0, 0.16);
+      }
+  }
+}
+
+.buttons-bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.button-container {
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+}

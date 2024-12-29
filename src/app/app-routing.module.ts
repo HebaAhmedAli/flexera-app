@@ -97,6 +97,10 @@ const routes: Routes = [
   {
     path: 'maintenence-report',
     loadChildren: () => import('./pages/maintenence-report/maintenence-report.module').then( m => m.MaintenenceReportPageModule)
+  },
+  {
+    path: 'book-course',
+    loadChildren: () => import('./pages/book-course/book-course.module').then( m => m.BookCoursePageModule)
   }
 
 

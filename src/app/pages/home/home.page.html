@@ -72,8 +72,8 @@
           <ion-card >
             <img class="product-img" [src]="getImgUrl(product.img)" [routerLink]="['/product-details',{productId: product.id}]"/>
             <ion-card-header [routerLink]="['/product-details',{productId: product.id}]">
-              <ion-card-title>{{ product.description }}</ion-card-title>
-              <ion-card-subtitle>{{ product.name }}</ion-card-subtitle>
+              <ion-card-title>{{ product.name }}</ion-card-title>
+              <ion-card-subtitle>{{ product.description }}</ion-card-subtitle>
             </ion-card-header>
             <ion-card-content>
              <div [ngClass]="{'old-price' : product.price !== product.priceAfterDiscount}">{{ product.price }} EGP </div>
@@ -115,8 +115,8 @@
           <ion-card >
             <img class="product-img" [src]="getImgUrl(product.img)" [routerLink]="['/product-details',{productId: product.id}]"/>
             <ion-card-header [routerLink]="['/product-details',{productId: product.id}]">
-              <ion-card-title>{{ product.name }}</ion-card-title>
-              <ion-card-subtitle>{{ product.description }}</ion-card-subtitle>
+              <ion-card-title>{{ product.description }}</ion-card-title>
+              <ion-card-subtitle>{{ product.name }}</ion-card-subtitle>
             </ion-card-header>
             <ion-card-content>
              <div [ngClass]="{'old-price' : product.price !== product.priceAfterDiscount}">{{ product.price }} EGP </div>

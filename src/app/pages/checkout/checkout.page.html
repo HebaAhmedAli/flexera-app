@@ -217,7 +217,7 @@
         <ion-row class="ion-padding padding-top-bottom">
           <ion-radio value="etisalat-cash" labelPlacement="end">Pay via Etisalat Cash</ion-radio>
         </ion-row>
-        <ion-row class="ion-padding padding-top-bottom">
+        <ion-row class="ion-padding padding-top-bottom" *ngIf="showCashOnDelivery">
           <ion-radio value="cash" labelPlacement="end">Cash on Delivery</ion-radio>
         </ion-row>
         <!-- <ion-row class="ion-padding padding-top-bottom">

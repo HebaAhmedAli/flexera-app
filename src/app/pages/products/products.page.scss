@@ -39,12 +39,14 @@ ion-card-subtitle {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
 }
 
 ion-card-content {
   text-align: center;
   color: #008ECC;
     font-weight: bold;
+    height: 45px;
 
 }
 ion-title {
@@ -134,7 +136,8 @@ ion-card-subtitle {
     padding-left: 8px;
     color: black;
     font-weight: bold;
-    font-size: medium;
+    font-size: 15px;
+    max-width: 75%;
 }
 
 ion-card-content {
@@ -171,19 +174,23 @@ a {
 
 .add-fab {
   zoom: 0.6;
-  margin-bottom: 70px;
-    z-index: 10000;
-
+    margin-bottom: 79px;
+    margin-right: -5px;
 }
 
+.filter-fab {
+  zoom: 0.7;
+  margin-bottom: 50px;
+    z-index: 10000;
+}
 .product-img{
   // position: relative;
-            height: 120px;
-            width: 80%;
-            margin-left: 10%;
+  height: 160px !important;
+  width: 100% !important;
+          margin-left: 0px!important;
             object-fit: fill;
             z-index: 1000;
-            margin-bottom: -3px;
+            margin-bottom: 0px !important;
 }
 
 .cat-name {

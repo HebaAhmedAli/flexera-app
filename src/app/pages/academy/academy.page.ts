@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CourseBooking } from 'src/app/models/course-booking.model';
 import { Course } from 'src/app/models/course.model';
 import { AcademyService } from 'src/app/services/academy.service';
 
@@ -8,15 +9,23 @@ import { AcademyService } from 'src/app/services/academy.service';
   styleUrls: ['./academy.page.scss'],
 })
 export class AcademyPage implements OnInit {
+
   segmentValue = 'current';
 
   currentCourses: Course[] = [];
   oldCourses: Course[] = [];
   loading = true;
 
+  myCourses:  CourseBooking[] = [];
+
   constructor(private academyService: AcademyService) { }
 
   ngOnInit() {
+    this.getCourses();
+  }
+
+  ionViewWillEnter() {
+    console.log('inside will enter')
     this.getCourses();
   }
 
@@ -28,10 +37,17 @@ export class AcademyPage implements OnInit {
     }), () => {
       this.loading = false;
     }
+
+    this.academyService.getMyCourses().subscribe(courseBookings => {
+      this.myCourses = courseBookings;
+    })
   }
 
   navigateToCourseDetails() {
 
   }
 
+  checkBooked(course: Course): boolean {
+    return this.myCourses.findIndex(myCourse => myCourse.course.id === course.id) !== -1
+  }
 }

@@ -1,3 +1,5 @@
+import { GalleryItem } from "./gallery-item.model";
+
 export interface Course {
     id: number;
     title: string;
@@ -5,6 +7,8 @@ export interface Course {
     startDate: string;
     endDate: string;
     upcoming: boolean;
-    image: string;
     instructors: string[];
+    gallery: Array<GalleryItem>;
+    canBeBooked: boolean;
+    price: number;
 }

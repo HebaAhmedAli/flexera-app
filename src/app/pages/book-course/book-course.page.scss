@@ -1,0 +1,130 @@
+.card-title {
+  padding-bottom: 5px;
+  --color: white !important;
+}
+
+.card-sub-title {
+  --color: lightgrey !important;
+}
+
+ion-card {
+  background: white;
+  padding: 0px;
+  color: black;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+ion-item {
+  --background: white !important;
+  --color: black !important;
+  width: 100%;
+  --border-color: white;
+    padding-right: 20px;
+
+}
+
+ion-icon {
+  //color: white !important;
+}
+
+ion-card-content {
+  padding: 0px;
+}
+
+.total-price {
+  padding-left: 20px;
+  padding-bottom: 5px;
+  font-weight: bold;
+}
+
+.name{
+  padding-left: 18px;
+  padding-bottom: 5px;
+  font-weight: bold;
+}
+
+.price-col {
+  text-align: end;
+  padding-right: 30px;
+}
+
+.line {
+  border-top: 1px solid white;
+  margin: 5px;
+}
+
+
+.padding-top-bottom {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.summary-title {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.sub-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+
+ion-radio {
+  --color-checked: black !important;
+}
+
+.note {
+  color: red;
+  font-size: 15px;
+  padding: 20px;
+}
+
+.payments {
+  padding: 7px;
+}
+
+
+.address-list {
+  width: 100%;
+  padding: 0px;
+  background: white !important;
+
+}
+
+.address-item {
+  background: white !important;
+}
+
+.buttons-bottom {
+  position: relative;
+}
+
+.summary-title {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.main-label
+{
+  background: black;
+  /* width: 100%; */
+  color: white;
+  text-align: center;
+  padding-top: 5%;
+  text-transform: uppercase;
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+input[type="file"] {
+display: none;
+}
+
+.green {
+  background: green;
+  opacity: 0.5;
+}

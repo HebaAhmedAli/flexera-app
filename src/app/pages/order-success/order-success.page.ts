@@ -14,11 +14,8 @@ export class OrderSuccessPage implements OnInit {
   done = false;
 
   selectedFile!: File;
-  retrievedImage: any;
-  base64Data: any;
-  retrieveResonse: any;
+
   message!: string;
-  imageName: any;
   orderId!: string;
   orderStatus!: String;
 
