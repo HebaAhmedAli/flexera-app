@@ -87,8 +87,10 @@ export class HomePage implements OnInit {
 
     this.productService.getAllProducts().subscribe(data => {
       this.products = data;
-      this.bestSellerProducts = this.products.filter(pr => pr.sellingRate === 100);
-      this.orderNowProducts = this.products.filter(pr => pr.sellingRate === 99);
+      this.bestSellerProducts = this.products.filter(pr => pr.sellingRate >= 100 && pr.sellingRate < 200);
+      this.bestSellerProducts = this.bestSellerProducts.sort((a,b) => a.sellingRate - b.sellingRate);
+      this.orderNowProducts = this.products.filter(pr => pr.sellingRate >= 200 && pr.sellingRate < 300);
+      this.orderNowProducts = this.orderNowProducts.sort((a,b) => a.sellingRate - b.sellingRate);
     },
     err => {
       console.log(err);
