@@ -18,4 +18,5 @@ export class ProductModel {
   available!: string;
   sizes!: ProductSizesModel[];
   enable!: boolean;
+  preBooking!: string;
 }

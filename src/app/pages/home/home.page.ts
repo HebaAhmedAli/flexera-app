@@ -55,6 +55,8 @@ export class HomePage implements OnInit {
 
   addsActiveIndex = 0;
 
+  message!: string;
+
 
   constructor(private categoryService: CategoryService,
     private globalService: GlobalService,
@@ -258,11 +260,18 @@ filterProductClicked(id: number) {
 
   if(this.mode === 'guest') {
     this.isAlertOpen = true;
+    this.message = 'You need to login first to be able to add products to cart.'
     return;
   }
 
   if(product.sizes.length > 0) {
     this.router.navigate(['/product-details',{productId: product.id}]);
+    return;
+  }
+
+  if(product.available.toString() === 'false' && product.preBooking !== 'true') {
+    this.isAlertOpen = true;
+    this.message = 'This product is out of stock.'
     return;
   }
 

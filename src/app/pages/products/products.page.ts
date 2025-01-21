@@ -26,6 +26,7 @@ export class ProductsPage implements OnInit {
   mode!: string;
   isAlertOpen = false;
   toastMessage!: string;
+  message!: string;
 
 
   constructor(private router: ActivatedRoute,private cartService: CartService, private categoryService: CategoryService, private routerr: Router, private storage:SecureStorage) {
@@ -79,11 +80,18 @@ export class ProductsPage implements OnInit {
 
     if(this.mode === 'guest') {
       this.isAlertOpen = true;
+      this.message = 'You need to login first to be able to add products to cart.'
       return;
     }
 
     if(product.sizes.length > 0) {
       this.routerr.navigate(['/product-details',{productId: product.id}]);
+      return;
+    }
+
+    if(product.available.toString() === 'false' && product.preBooking !== 'true') {
+      this.isAlertOpen = true;
+      this.message = 'This product is out of stock.'
       return;
     }
 

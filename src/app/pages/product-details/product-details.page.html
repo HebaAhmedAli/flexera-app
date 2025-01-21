@@ -79,8 +79,8 @@
             <ion-button expand="block" class="main-button plus-minus-button" (click)="addProduct()">+</ion-button>
           </ion-row>
         <ion-button expand="block" class="main-button"
-         [disabled]=" (product.sizes.length > 0 && !selectedSize) || (product.sizes.length > 0 && selectedSize && selectedSize.available.toString() === 'false') || (product.sizes.length === 0 && product.available.toString() === 'false')"
-          (click)="addProduct()" *ngIf="productCounter === 0">{{ (product.sizes.length > 0 && selectedSize && selectedSize.available.toString() === 'false') || (product.sizes.length === 0 && product.available.toString() === 'false') ? 'Out of Stock' :
+         [disabled]="((product.sizes.length > 0 && !selectedSize) || (product.sizes.length > 0 && selectedSize && selectedSize.available.toString() === 'false') || (product.sizes.length === 0 && product.available.toString() === 'false')) && product.preBooking !== 'true'"
+          (click)="addProduct()" *ngIf="productCounter === 0">{{ (product.sizes.length > 0 && selectedSize && selectedSize.available.toString() === 'false') || (product.sizes.length === 0 && product.available.toString() === 'false') ? (product.preBooking === 'true' ? 'Pre Booking' : 'Out of Stock') :
             (product.sizes.length > 0 && !selectedSize ? 'Select product size' : 'Add to cart')}} </ion-button>
         <ion-button expand="block" class="main-button" id="open-modal" *ngIf="product.installmentPlan" (click)="isModalOpen = true">View Installment Plan</ion-button>
         </div>
