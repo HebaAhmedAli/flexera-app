@@ -33,6 +33,7 @@ export class BookCoursePage implements OnInit {
   courseId!: number;
   isAlertOpen = false;
 
+  loading = false;
 
 
   constructor(private httpClient: HttpClient, private router: Router, private activatedRoute: ActivatedRoute, private academyService: AcademyService, private modalController: ModalController, private sysParamServ: SystemParametersService) { }
@@ -98,6 +99,8 @@ export class BookCoursePage implements OnInit {
     }
 
     bookCourse() {
+      this.loading = true;
+
       let courseBookingRq = new CourseBookingRq();
       let totalPrice = this.course.price;
       switch(this.paymentMethod) {
@@ -119,6 +122,7 @@ export class BookCoursePage implements OnInit {
             if(response.status === 200) {
               this.onUpload(response.body.id);
             } else {
+              this.loading = false;
               this.message = response.error.message;
               this.isAlertOpen = true;
             }
@@ -126,6 +130,7 @@ export class BookCoursePage implements OnInit {
             console.log(error)
             this.message = error.error.message;
             this.isAlertOpen = true;
+            this.loading = false;
           }
           );
     }
@@ -146,18 +151,21 @@ export class BookCoursePage implements OnInit {
           if (response.status === 200) {
             this.message = 'You successfully booked the course!';
             this.isAlertOpen = true;
-
+            this.academyService.fetchMyCourses.next();
+            this.loading = false;
 
           } else {
             this.isAlertOpen = true;
 
             this.message = 'Image not uploaded successfully';
+            this.loading  = false;
           }
         }, (err: any) => {
           console.log(err);
           this.isAlertOpen = true;
 
           this.message = 'Image not uploaded successfully, please try again!';
+          this.loading = false;
         }
         );
     }

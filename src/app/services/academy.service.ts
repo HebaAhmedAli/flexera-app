@@ -2,7 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Course } from '../models/course.model';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { CourseBookingRq } from '../models/course-booking-rq.model';
 import { CourseBooking } from '../models/course-booking.model';
 
@@ -12,6 +12,8 @@ import { CourseBooking } from '../models/course-booking.model';
 export class AcademyService {
 
   constructor(private httpClient: HttpClient) { }
+
+  fetchMyCourses: Subject<void> = new Subject();
 
   getCourses(): Observable<Course[]> {
     return this.httpClient.get<Course[]>(`${environment.baseUrl}/api/v1/courses`);

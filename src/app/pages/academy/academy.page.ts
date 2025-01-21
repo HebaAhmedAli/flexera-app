@@ -22,6 +22,11 @@ export class AcademyPage implements OnInit {
 
   ngOnInit() {
     this.getCourses();
+    this.academyService.fetchMyCourses.subscribe(() => {
+      this.academyService.getMyCourses().subscribe(courseBookings => {
+        this.myCourses = courseBookings;
+      });
+    })
   }
 
   ionViewWillEnter() {
