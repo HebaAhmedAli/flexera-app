@@ -50,7 +50,11 @@ export class CheckoutPage implements OnInit {
     // this.address =  (await this.storage.get('user') as UserModel).address;
     this.productService.getAllProducts().subscribe(data => {
       this.products = data.filter(product => product.enable);
-      this.cartService.order.orderItems = this.cartService.order.orderItems.filter(item => this.products.find(product => item.product.id === product.id)?.available);
+      this.cartService.order.orderItems = this.cartService.order.orderItems.filter(item => {
+        const prod = this.products.find(product => item.product.id === product.id);
+        return prod?.available  || (!prod?.available && prod?.preBooking === 'true');
+       } );
+
       this.storage.set('cart-order',  this.cartService.order);
       this.order = this.cartService.order;
       this.calculateOrderTotalPrice();

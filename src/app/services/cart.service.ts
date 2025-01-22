@@ -27,6 +27,7 @@ export class CartService {
    }
 
   addProductToCart(product: ProductModel, productSize: ProductSizesModel | undefined): void {
+    console.log('inside add product to cart')
     var orderItem = this.order.orderItems.find(orderItem => product.id === orderItem.productId);
     if(orderItem) {
       if(productSize) {
