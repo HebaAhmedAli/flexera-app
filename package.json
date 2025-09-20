@@ -22,7 +22,6 @@
     "@angular/platform-browser": "^16.0.0",
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
-    "@awesome-cordova-plugins/camera": "^5.36.0",
     "@awesome-cordova-plugins/core": "^5.46.0",
     "@awesome-cordova-plugins/geolocation": "^6.6.0",
     "@awesome-cordova-plugins/network": "^6.6.0",
@@ -98,9 +97,7 @@
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-camera": {
-        "ANDROIDX_CORE_VERSION": "1.6.+"
-      },
+
       "cordova-plugin-geolocation": {
         "GEOLOCATION_USAGE_DESCRIPTION": "App uses geolocation to determine where you are.",
         "GPS_REQUIRED": "true"

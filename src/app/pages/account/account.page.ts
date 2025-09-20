@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
- import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { ModalController } from '@ionic/angular';
 import { AccountImageModalComponent } from 'src/app/components/account-image-modal/account-image-modal.component';
 import { UserModel } from 'src/app/models/user.model';
@@ -47,7 +46,7 @@ export class AccountPage implements OnInit {
 
 
 
-  constructor(private camera: Camera, private storage: SecureStorage,
+  constructor( private storage: SecureStorage,
     private modalController: ModalController,
     private profileService: ProfileService,
     private router: Router,
@@ -78,24 +77,42 @@ export class AccountPage implements OnInit {
   }
 
   openImagePicker() {
-    const options: CameraOptions = {
-      quality: 100,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-    this.camera.getPicture(options).then(async (imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64 (DATA_URL):
-      this.photoURL = 'data:image/jpeg;base64,'  + imageData;
-      console.log(this.photoURL);
-      await this.storage.set('photo', this.photoURL);
-    }, (err) => {
-      // Handle error
-      console.log(err);
+    // const options: CameraOptions = {
+    //   quality: 100,
+    //   sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    //   destinationType: this.camera.DestinationType.DATA_URL,
+    //   encodingType: this.camera.EncodingType.JPEG,
+    //   mediaType: this.camera.MediaType.PICTURE
+    // }
+    // this.camera.getPicture(options).then(async (imageData) => {
+    //   // imageData is either a base64 encoded string or a file URI
+    //   // If it's base64 (DATA_URL):
+    //   this.photoURL = 'data:image/jpeg;base64,'  + imageData;
+    //   console.log(this.photoURL);
+    //   await this.storage.set('photo', this.photoURL);
+    // }, (err) => {
+    //   // Handle error
+    //   console.log(err);
 
-    });
+    // });
+
+
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.onchange = async (event: any) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = async () => {
+          this.photoURL = reader.result as string; // Base64 Image Data
+         // console.log(this.photoURL);
+          await this.storage.set('photo', this.photoURL);
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+    input.click();
  }
 
   setOpenOfActionSheet(isOpen: boolean) {

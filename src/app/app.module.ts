@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 import { Storage } from '@ionic/storage';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -22,7 +21,7 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule ],
-  providers: [ Camera,
+  providers: [
      Storage,
      SplashScreen,
      Network,
