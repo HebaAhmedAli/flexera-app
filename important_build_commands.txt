@@ -1,0 +1,7 @@
+rm -rf platforms/android plugins
+
+ionic cordova platform add android
+ionic cordova build android --prod --release --buildConfig=build.json
+
+
+upload the aa-release.aab to play console

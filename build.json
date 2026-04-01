@@ -1,0 +1,12 @@
+{
+  "android": {
+    "release": {
+      "keystore": "my-release-key.keystore",
+      "storePassword": "tds_FLEXPAY_2023B",
+      "alias": "alias_name",
+      "password" : "tds_FLEXPAY_2023B",
+      "keystoreType": "",
+      "packageType": "bundle"
+    }
+  }
+}

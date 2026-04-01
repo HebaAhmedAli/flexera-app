@@ -97,7 +97,6 @@
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
-
       "cordova-plugin-geolocation": {
         "GEOLOCATION_USAGE_DESCRIPTION": "App uses geolocation to determine where you are.",
         "GPS_REQUIRED": "true"
