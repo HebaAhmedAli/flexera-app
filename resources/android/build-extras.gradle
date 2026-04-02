@@ -1,0 +1,10 @@
+android {
+    packagingOptions {
+        // Exclude all Crashlytics native libraries using wildcard
+        exclude 'lib/**/libcrashlytics*.so'
+
+        jniLibs {
+            useLegacyPackaging = false
+        }
+    }
+}

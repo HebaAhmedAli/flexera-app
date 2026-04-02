@@ -39,7 +39,7 @@
     "@types/googlemaps": "^3.43.3",
     "cordova-android": "13.0.0",
     "cordova-plugin-app-version": "^0.1.14",
-    "cordova-plugin-firebasex": "^16.3.0",
+    "cordova-plugin-firebasex": "^16.5.0",
     "cordova-plugin-geolocation": "^5.0.0",
     "cordova-plugin-market": "^1.2.0",
     "cordova-plugin-network-information": "^3.0.0",
@@ -125,7 +125,12 @@
         "ANDROID_FIREBASE_CRASHLYTICS_NDK_VERSION": "18.5.1",
         "ANDROID_GSON_VERSION": "2.9.0",
         "ANDROID_FIREBASE_PERF_GRADLE_PLUGIN_VERSION": "1.4.2",
-        "ANDROID_GRPC_OKHTTP": "1.46.0"
+        "ANDROID_GRPC_OKHTTP": "1.46.0",
+        "GOOGLE_ANALYTICS_ADID_COLLECTION_ENABLED": "true",
+        "GOOGLE_ANALYTICS_DEFAULT_ALLOW_ANALYTICS_STORAGE": "true",
+        "GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_STORAGE": "true",
+        "GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_USER_DATA": "true",
+        "GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_PERSONALIZATION_SIGNALS": "true"
       },
       "cordova-plugin-app-version": {},
       "cordova-plugin-market": {}
