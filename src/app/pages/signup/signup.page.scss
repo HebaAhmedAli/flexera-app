@@ -50,7 +50,7 @@ ion-toolbar {
 
 
 ion-toolbar {
-  --background: #EEEEEE !important;
+  --background: var(--ion-color-tertiary) !important;
 }
 
 ion-label {

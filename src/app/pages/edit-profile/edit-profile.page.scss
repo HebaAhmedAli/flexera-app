@@ -54,5 +54,5 @@ ion-label {
 }
 
 ion-list {
-  --background: #EEEEEE !important;
+  --background: var(--ion-color-tertiary) !important;
 }

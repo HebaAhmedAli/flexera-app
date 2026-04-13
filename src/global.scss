@@ -136,21 +136,21 @@ ion-toolbar {
 
 ion-tab-button {
   color: var(--ion-color-primary);
-  //background: #EEEEEE;
+  //background: var(--ion-color-tertiary);
 }
 
 ion-tab-bar {
-  //background: #EEEEEE;
+  //background: var(--ion-color-tertiary);
 }
 
 
 ion-toolbar {
- //--background: #EEEEEE !important;
+ --background: var(--ion-color-tertiary) !important;
   color: var(--ion-color-primary);
 }
 
 ion-content {
-  --background: #EEEEEE !important;
+  --background: var(--ion-color-tertiary) !important;
 }
 
 .swiper-pagination {
@@ -348,14 +348,14 @@ ion-searchbar .searchbar-input {
 }
 
 ion-item {
-  --background: #EEEEEE !important;
+  --background: var(--ion-color-tertiary) !important;
   --border-color: darkgrey !important;
 }
 
 
 
 ion-list {
-  background: #EEEEEE !important;
+  background: var(--ion-color-tertiary) !important;
 }
 
 .product-img{
