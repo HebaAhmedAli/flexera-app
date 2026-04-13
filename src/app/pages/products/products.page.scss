@@ -1,7 +1,7 @@
 
 
 ion-fab-button {
-  --background: black;
+  --background: var(--ion-color-primary);
 }
 
 ion-col {
@@ -52,7 +52,7 @@ ion-card-content {
 ion-title {
   padding: 5px;
   text-align: center;
-  background: black;
+  background: var(--ion-color-primary);
   color: white;
   border: 1px solid white;
 }
@@ -69,12 +69,12 @@ ion-title {
 .filter-button {
   margin-bottom: -20px;
   zoom: 0.7;
-  --background: black;
+  --background: var(--ion-color-primary);
 }
 
 
 ion-modal#sort-modal h1 {
-  background: black;
+  background: var(--ion-color-primary);
   color: white;
   margin: 0px;
   padding: 15px;
@@ -134,7 +134,7 @@ ion-card-subtitle {
     white-space: nowrap;
     margin-top: 1px;
     padding-left: 8px;
-    color: black;
+    color: var(--ion-color-primary);
     font-weight: bold;
     font-size: 15px;
     max-width: 75%;
@@ -142,7 +142,7 @@ ion-card-subtitle {
 
 ion-card-content {
   text-align: right;
-    color: black;
+    color: var(--ion-color-primary);
     font-weight: bold;
    // height: 30px;
     margin: 0px;
@@ -153,14 +153,14 @@ ion-card-content {
 ion-title {
   padding: 5px;
   text-align: center;
-  background: black;
+  background: var(--ion-color-primary);
   color: white;
   border: 1px solid white;
 }
 
 
 ion-fab-button {
-  --background: black;
+  --background: var(--ion-color-primary);
     --color: white;
 }
 
@@ -195,7 +195,7 @@ a {
 
 .cat-name {
   font-size: 35px;
-    color: black;// #00004B;
+    color: var(--ion-color-primary);// #00004B;
     font-weight: bold;
 }
 

@@ -90,6 +90,6 @@ ion-item {
 .background {
   position: fixed;
     top: 0;
-    background: black;
+    background: var(--ion-color-primary);
     margin-top: -30px;
 }

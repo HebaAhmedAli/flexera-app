@@ -3,11 +3,11 @@ ion-card-content {
   font-size: 25px;
   display: flex;
   font-weight: bold;
-    color: black;
+    color: var(--ion-color-primary);
 }
 
 ion-card {
- // --background: black;
+ // --background: var(--ion-color-primary);
  //--color: lightgrey;
   margin: 30px;
  border-radius: 10px;

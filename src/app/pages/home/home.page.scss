@@ -193,14 +193,14 @@ ion-card-subtitle {
   white-space: nowrap;
   margin-top: 1px;
   padding-left: 8px;
-  color: black;
+  color: var(--ion-color-primary);
   font-weight: bold;
   font-size: medium;
 }
 
 ion-card-content {
   text-align: right;
-  color: black;
+  color: var(--ion-color-primary);
   font-weight: bold;
   margin: 0px;
   padding: 0px;
@@ -211,7 +211,7 @@ ion-card-content {
 ion-title {
   padding: 5px;
   text-align: center;
-  background: black;
+  background: var(--ion-color-primary);
   color: white;
   border: 1px solid white;
 }
@@ -231,7 +231,7 @@ ion-title {
   --color: #333;
   --padding-start: 15px;
   --padding-end: 15px;
-  --box-shadow: 0 0 2px black;
+  --box-shadow: 0 0 2px var(--ion-color-primary);
 }
 
 ion-list {
@@ -242,7 +242,7 @@ ion-list {
 }
 
 ion-fab-button {
-  --background: black;
+  --background: var(--ion-color-primary);
   --color: white;
 }
 

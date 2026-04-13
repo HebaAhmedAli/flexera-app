@@ -18,7 +18,7 @@
   width: 5vw;
   height: 5vw;
   left: calc(50vw - (7.4vw / 2));
-  color: black;
+  color: var(--ion-color-primary);
 }
 
 
@@ -34,7 +34,7 @@
 
 ion-label {
   font-weight: bold;
-  color: black;
+  color: var(--ion-color-primary);
 }
 // .profile-label {
 //   position: fixed;

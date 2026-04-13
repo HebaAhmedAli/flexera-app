@@ -25,13 +25,8 @@ ion-row {
 .full-container {
   height: 100%;
   width: 100%;
-  background-color: black;
+  background-color: var(--ion-color-primary);
   color: white;
-}
-
-.tds-word-img {
-  padding-left: 5%;
-  padding-right: 5%;
 }
 
 
@@ -49,7 +44,7 @@ h1 {
 
 .main-button {
  // --background: linear-gradient(90deg, rgba(130, 130, 130, 1) 0%, rgba(206, 206, 206, 1) 100%) !important;
- --background: black !important;
+ --background: var(--ion-color-primary) !important;
 }
 
 .extra-margin {
@@ -402,6 +397,6 @@ ion-row {
 .background {
   position: fixed;
   top: 0;
-  background: black;
+  background: var(--ion-color-primary);
   margin-top: -10px;
 }

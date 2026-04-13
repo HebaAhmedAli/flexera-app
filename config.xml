@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-packageName="com.tds.appFlexpay" id="com.tds.appFlexpay" version="0.2.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>TDS</name>
+<widget android-packageName="com.fleaxera.app" id="com.fleaxera.app" version="0.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>FLEXERA</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
@@ -64,10 +64,10 @@
     </platform>
     <platform name="ios">
         <edit-config file="*-Info.plist" mode="merge" target="NSLocationAlwaysAndWhenInUseUsageDescription">
-            <string>TDS app needs access to your location to get your address location to deliver your order.</string>
+            <string>FLEXERA app needs access to your location to get your address location to deliver your order.</string>
         </edit-config>
         <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
-            <string>TDS app needs access to your location to get your address location to deliver your order.</string>
+            <string>FLEXERA app needs access to your location to get your address location to deliver your order.</string>
         </edit-config>
         <edit-config file="*-Info.plist" mode="merge" overwrite="true" target="NSPhotoLibraryUsageDescription">
             <string>Used to allow user choose image from his gallery to set his account picture</string>

@@ -10,7 +10,7 @@
 ion-card {
   background: white;
   padding: 0px;
-  color: black;
+  color: var(--ion-color-primary);
   padding-top: 10px;
   padding-bottom: 10px;
   font-weight: bold;
@@ -19,7 +19,7 @@ ion-card {
 
 ion-item {
   --background: white !important;
-  --color: black !important;
+  --color: var(--ion-color-primary) !important;
   width: 100%;
   --border-color: white;
     padding-right: 20px;
@@ -74,7 +74,7 @@ ion-card-content {
 }
 
 ion-radio {
-  --color-checked: black !important;
+  --color-checked: var(--ion-color-primary) !important;
 }
 
 .note {

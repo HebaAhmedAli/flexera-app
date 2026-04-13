@@ -1,12 +1,12 @@
 
 .card-title {
   padding-bottom: 5px;
-  --color: black !important;
+  --color: var(--ion-color-primary) !important;
   font-weight: bold;
 }
 
 .card-sub-title {
-  --color: black !important;
+  --color: var(--ion-color-primary) !important;
 }
 
 ion-card {
@@ -23,11 +23,11 @@ img {
 
 ion-fab-button {
   --background: orange;
-    --color: black;
+    --color: var(--ion-color-primary);
 }
 
 a {
-  color: black;
+  color: var(--ion-color-primary);
   font-size: 18px;
   text-decoration: none;
 }

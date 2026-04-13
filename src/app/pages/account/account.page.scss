@@ -29,7 +29,7 @@ ion-card-content {
 
 ion-card {
   --background: white;
-  --color: black;
+  --color: var(--ion-color-primary);
   margin-top: 20px;
   font-weight: bold;
   border-radius: 10px;

@@ -7,7 +7,7 @@ import { AccountImageModalComponent } from './components/account-image-modal/acc
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { ProductFullGalleryModalComponent } from './components/product-full-gallery-modal/product-full-gallery-modal.component';
 
-import { PinchZoomModule } from 'ngx-pinch-zoom';
+import { PinchZoomModule } from '@mapaxe/ngx-pinch-zoom';
 import { SafePipe } from './pipes/safe.pipe';
 import { FullScreenModalComponent } from './components/full-screen-modal/full-screen-modal.component';
 

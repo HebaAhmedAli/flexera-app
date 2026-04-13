@@ -1,5 +1,5 @@
 .header-row {
-  background: black;
+  background: var(--ion-color-primary);
   color: #fff;
   font-size: 18px;
 }
@@ -15,7 +15,7 @@ ion-card-content {
 
 ion-card {
   background: white;
-  color: black;
+  color: var(--ion-color-primary);
   font-weight: bold;
   border-radius: 10px;
 
@@ -125,7 +125,7 @@ video {
   width: 20vw;
     height: 20vw;
     border-radius: 5px;
-    background: black;
+    background: var(--ion-color-primary);
 }
 
 .green {
