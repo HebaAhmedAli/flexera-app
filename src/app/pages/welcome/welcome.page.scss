@@ -397,6 +397,21 @@ ion-row {
 .background {
   position: fixed;
   top: 0;
-  background: var(--ion-color-primary);
-  margin-top: -10px;
+  //background: var(--ion-color-primary);
+  margin-top: 10vh;
+  z-index: 1000;
+}
+
+.background-1 {
+   position: fixed;
+  top: 0;
+  //background: var(--ion-color-primary);
+  margin-top: 0vh;
+}
+
+.background-2 {
+   position: fixed;
+  top: 0;
+  //background: var(--ion-color-primary);
+  margin-top: 20vh;
 }
