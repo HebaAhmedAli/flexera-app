@@ -26,37 +26,15 @@ export class HomePage implements OnInit {
 
 
   addsSwiper!: Swiper;
-  categorySwiper!: Swiper;
-  orderNowSwiper!: Swiper;
-  bestSellerSwiper!: Swiper;
-
-  categories: Array<CategoryModel>  = [];
-  products: Array<ProductModel> = [] ;
-  orderNowProducts: Array<ProductModel> = [] ;
-  bestSellerProducts: Array<ProductModel> = [] ;
-  adds: Array<Adds>  = [];
-  videoFixed = false;
 
 
-  showOrderNow = true;
-  showBestSeller = true;
-
-
-  justClickSegment = false;
-
-  searchTerm: string = '';
-  filteredProducts: ProductModel[] = [];
-
-  isToastOpen = false;
-  mode!: string;
-  isAlertOpen = false;
-
-  toastMessage!: string;
 
   addsActiveIndex = 0;
 
-  message!: string;
+  adds: Array<Adds>  = [];
+  videoFixed = false;
 
+  justClickSegment = false;
 
   constructor(private categoryService: CategoryService,
     private globalService: GlobalService,
@@ -71,32 +49,13 @@ export class HomePage implements OnInit {
   ) { }
 
   async ngOnInit() {
-
-    this.categoryService.getCategories().subscribe(data => {
-      this.categories = data;
-    },
-    err => {
-      console.log(err);
-    });
-
-    this.addsService.getAddss().subscribe(data => {
+      this.addsService.getAddss().subscribe(data => {
       this.adds = data;
       this.videoFix();
     },
     err => {
       console.log(err);
-    })
-
-    this.productService.getAllProducts().subscribe(data => {
-      this.products = data;
-      this.bestSellerProducts = this.products.filter(pr => pr.sellingRate >= 100 && pr.sellingRate < 200);
-      this.bestSellerProducts = this.bestSellerProducts.sort((a,b) => a.sellingRate - b.sellingRate);
-      this.orderNowProducts = this.products.filter(pr => pr.sellingRate >= 200 && pr.sellingRate < 300);
-      this.orderNowProducts = this.orderNowProducts.sort((a,b) => a.sellingRate - b.sellingRate);
-    },
-    err => {
-      console.log(err);
-    })
+    });
 
     const showEventPopup = this.sysParamServ.getValue('SHOW_EVENT_SPLASH') as string;
       if(showEventPopup === 'Y' && !this.globalService.eventScreenShowed) {
@@ -112,8 +71,8 @@ export class HomePage implements OnInit {
             return await modalEl.present();
 
       }
-
   }
+
 
   ionViewDidEnter() {
 
@@ -132,25 +91,7 @@ export class HomePage implements OnInit {
         },
       });
 
-      this.categorySwiper = new Swiper('.category-swiper-container', {
-        // Optional parameters
-        direction: 'horizontal',
-        loop: false,
-        slidesPerView: 4
-      });
-      this.orderNowSwiper = new Swiper('.order-now-swiper-container', {
-        // Optional parameters
-        direction: 'horizontal',
-        loop: false,
-        slidesPerView: 2
-      });
 
-      this.bestSellerSwiper = new Swiper('.best-seller-swiper-container', {
-        // Optional parameters
-        direction: 'horizontal',
-        loop: false,
-        slidesPerView: 2
-      });
     }
 
    this.videoFix();
@@ -160,9 +101,6 @@ export class HomePage implements OnInit {
  }
 
 
-//  get addsActiveIndex() {
-//   return this.addsSwiper?.activeIndex;
-//  }
 
 
  videoFix() {
@@ -199,12 +137,8 @@ export class HomePage implements OnInit {
     return environment.baseUrl + '/' + url;
    }
 
-   getCategoryNmaeFormatted(name: string) {
-    return name.split('-')[0].charAt(0).toUpperCase() + name.split('-')[0].slice(1);
-    }
 
-
-    async openImageViewer(i: number) {
+       async openImageViewer(i: number) {
       if(this.justClickSegment) return;
       let galleryList: GalleryItem[] = [];
 
@@ -233,51 +167,5 @@ segmentClicked() {
   setTimeout(() => this.justClickSegment = false, 100);
 }
 
-
-filterItems() {
-  if(this.searchTerm == '') {
-    this.filteredProducts = [];
-    return;
-  }
-  this.filteredProducts = this.products.filter(item =>
-    item.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-  );
-}
-
-
-clearFilter() {
-  this.filteredProducts = [];
-}
-
-filterProductClicked(id: number) {
-  this.router.navigate(['/product-details', {productId: id}]);
-  this.searchTerm = '';
-  this.clearFilter();
-}
-
-  async addProduct(product: ProductModel) {
-  this.mode = await this.storage.get('mode');
-
-  if(this.mode === 'guest') {
-    this.isAlertOpen = true;
-    this.message = 'You need to login first to be able to add products to cart.'
-    return;
-  }
-
-  if(product.sizes.length > 0) {
-    this.router.navigate(['/product-details',{productId: product.id}]);
-    return;
-  }
-
-  if(product.available.toString() === 'false' && product.preBooking !== 'true') {
-    this.isAlertOpen = true;
-    this.message = 'This product is out of stock.'
-    return;
-  }
-
-  this.cartService.addProductToCart(product, undefined);
-  this.toastMessage = "Added to cart successfully!";
-  this.isToastOpen = true;
- }
 
 }

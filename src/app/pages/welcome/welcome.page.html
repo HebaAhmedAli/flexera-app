@@ -1,29 +1,66 @@
 <ion-header>
-
 </ion-header>
 
+<ion-content class="welcome-content">
+  <div class="welcome-container">
+    <!-- Logo -->
+    <div class="logo-section">
+      <img src="assets/flexera-logo-removebg-preview.png" alt="Flexera Logo" class="flexera-logo">
+    </div>
 
+    <!-- Welcome Illustration Background -->
+    <div class="illustration-section">
+      <img src="assets/flexera-background-try.png" alt="Welcome Background" class="welcome-illustration">
+    </div>
 
+    <!-- Welcome Text -->
+    <div class="text-section">
+      <h1 class="welcome-title">Welcome to Flexera</h1>
+      <p class="welcome-subtitle">The ERA of Flexible Finance</p>
+    </div>
 
-<ion-content style="--background: none !important; z-index: 100000;">
+    <!-- Action Buttons -->
+    <div class="buttons-section">
+      <ion-button
+        *ngIf="!forceUpdate"
+        expand="block"
+        class="btn-guest"
+        (click)="navigateToTabs()">
+        <ion-icon slot="start" name="person-outline"></ion-icon>
+        Continue as Guest
+      </ion-button>
 
-  <div class="half-part" [ngClass]="{hidden: splashMode}" >
-    <ion-grid>
-      <ion-row class="ion-text-center" style="justify-content: center; padding-top: 15%;" [ngClass]="{'extra-margin': forceUpdate }">
-        <div class="button-container">
-          <ion-button *ngIf="!forceUpdate" expand="block" class="main-button" (click)="navigateToTabs()">Continue as Guest</ion-button>
-          <ion-button *ngIf="!forceUpdate" expand="block" class="main-button" routerLink="/login" routerDirection="forward">Log in</ion-button>
-          <ion-button *ngIf="!forceUpdate" expand="block" color="dark" fill="clear" routerLink="/signup" routerDirection="forward">Don't have acccount ? Signup</ion-button>
-          <ion-button *ngIf="forceUpdate" expand="block" class="main-button" (click)="forceUpdateLogic()">Update the App To continue</ion-button>
-        </div>
-      </ion-row>
-    </ion-grid>
+      <ion-button
+        *ngIf="!forceUpdate"
+        expand="block"
+        class="btn-login"
+        routerLink="/login"
+        routerDirection="forward">
+        <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
+        Login
+      </ion-button>
+
+      <ion-button
+        *ngIf="!forceUpdate"
+        expand="block"
+        class="btn-signup"
+        routerLink="/signup"
+        routerDirection="forward">
+        <ion-icon slot="start" name="person-add-outline"></ion-icon>
+        Sign Up
+      </ion-button>
+
+      <ion-button
+        *ngIf="forceUpdate"
+        expand="block"
+        class="btn-guest"
+        (click)="forceUpdateLogic()">
+        Update the App To continue
+      </ion-button>
+    </div>
 
 
   </div>
-
 </ion-content>
 
-<div class="background"><img src="assets/flexera-background.png"/></div>
-<div class="background-1"><img src="assets/flexera-color.png"/></div>
-<div class="background-2"><img src="assets/flexera-color.png"/></div>
+

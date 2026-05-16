@@ -1,0 +1,153 @@
+<app-header></app-header>
+<ion-content>
+
+
+  <div class="custom-searchbar-container" *ngIf="products.length > 0 && categories.length > 0">
+    <ion-searchbar
+    [(ngModel)]="searchTerm"
+    (ionInput)="filterItems()"
+    (ionClear)="clearFilter()"
+      placeholder="What are you looking for"
+      class="custom-searchbar"
+      show-cancel-button="never"
+      search-icon="search-outline"
+      mode="md"
+    ></ion-searchbar>
+  </div>
+
+  <ion-list *ngIf="filteredProducts.length > 0">
+    <ion-item *ngFor="let item of filteredProducts" (click)="filterProductClicked(item.id)">
+      {{ item.name }}
+    </ion-item>
+  </ion-list>
+
+
+  <div class="category-slider">
+    <div class="category-swiper-container" >
+      <div class="swiper-wrapper" >
+
+        <div class="swiper-slide"  *ngFor="let category of categories;let i=index;"  >
+          <img [src]="category.img" [routerLink]="['/products',{categoryImg: category.img, categoryId: category.id, categoryName: getCategoryNmaeFormatted(category.name)}]"/>
+          <div class="ion-text-center" style="font-weight: bold; font-size: 13px;">{{getCategoryNmaeFormatted(category.name) }}</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <ion-item  *ngIf="products.length > 0 && categories.length > 0" lines="none" (click)="showOrderNow = !showOrderNow" style="margin-top: 10px;  margin-bottom: -10px; --background: var(--ion-color-tertiary) !important;">
+    <h3 style="margin: 0px;
+    margin-left: 15px;
+    font-size: 15px;
+    font-weight: bold;">Order Now</h3>
+    <ion-icon  name="{{ showOrderNow ? 'caret-down-outline' : 'caret-forward-outline' }}" style="color: var(--ion-color-primary);
+    font-size: 20px;
+    margin-left: 5px;" ></ion-icon>
+  </ion-item>
+
+
+  <div class="order-now-slider">
+    <div class="order-now-swiper-container" >
+      <div class="swiper-wrapper" *ngIf="showOrderNow">
+
+        <div class="swiper-slide"  *ngFor="let product of orderNowProducts;let i=index;"  >
+          <ion-card mode="md">
+            <img class="product-img" [src]="getImgUrl(product.img)" [routerLink]="['/product-details',{productId: product.id}]"/>
+            <ion-card-header [routerLink]="['/product-details',{productId: product.id}]">
+              <ion-card-title>{{ product.description }}</ion-card-title>
+              <ion-card-subtitle>{{ product.name }}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+             <div [ngClass]="{'old-price' : product.price !== product.priceAfterDiscount}">{{ product.price }} EGP </div>
+             <div *ngIf="product.price !== product.priceAfterDiscount">
+               {{ product.priceAfterDiscount }} EGP
+             </div>
+            </ion-card-content>
+            <div *ngIf="product.available.toString() === 'false' && product.preBooking === 'true'" style="position: absolute;
+            bottom: 5px;
+            left: 10px;
+            font-size: 12px;
+            color: green;
+            font-weight: bold;">
+              Pre Booking
+            </div>
+            <ion-fab  mode="md" vertical="bottom" horizontal="end" class="add-fab" >
+              <ion-fab-button (click)="addProduct(product)">
+                <a>+</a>
+              </ion-fab-button>
+            </ion-fab>
+          </ion-card>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+  <ion-item *ngIf="products.length > 0 && categories.length > 0" lines="none" (click)="showBestSeller = !showBestSeller" style="margin-top: 0px;  margin-bottom: -10px; --background: var(--ion-color-tertiary) !important;">
+    <h3 style="margin: 0px;
+    margin-left: 15px;
+    font-size: 15px;
+    font-weight: bold;">Best Seller</h3>
+    <ion-icon  name="{{ showBestSeller ? 'caret-down-outline' : 'caret-forward-outline' }}" style="color: var(--ion-color-primary);
+    font-size: 20px;
+    margin-left: 5px;" ></ion-icon>
+  </ion-item>
+
+
+  <div class="best-seller-slider" style="margin-bottom: 20px;">
+    <div class="best-seller-swiper-container" >
+      <div class="swiper-wrapper" *ngIf="showBestSeller">
+
+        <div class="swiper-slide"  *ngFor="let product of bestSellerProducts;let i=index;"  >
+          <ion-card  mode="md">
+            <img class="product-img" [src]="getImgUrl(product.img)" [routerLink]="['/product-details',{productId: product.id}]"/>
+            <ion-card-header [routerLink]="['/product-details',{productId: product.id}]">
+              <ion-card-title>{{ product.description }}</ion-card-title>
+              <ion-card-subtitle>{{ product.name }}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+             <div [ngClass]="{'old-price' : product.price !== product.priceAfterDiscount}">{{ product.price }} EGP </div>
+             <div *ngIf="product.price !== product.priceAfterDiscount">
+               {{ product.priceAfterDiscount }} EGP
+             </div>
+            </ion-card-content>
+            <div *ngIf="product.available.toString() === 'false' && product.preBooking === 'true'" style="position: absolute;
+            bottom: 5px;
+            left: 10px;
+            font-size: 12px;
+            color: green;
+            font-weight: bold;">
+              Pre Booking
+            </div>
+            <ion-fab  mode="md" vertical="bottom" horizontal="end" class="add-fab">
+              <ion-fab-button (click)="addProduct(product)">
+                <a>+</a>
+              </ion-fab-button>
+            </ion-fab>
+          </ion-card>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <ion-toast
+  [isOpen]="isToastOpen"
+  [message]="toastMessage"
+  [duration]="2000"
+  (didDismiss)="isToastOpen = false"
+  position="middle"
+></ion-toast>
+
+<ion-alert
+[isOpen]="isAlertOpen"
+[message]="message"
+[buttons]="['OK']"
+(didDismiss)="isAlertOpen = false"
+></ion-alert>
+
+
+</ion-content>

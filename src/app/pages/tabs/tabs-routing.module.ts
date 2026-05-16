@@ -26,8 +26,19 @@ const routes: Routes = [
       {
         path: 'academy',
         loadChildren: () => import('../academy/academy.module').then( m => m.AcademyPageModule)
-      }
-      ,
+      },
+      {
+        path: 'marketplace',
+        loadChildren: () => import('../marketplace/marketplace.module').then( m => m.MarketplacePageModule)
+      },
+       {
+        path: 'profile',
+        loadChildren: () => import('../account/account.module').then( m => m.AccountPageModule)
+      },
+      {
+        path: 'support',
+        loadChildren: () => import('../support/support.module').then( m => m.SupportPageModule)
+      },
       {
         path: '',
         redirectTo: '/tabs/home',

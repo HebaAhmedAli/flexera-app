@@ -150,7 +150,14 @@ ion-toolbar {
 }
 
 ion-content {
-  --background: var(--ion-color-tertiary) !important;
+  --background: linear-gradient(
+  135deg,
+  #f9fbff 0%,
+  #eef3fb 18%,
+  #dbe5f3 42%,
+  #c7d6eb 68%,
+  #b4c7e3 100%
+);
 }
 
 .swiper-pagination {

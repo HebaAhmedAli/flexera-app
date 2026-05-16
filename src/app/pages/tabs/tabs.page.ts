@@ -59,9 +59,9 @@ export class TabsPage {
     });
   }
 
-  navigateToAccount() {
-    this.router.navigate(['/tabs/account']);
-    }
+  // navigateToAccount() {
+  //   this.router.navigate(['/tabs/account']);
+  //   }
 
     async navigateToAfterSale() {
       const mode = await this.storage.get('mode');
