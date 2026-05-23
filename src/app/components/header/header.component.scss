@@ -4,8 +4,9 @@
 }
 
 .logo-icon {
-  max-width: 40%;
-    padding-left: 1%;
+      max-width: 50vw;
+    margin-left: 10vw;
+    //padding-left: 1%;
 }
 
 .cart-counter {
@@ -21,7 +22,7 @@
 
 
  .circle {
-  background: var(--ion-color-medium);
+  //background: var(--ion-color-medium);
     border-radius: 50%;
     scale: 0.8;
  }

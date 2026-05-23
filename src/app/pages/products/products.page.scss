@@ -197,6 +197,7 @@ a {
   font-size: 35px;
     color: var(--ion-color-primary);// #00004B;
     font-weight: bold;
+    margin-left: 10px;
 }
 
 .fanta-color {
@@ -218,4 +219,9 @@ a {
 
 .water-color {
   color: #1b247e;
+}
+
+.product-card {
+     max-width: 43vw;
+     margin-left: -1vw;
 }

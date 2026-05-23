@@ -1,6 +1,7 @@
-<app-header></app-header>
 
 <ion-content [fullscreen]="true">
+  <app-header></app-header>
+
   <ion-list *ngIf="notificationService.getUndeletedNotifications().length !== 0">
     <ion-item-sliding  *ngFor="let item of notificationService.getUndeletedNotifications()" >
       <ion-item  [ngClass]="{'read': item.read , 'unread': !item.read}"   (click)="updateNotifications(item)">

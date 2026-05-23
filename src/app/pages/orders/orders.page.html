@@ -1,7 +1,5 @@
-<app-header></app-header>
-
-
 <ion-content [fullscreen]="true">
+  <app-header></app-header>
   <div *ngIf="allOrders.length > 0 && mode !== 'guest'">
   <ion-segment value="current" color="dark" mode="md" [(ngModel)]="segmentValue">
     <ion-segment-button value="current">

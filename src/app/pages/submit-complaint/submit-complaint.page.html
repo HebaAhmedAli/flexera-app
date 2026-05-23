@@ -1,7 +1,5 @@
-<app-header></app-header>
-
-
 <ion-content class="ion-padding">
+  <app-header></app-header>
   <div class="ion-padding container" *ngIf="complaintForm">
     <h1>Submit a complaint</h1>
     <form [formGroup]="complaintForm" (ngSubmit)="submit()">

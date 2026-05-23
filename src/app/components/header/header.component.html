@@ -1,19 +1,20 @@
 <ion-header  mode="md" class="ion-no-border">
   <ion-toolbar>
-      <img src="assets/flexera-header.png"  slot="start" class="logo-icon" (click)="navigateToHome()"/>
 
 
 
-     <ion-buttons slot="end" (click)="navigateToCart()">
+     <ion-buttons slot="start" (click)="navigateToCart()">
        <ion-button class="circle">
-         <ion-icon slot="icon-only" name="cart" class="cart-icon"></ion-icon>
+         <ion-icon slot="icon-only" name="cart-outline" class="cart-icon"></ion-icon>
          <span class="cart-counter" *ngIf="cartService.getCartCounter() > 0">{{cartService.getCartCounter()}}</span>
        </ion-button>
      </ion-buttons>
 
+           <img src="assets/flexera-logo-removebg-preview.png"  slot="start" class="logo-icon" (click)="navigateToHome()"/>
+
      <ion-buttons slot="end" (click)="navigateToNotifications()">
       <ion-button class="circle">
-        <ion-icon slot="icon-only" name="notifications" class="cart-icon"></ion-icon>
+        <ion-icon slot="icon-only" name="notifications-outline" class="cart-icon"></ion-icon>
         <span class="cart-counter" *ngIf="notificationService.getUnreadNotificationsCount() > 0">{{notificationService.getUnreadNotificationsCount()}}</span>
       </ion-button>
     </ion-buttons>

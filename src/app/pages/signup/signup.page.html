@@ -110,57 +110,9 @@
         </ion-item>
       </ion-list>
 
-      <br>
-
-      <ion-item style="--background: white !important;
-  --border-color: darkgrey !important;" lines="none" (click)="showAdditional = !showAdditional">
-        <h3>Optional Info</h3>
-        <ion-icon  name="{{ showAdditional ? 'caret-down-outline' : 'caret-forward-outline' }}" slot="end" ></ion-icon>
-      </ion-item>
 
 
-
-      <br>
-
-      <ion-label class="item-label" position="floating" *ngIf="showAdditional">Address</ion-label>
-        <ion-item *ngIf="showAdditional">
-          <ion-input formControlName="address"></ion-input>
-        </ion-item>
-
-
-        <ion-label class="item-label" position="floating" *ngIf="showAdditional">Speciality</ion-label>
-        <ion-list *ngIf="showAdditional">
-          <ion-item>
-            <ion-select formControlName="speciality"  interface="popover" mode="md">
-              <ion-select-option value="GP">GP</ion-select-option>
-              <ion-select-option value="Restorative">Restorative</ion-select-option>
-              <ion-select-option value="Endodontics">Endodontics</ion-select-option>
-              <ion-select-option value="Prosthodontics">Prosthodontics</ion-select-option>
-              <ion-select-option value="Surgery">Surgery</ion-select-option>
-              <ion-select-option value="Implantology">Implantology</ion-select-option>
-              <ion-select-option value="Pedodontics">Pedodontics</ion-select-option>
-              <ion-select-option value="Orthodontics">Orthodontics</ion-select-option>
-              <ion-select-option value="Periodontics">Periodontics</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-list>
-
-        <ion-label class="item-label" position="floating" *ngIf="showAdditional">University Staff</ion-label>
-        <ion-list *ngIf="showAdditional">
-          <ion-item>
-            <ion-select formControlName="uniStaff"  interface="popover" mode="md" >
-              <ion-select-option value="Yes">Yes</ion-select-option>
-              <ion-select-option value="No">No</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-list>
-
-        <ion-label class="item-label" position="floating" *ngIf="showAdditional">University</ion-label>
-        <ion-item *ngIf="showAdditional && uniStaff?.value === 'Yes'">
-          <ion-input formControlName="university"></ion-input>
-        </ion-item>
-
-        <ion-item style="--background: white !important;
+        <ion-item style="--background: none !important;
   --border-color: darkgrey !important;">
           <ion-checkbox formControlName="termsAndConditions"></ion-checkbox>
           <ion-label style="white-space: normal;">Accept <a (click)="openTermsAndConditions('terms')">Terms and Conditions</a> and <a (click)="openTermsAndConditions('privacy')">Privacy Policy</a></ion-label>
@@ -187,5 +139,3 @@
 
 </ion-content>
 
-
-<div class="background"><img src="assets/background.png"/></div>

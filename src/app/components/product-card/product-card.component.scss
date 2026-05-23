@@ -1,0 +1,77 @@
+ion-card {
+  width: 100%;
+  border-radius: 8px;
+  position: relative;
+}
+
+ion-card-header {
+  height: 45px;
+  padding: 2px;
+      width: 35vw;
+
+}
+
+ion-card-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+  color: grey;
+  font-size: small;
+  padding-left: 8px;
+}
+
+ion-card-subtitle {
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 1px;
+  padding-left: 8px;
+  color: var(--ion-color-primary);
+  font-weight: bold;
+  font-size: medium;
+}
+
+ion-card-content {
+  text-align: right;
+  color: var(--ion-color-primary);
+  font-weight: bold;
+  margin: 0px;
+  padding: 0px;
+  padding-right: 8px;
+  height: 45px;
+}
+
+.product-img {
+  height: 120px;
+  width: 80%;
+  margin-left: 5%;
+  object-fit: fill;
+  cursor: pointer;
+}
+
+ion-fab-button {
+  --background: var(--ion-color-primary);
+  --color: white;
+}
+
+a {
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  text-decoration: none;
+  padding-bottom: 3px;
+}
+
+.add-fab {
+  zoom: 0.6;
+  margin-bottom: 79px;
+  margin-right: -5px;
+}
+
+.old-price {
+  text-decoration-line: line-through;
+  text-decoration-color: red;
+  font-weight: 100;
+}

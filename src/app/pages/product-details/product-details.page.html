@@ -1,6 +1,7 @@
-<app-header></app-header>
 
 <ion-content >
+  <app-header></app-header>
+
   <ion-title *ngIf="product" class="product-title ion-text-center">{{selectedSize ? selectedSize.name : product.name}}</ion-title>
 
     <div class="category-slider">
